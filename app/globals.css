@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────────────────
+   DUNES — Botanical Architect Design System
+   Tailwind v4 @theme tokens
+   Mirrors exactamente el tailwind.config de los HTML de referencia
+───────────────────────────────────────────────────────── */
+
+@theme {
+  /* ── Surfaces ── */
+  --color-background:               #fcf9f2;
+  --color-on-background:            #1c1c18;
+  --color-surface:                  #fcf9f2;
+  --color-surface-bright:           #fcf9f2;
+  --color-surface-dim:              #dcdad3;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low:    #f6f3ec;
+  --color-surface-container:        #f1eee7;
+  --color-surface-container-high:   #ebe8e1;
+  --color-surface-container-highest:#e5e2db;
+  --color-surface-variant:          #e5e2db;
+  --color-surface-tint:             #3f6837;
+
+  /* ── Brand: Primary (Forest Green) ── */
+  --color-primary:                  #234b1d;
+  --color-primary-container:        #3a6332;
+  --color-primary-fixed:            #c0efb1;
+  --color-primary-fixed-dim:        #a4d396;
+  --color-on-primary:               #ffffff;
+  --color-on-primary-container:     #aedda0;
+  --color-on-primary-fixed:         #002201;
+  --color-on-primary-fixed-variant: #285021;
+  --color-inverse-primary:          #a4d396;
+
+  /* ── Secondary (Terracotta) ── */
+  --color-secondary:                #904c2d;
+  --color-secondary-container:      #fea681;
+  --color-secondary-fixed:          #ffdbcd;
+  --color-secondary-fixed-dim:      #ffb597;
+  --color-on-secondary:             #ffffff;
+  --color-on-secondary-container:   #78391c;
+  --color-on-secondary-fixed:       #360f00;
+  --color-on-secondary-fixed-variant:#723519;
+
+  /* ── Tertiary (Soft Gold) ── */
+  --color-tertiary:                 #543f00;
+  --color-tertiary-container:       #6f560c;
+  --color-tertiary-fixed:           #ffdf96;
+  --color-tertiary-fixed-dim:       #e5c370;
+  --color-on-tertiary:              #ffffff;
+  --color-on-tertiary-container:    #f0cd79;
+  --color-on-tertiary-fixed:        #251a00;
+  --color-on-tertiary-fixed-variant:#5a4400;
+
+  /* ── Error ── */
+  --color-error:                    #ba1a1a;
+  --color-error-container:          #ffdad6;
+  --color-on-error:                 #ffffff;
+  --color-on-error-container:       #93000a;
+
+  /* ── On-surface / Outline ── */
+  --color-on-surface:               #1c1c18;
+  --color-on-surface-variant:       #42493f;
+  --color-inverse-surface:          #31312c;
+  --color-inverse-on-surface:       #f3f0e9;
+  --color-outline:                  #72796e;
+  --color-outline-variant:          #c2c9bb;
+
+  /* ── Fonts
+     font-brand    = Oswald    → display/CTA (ALL CAPS brutalist)
+     font-headline = Space Grotesk → títulos de sección
+     font-body     = Inter     → body / UI
+     font-label    = Inter     → chips, badges, etiquetas
+  ── */
+  --font-brand:    var(--font-oswald),        "Oswald",        ui-sans-serif, sans-serif;
+  --font-headline: var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-display:  var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-body:     var(--font-inter),         "Inter",         ui-sans-serif, sans-serif;
+  --font-label:    var(--font-inter),         "Inter",         ui-sans-serif, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Material Symbols ──────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+  line-height: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ───────────────────────────────────────────────── */
+html {
+  background-color: #fcf9f2;
+  color: #1c1c18;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+::selection {
+  background-color: color-mix(in srgb, #234b1d 20%, transparent);
+}
+
+/* ── Glassmorphism (nav sticky) ─────────────────────────── */
+.glass-nav {
+  background-color: color-mix(in srgb, #fcf9f2 80%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Ambient shadow ─────────────────────────────────────── */
+.shadow-ambient {
+  box-shadow: 0 8px 32px 0 rgba(28, 28, 24, 0.05);
+}
+
+/* ── No-scrollbar ───────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
