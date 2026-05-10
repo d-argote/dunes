@@ -31,7 +31,7 @@ function publicAdminPath(pathname: string) {
   return null;
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const session = request.cookies.get("dunes-admin-session")?.value;
 

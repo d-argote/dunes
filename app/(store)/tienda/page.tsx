@@ -75,20 +75,16 @@ export default async function TiendaPage() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {items.map((product, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          {items.map((product) => (
             <Link
               key={product.id}
               href={`/producto/${product.id}`}
               className="group flex flex-col cursor-pointer"
             >
-              <article>
+              <article className="flex flex-col flex-1">
                 {/* Image */}
-                <div
-                  className={`aspect-[4/5] overflow-hidden bg-surface-container-low mb-6 relative ${
-                    i === 1 ? "md:mt-12" : ""
-                  }`}
-                >
+                <div className="aspect-[4/5] overflow-hidden bg-surface-container-low mb-6 relative">
                   {product.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -115,12 +111,10 @@ export default async function TiendaPage() {
                 <h2 className="font-brand text-2xl uppercase leading-tight mb-2 text-primary group-hover:text-secondary transition-colors">
                   {product.name.toUpperCase()}
                 </h2>
-                {product.description && (
-                  <p className="text-on-surface-variant text-sm leading-relaxed mb-4 max-w-sm">
-                    {product.description}
-                  </p>
-                )}
-                <div className="flex items-center justify-between">
+                <p className="text-on-surface-variant text-sm leading-relaxed mb-6 max-w-sm min-h-[3rem]">
+                  {product.description ?? ""}
+                </p>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
                   <span className="font-headline font-bold text-xl text-tertiary">
                     ${product.price.toLocaleString("es-CO")}
                   </span>

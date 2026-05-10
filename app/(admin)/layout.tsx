@@ -22,8 +22,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const isLogin = pathname === "/admin/login" || pathname === "/login";
 
   function handleLogout() {
-    document.cookie = "dunes-admin-session=; path=/; max-age=0; SameSite=Lax";
-    window.location.href = "/admin/login";
+    fetch("/api/auth/logout", { method: "POST" }).finally(() => {
+      window.location.href = "/admin/login";
+    });
   }
 
   if (isLogin) {

@@ -10,13 +10,33 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const maxAge = remember ? 604800 : 28800;
-    document.cookie = `dunes-admin-session=active; path=/; max-age=${maxAge}; SameSite=Lax`;
-    router.push("/admin/dashboard");
+    setError(null);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, remember }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? "Error al iniciar sesión.");
+        return;
+      }
+
+      router.push("/admin/dashboard");
+    } catch {
+      setError("Error de red. Intenta de nuevo.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -47,6 +67,11 @@ export default function AdminLoginPage() {
             </div>
           </div>
           <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+            {error && (
+              <p className="font-body text-sm text-error bg-error-container/30 px-4 py-3 border border-error/30">
+                {error}
+              </p>
+            )}
             <div className="relative">
               <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Correo Electronico" required className="peer w-full bg-transparent border-0 border-b-2 border-outline-variant text-on-surface focus:ring-0 focus:border-primary px-0 py-2 font-body text-base placeholder-transparent transition-colors outline-none" />
               <label htmlFor="email" className="absolute left-0 -top-4 font-body text-xs font-semibold text-on-surface-variant transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary uppercase tracking-widest">Correo Electronico</label>
