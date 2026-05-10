@@ -356,7 +356,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Tónico */}}
+          {/* Tónico */}
           <div className="border-t border-primary/10 pt-10 md:pt-14">
             <p className="font-headline text-xs uppercase tracking-[0.25em] text-secondary font-bold mb-6 md:mb-8 text-center">
               Tónico Capilar
