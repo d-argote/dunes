@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Oswald:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f3f0e9",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-variant": "#e5e2db",
+                    "on-secondary-container": "#78391c",
+                    "surface": "#fcf9f2",
+                    "on-primary-container": "#aedda0",
+                    "on-tertiary-fixed-variant": "#5a4400",
+                    "tertiary-fixed": "#ffdf96",
+                    "surface-bright": "#fcf9f2",
+                    "primary-fixed-dim": "#a4d396",
+                    "surface-tint": "#3f6837",
+                    "inverse-primary": "#a4d396",
+                    "outline-variant": "#c2c9bb",
+                    "inverse-surface": "#31312c",
+                    "on-surface-variant": "#42493f",
+                    "primary-fixed": "#c0efb1",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#543f00",
+                    "outline": "#72796e",
+                    "tertiary-container": "#6f560c",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#ffb597",
+                    "on-error": "#ffffff",
+                    "primary-container": "#3a6332",
+                    "on-tertiary-fixed": "#251a00",
+                    "secondary-fixed": "#ffdbcd",
+                    "on-error-container": "#93000a",
+                    "primary": "#234b1d",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#285021",
+                    "on-primary-fixed": "#002201",
+                    "tertiary-fixed-dim": "#e5c370",
+                    "secondary": "#904c2d",
+                    "surface-container": "#f1eee7",
+                    "on-secondary-fixed-variant": "#723519",
+                    "surface-dim": "#dcdad3",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-container-high": "#ebe8e1",
+                    "on-tertiary-container": "#f0cd79",
+                    "on-surface": "#1c1c18",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#360f00",
+                    "secondary-container": "#fea681",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f2",
+                    "on-background": "#1c1c18"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234b1d;
+            border-radius: 10px;
+        }
+        /* Product JSON-LD for SEO */
+        script[type="application/ld+json"] {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f2]/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-70 transition-opacity text-[#234b1d] dark:text-[#fcf9f2] scale-95 active:transition-transform">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+<div class="font-['Oswald'] text-2xl font-bold tracking-widest text-[#234b1d] dark:text-[#fcf9f2]">
+            DUNES
+        </div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-70 transition-opacity text-[#234b1d] dark:text-[#fcf9f2] scale-95 active:transition-transform">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-12 lg:px-24 max-w-7xl mx-auto">
+<!-- Product Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+<!-- Gallery Section: Organic Asymmetry -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="relative overflow-hidden group">
+<img alt="Shampoo Crecimiento Natural DUNES" class="w-full aspect-[4/5] object-cover rounded-xl shadow-sm group-hover:scale-105 transition-transform duration-700" data-alt="Premium glass shampoo bottle with minimalist label on a wet marble slab surrounded by fresh rosemary and ginger roots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3nSiZmHN-zCQKteWrTsqra9kROcuqv97O4h4cHqhD8Uv1PdcZtCb5SiISntMh7ivUXYC3R9XoIl0M60y_uDgrWrHObRwny0mvyn5ZWcw_AElcNGtmjSeBny9U6EM1P1ULDlw9DpDXwPNFCq8US-8gOIG-QFwjUfalrIcPKl40HwUf-1WC4nnJ2Tr_b4ZpsHuZVQTiM64zH6yTr3PbDOcQ3hEXBp-6449159Isy8uPFDbEBJBZYLY6qBPOLfQAltCL1aysJg8reP8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<img class="aspect-square object-cover rounded-lg cursor-pointer border-b-2 border-primary" data-alt="Close-up detail of viscous golden liquid shampoo with small bubbles and botanical extracts texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvmNsn-uUAlxAtxPotJC3Gaz3abrfr0It-r9slQ9Jnu_gye-0h5bHgVpDfyIUxmHnzH8pEB5Y4qlbkLDOjs3P-k8AlqOcy2Aqm8MT9zmxVVw5MHh2rdb9KrZEj-8UbLSwdjBwG0geKNHsCZY5WynkJAU4CvV27Ax_ROliXc2LYLpyajIUKnyTQfUJpvPwKsBRtNqT3mTwKjbDes3RlvGH-TXQQz9h0BLsMvNi9axDfkg97jVzKl5At5wOcrPdMB7HrjspijDW7220"/>
+<img class="aspect-square object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity" data-alt="Back of shampoo bottle showing natural ingredients list and usage instructions on ivory paper texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTnXSx07Sc7TBsh769sIUPDYJ7lKGseuldL8r6XhcRC0w7LQx-Xlc-kAhztnFF8ScdD-QV6A5Qon-rrvtjjhadVNGkigIq_BlVSgWcEYkLlZ9p_zFSP8MTgSacrVQ7Yg5QY6kT5nYCiD9tDAPnP8Jn8jQIAgQ1NM3oRNr3f7BJbu_pdxwyCqPqmCDVdjDp_GuakQaHYwzYaTtTvc6fSp-a8MJFYwbrmfSU9mBfS7iMPdotWXfN5qGRDzIywTj9UIktnlV3IzGCej8"/>
+<div class="relative aspect-square rounded-lg bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Minimalist lifestyle scene of the shampoo in a sunlit modern bathroom with neutral tones and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYlzQD2X_cs2aQAn3R4Ne6jf65VzSG_OilArHhhrdlZisM_zB5k4-78_5oUTVyBTkVKXIk91umoUkQpYSvQfWV5P9z3Dcy05Dw6AK-bHjyYxojNRBWUqzFb3gN6NLVTTBjnpWsd5q-FI7x4KnB7fxZAVG-ivhZZ1qsHgSiBHzP-_vgl-591MoDDWGH3PWubzMRHnAh7p7mOCOXO8qxrtaGkxpUjzW9MNdocoSdQsrR8tdkincu1HfUWlqVaKNhXrtFGMFvsQDOZrw"/>
+</div>
+<div class="aspect-square rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+</div>
+<!-- Content Section: Architectural Structure -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Header -->
+<div class="space-y-4">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star_half" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star_half</span>
+<span class="text-xs font-medium ml-2 text-on-surface/60 font-label tracking-widest">(124 RESEÑAS)</span>
+</div>
+<h1 class="font-headline text-4xl lg:text-5xl font-bold text-primary leading-tight uppercase tracking-tighter">
+                        SHAMPOO CRECIMIENTO NATURAL DUNES (500ML)
+                    </h1>
+<p class="text-lg text-on-surface/80 leading-relaxed max-w-md">
+                        Una fórmula botánica avanzada diseñada para fortalecer desde el folículo y acelerar el ciclo de crecimiento capilar.
+                    </p>
+</div>
+<!-- Pricing & Purchase Logic -->
+<div class="space-y-4">
+<div class="grid grid-cols-1 gap-4">
+<!-- One-time purchase -->
+<label class="relative flex items-center justify-between p-5 rounded-xl border border-outline-variant/30 cursor-pointer hover:bg-surface-container-low transition-colors group">
+<input checked="" class="sr-only" name="purchase_type" type="radio"/>
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-[&amp;:has(:checked)]:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-[&amp;:has(:checked)]:opacity-100"></div>
+</div>
+<span class="font-medium text-primary uppercase tracking-widest text-sm">Compra Única</span>
+</div>
+<span class="font-headline font-bold text-lg text-primary">$85.000</span>
+</label>
+<!-- Subscription (Highlighted) -->
+<label class="relative flex items-center justify-between p-5 rounded-xl border-2 border-primary bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors group">
+<input class="sr-only" name="purchase_type" type="radio"/>
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-[&amp;:has(:checked)]:opacity-100"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-primary uppercase tracking-widest text-sm">Suscripción Mensual</span>
+<span class="text-[10px] text-secondary font-bold uppercase tracking-wider">Ahorra 15% + Envío Gratis</span>
+</div>
+</div>
+<span class="font-headline font-bold text-lg text-primary">$72.250</span>
+</label>
+</div>
+<button class="w-full bg-primary text-on-primary font-headline py-5 rounded-xl text-lg font-bold tracking-widest hover:scale-[1.02] active:scale-95 transition-all duration-200 uppercase">
+                        AÑADIR AL CARRITO
+                    </button>
+</div>
+<!-- Info Accordions -->
+<div class="divide-y divide-outline-variant/20 border-t border-outline-variant/20">
+<details class="group py-4">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline font-bold tracking-widest text-sm text-primary uppercase">Beneficios</span>
+<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 space-y-4 text-sm leading-relaxed text-on-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="eco">eco</span>
+<p>Estimula la microcirculación del cuero cabelludo.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="shutter_speed">shutter_speed</span>
+<p>Reduce la caída visible en solo 21 días de uso constante.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="architecture">architecture</span>
+<p>Engrosa la fibra capilar desde la raíz.</p>
+</div>
+</div>
+</details>
+<details class="group py-4" open="">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline font-bold tracking-widest text-sm text-primary uppercase">Ingredientes Activos</span>
+<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 space-y-3 text-sm leading-relaxed text-on-surface-variant">
+<p><strong>Extracto de Romero:</strong> Antioxidante natural.</p>
+<p><strong>Biotina:</strong> Vitamina esencial para la queratina.</p>
+<p><strong>Jengibre Orgánico:</strong> Energizante folicular.</p>
+<p><strong>Aceite de Argán:</strong> Hidratación profunda sin peso.</p>
+<p><strong>Aminoácidos de Seda:</strong> Reparación de puntas abiertas.</p>
+</div>
+</details>
+<details class="group py-4">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline font-bold tracking-widest text-sm text-primary uppercase">Modo de Uso</span>
+<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 space-y-4 text-sm text-on-surface-variant">
+<div class="flex gap-4">
+<span class="font-headline font-bold text-secondary text-xl">01</span>
+<p>Aplica sobre el cabello húmedo y masajea el cuero cabelludo por 2 minutos.</p>
+</div>
+<div class="flex gap-4">
+<span class="font-headline font-bold text-secondary text-xl">02</span>
+<p>Deja actuar la espuma botánica mientras terminas tu ducha.</p>
+</div>
+<div class="flex gap-4">
+<span class="font-headline font-bold text-secondary text-xl">03</span>
+<p>Enjuaga con abundante agua tibia, evitando temperaturas extremas.</p>
+</div>
+</div>
+</details>
+<details class="group py-4">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline font-bold tracking-widest text-sm text-primary uppercase">Envíos</span>
+<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 text-sm text-on-surface-variant">
+<p>Despachos a todo Colombia. Tiempo estimado: 2-4 días hábiles en ciudades principales.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<!-- Cross-Selling: Bento Style -->
+<section class="mt-32">
+<h2 class="font-headline text-3xl font-bold text-primary mb-12 tracking-tighter uppercase">COMPLETA TU RUTINA</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Product Card 1 -->
+<div class="group relative bg-surface-container-low rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 overflow-hidden">
+<img alt="Cepillo Masajeador" class="w-40 h-40 object-cover rounded-xl shadow-lg group-hover:rotate-12 transition-transform duration-500" data-alt="Modern silicone scalp massage brush with ergonomic handle on a light wood surface with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdkx4BN2ea5mrWmkdZh2eY5vEErkZqulUU0ahl28HjNDu4CiVNRdM3PjcBLy3hlLy1XWtk0Jjz-VZx1oa4YZ19fCGgOqTquDG3pRCckA1jtvaNdjs6M8qhqIgnfItN3Yv5E5PEzJMcnoBAqYqWddujoG6K1IEaGDZ2ccaaafu1UVZRpUbibro8mRlRHWhVCUU-IWHLiBbdNRSHc39RJS8-613zzd-T85hEQvA0nN3DNPcHwKXyn4QycD7kOVLtL2cs_mEXZp-jqNQ"/>
+<div class="flex-1 space-y-4">
+<h3 class="font-headline text-xl font-bold text-primary tracking-tight uppercase">CEPILLO MASAJEADOR CAPILAR</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Exfolia suavemente y potencia la absorción del Shampoo Dunes para mejores resultados.</p>
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-secondary">$32.000</span>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+                                AÑADIR
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative bg-surface-container-low rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 overflow-hidden">
+<img alt="Tónico Intensivo" class="w-40 h-40 object-cover rounded-xl shadow-lg group-hover:scale-105 transition-transform duration-500" data-alt="Amber glass dropper bottle of hair tonic against a botanical backdrop of green leaves and sunlight dappled patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmrHYnCkgG5ErUFmfW_WHfblBuI-C19kM05_nr1SrqXenQTNGK63h6FQw6QrQjFqNzXWsANXKp4f_Tl_YrDJ39o5ZaGZI88oUsTUa6xvtLcuxWlJNcB6PHW-2d-X3EVq8tmBxi2IVZkVy86ZVtobZ_IOZq1w6KS2xlY0F3aoSX0aWFAz1CYbavyVV9B4ekcwGhcM_L62ayOAQ7v-Gx1CeKhgjr9MLtgUf655pcBJgrMKMTOncs5pOv_-hP9c4pXPD5qG51VF1NJSI"/>
+<div class="flex-1 space-y-4">
+<h3 class="font-headline text-xl font-bold text-primary tracking-tight uppercase">TÓNICO ANTICAÍDA INTENSIVO</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Tratamiento sin enjuague con alta concentración de biotina y cafeína orgánica.</p>
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-secondary">$95.000</span>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+                                AÑADIR
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-3xl border-t border-stone-200/10 bg-[#fcf9f2] dark:bg-stone-950 shadow-[0_-8px_32px_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-4 pb-safe">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 ease-out duration-200 hover:text-[#234b1d] dark:hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#234b1d] dark:text-white bg-[#e5e2db] dark:bg-stone-800 rounded-xl px-3 py-1 ease-out duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="rebase_edit">rebase_edit</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Producto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 ease-out duration-200 hover:text-[#234b1d] dark:hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Comunidad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 ease-out duration-200 hover:text-[#234b1d] dark:hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Blog</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full px-8 py-12 bg-[#f6f3ec] dark:bg-stone-900 flex flex-col items-center text-center space-y-8 mt-20">
+<div class="font-['Oswald'] text-xl tracking-tighter text-[#234b1d] dark:text-white mb-4">DUNES</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors ease-in-out" href="#">Políticas</a>
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors ease-in-out" href="#">Blog</a>
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors ease-in-out" href="#">Instagram</a>
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors ease-in-out" href="#">TikTok</a>
+</div>
+<div class="text-xs text-stone-400 tracking-widest font-label">© 2024 DUNES. HECHO EN COLOMBIA.</div>
+</footer>
+<!-- Structured Data -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Shampoo Crecimiento Natural DUNES",
+      "image": [
+        "https://images.unsplash.com/photo-1626784215021-2e39ccf971cd"
+      ],
+      "description": "Shampoo botánico de 500ml para estimular el crecimiento capilar y fortalecer la raíz.",
+      "brand": {
+        "@type": "Brand",
+        "name": "DUNES"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "COP",
+        "price": "85000",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "124"
+      }
+    }
+    </script>
+</body></html>

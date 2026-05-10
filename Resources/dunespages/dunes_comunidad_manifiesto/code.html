@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Oswald:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f3f0e9",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-variant": "#e5e2db",
+                    "on-secondary-container": "#78391c",
+                    "surface": "#fcf9f2",
+                    "on-primary-container": "#aedda0",
+                    "on-tertiary-fixed-variant": "#5a4400",
+                    "tertiary-fixed": "#ffdf96",
+                    "surface-bright": "#fcf9f2",
+                    "primary-fixed-dim": "#a4d396",
+                    "surface-tint": "#3f6837",
+                    "inverse-primary": "#a4d396",
+                    "outline-variant": "#c2c9bb",
+                    "inverse-surface": "#31312c",
+                    "on-surface-variant": "#42493f",
+                    "primary-fixed": "#c0efb1",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#543f00",
+                    "outline": "#72796e",
+                    "tertiary-container": "#6f560c",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#ffb597",
+                    "on-error": "#ffffff",
+                    "primary-container": "#3a6332",
+                    "on-tertiary-fixed": "#251a00",
+                    "secondary-fixed": "#ffdbcd",
+                    "on-error-container": "#93000a",
+                    "primary": "#234b1d",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#285021",
+                    "on-primary-fixed": "#002201",
+                    "tertiary-fixed-dim": "#e5c370",
+                    "secondary": "#904c2d",
+                    "surface-container": "#f1eee7",
+                    "on-secondary-fixed-variant": "#723519",
+                    "surface-dim": "#dcdad3",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-container-high": "#ebe8e1",
+                    "on-tertiary-container": "#f0cd79",
+                    "on-surface": "#1c1c18",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#360f00",
+                    "secondary-container": "#fea681",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f2",
+                    "on-background": "#1c1c18"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "brand": ["Oswald"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf9f2;
+            color: #1c1c18;
+        }
+        .text-slate-gray { color: #2C2F33; }
+        .bg-oat-white { background-color: #F4F1EA; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f2]/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<nav class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-[#234b1d] dark:text-[#fcf9f2] hover:opacity-70 transition-opacity scale-95 active:transition-transform">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+<div class="font-['Oswald'] text-2xl font-bold tracking-widest text-[#234b1d] dark:text-[#fcf9f2]">DUNES</div>
+<div class="flex items-center gap-4">
+<button class="text-[#234b1d] dark:text-[#fcf9f2] hover:opacity-70 transition-opacity scale-95 active:transition-transform">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</nav>
+<div class="h-px w-full bg-stone-200/20 dark:bg-stone-800/20"></div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative min-h-[795px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Group of confident young men in high-end minimalist earth-toned clothing standing in a brutalist architectural park with soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlmVL5o_DMZb0I4TkpACfIEPG-T96dB-RUypdgrWLuYisfAQGet4QfBAURdsrnoVZufhvfs3im0DzJkdqXMah1HoP0p4C6Qu0wQMJk6rgKIiL1hsh2VUu7wty93bAb-Gtri9xBp5fzRlMLASPqOOzxIX4m0n79XPPBqrrU9uNbK_iHetnfVN-7zFvIvnaRl0YREn8JCv2ShkvkogpPPmlVH_kElimd8TdIo6iGk3TlSGnFSFcAbrES2SlfBWKoUr_lifGMocfdKl4"/>
+<div class="absolute inset-0 bg-black/30"></div>
+</div>
+<div class="relative z-10 w-full px-6 md:px-12 max-w-7xl mx-auto">
+<h1 class="font-brand text-[12vw] md:text-[8vw] leading-none text-white font-bold tracking-tighter uppercase">
+                    SOMOS<br/>DUNES
+                </h1>
+<div class="mt-8 flex md:justify-end">
+<p class="max-w-md text-white/90 text-lg md:text-xl font-light leading-relaxed border-l-2 border-primary-fixed-dim pl-6">
+                        Una comunidad forjada en la disciplina, el rigor científico y la herencia botánica de nuestra tierra.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Manifiesto -->
+<section class="py-24 bg-surface px-6">
+<div class="max-w-4xl mx-auto">
+<span class="font-brand text-secondary tracking-[0.3em] uppercase text-sm mb-6 block">El Manifiesto</span>
+<div class="space-y-12">
+<h2 class="font-brand text-4xl md:text-6xl text-on-surface leading-tight">
+                        No somos negación.<br/>No somos filtros.<br/>No somos excusas.
+                    </h2>
+<div class="grid md:grid-cols-2 gap-12 font-body text-on-surface-variant leading-loose text-lg">
+<p>
+                            Entendemos el cuidado como un acto de arquitectura personal. No buscamos la perfección artificial, sino la salud estructural. En DUNES, creemos que el rostro de un hombre cuenta su historia de perseverancia, y nuestro propósito es asegurar que esa historia se mantenga con vigor.
+                        </p>
+<p>
+                            Nuestra disciplina no conoce atajos. Combinamos la sabiduría ancestral de las plantas colombianas con los estándares más estrictos de la dermatología moderna. Somos el puente entre la selva y el laboratorio.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Nuestro Proceso (Bento Style) -->
+<section class="py-24 bg-surface-container-low px-6">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div>
+<span class="font-brand text-secondary tracking-[0.3em] uppercase text-sm mb-4 block">Fabricación</span>
+<h2 class="font-brand text-5xl text-on-surface uppercase tracking-tighter">Nuestro Proceso</h2>
+</div>
+<p class="max-w-sm text-on-surface-variant text-sm uppercase tracking-widest font-medium">Hecho en Colombia • Ciencia Botánica</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-8 h-[500px] overflow-hidden rounded-sm relative group">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" data-alt="Modern laboratory setting in Colombia with white marble surfaces and high-tech equipment for botanical extraction" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaqXK7SCPHbhpDQWmswPDqnUtmjWc8VxS-9SRPjFRUKAq3lFv2JHPXYxpKTzk25Eh4uHr4mYifpwTUFg4clv7cxbKJUlMQbdjpsML0N_4K-Ji-lPJoZu5pPgi3pKza05_Ha1FROhaBjXyN9HhWMHm3tTt38CbWBCzKwF5vsBu4H-a9pJ7Bk5HV-zwHOmD-vj7g6dxb8qlVLm4p3k17DatZnIRV8qDCOuzxWmxxM6NZIRuX6GQYJSR6llbzpuXvsVsJRi2oioaQYjM"/>
+<div class="absolute bottom-8 left-8 text-white z-10">
+<h3 class="font-brand text-2xl uppercase mb-2">Rigor Científico</h3>
+<p class="text-sm font-light max-w-xs opacity-80">Extracciones controladas grado farmacéutico.</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+<div class="md:col-span-4 h-[500px] bg-surface-container-highest p-8 flex flex-col justify-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-6" data-icon="science">science</span>
+<h3 class="font-brand text-3xl uppercase text-on-surface mb-4">Herencia Viva</h3>
+<p class="text-on-surface-variant leading-relaxed">
+                            Desde el romero del Altiplano hasta el jengibre de las regiones cálidas, cada ingrediente es seleccionado por su pureza y potencia biológica.
+                        </p>
+</div>
+<div class="md:col-span-4 h-[400px] overflow-hidden rounded-sm">
+<img class="w-full h-full object-cover" data-alt="Close up of essential botanical ingredients being sorted by hand in a clean industrial workshop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB98t4hYhDpD0nG_WixmzenPjVQHq7H9TpLYjSnSmyRqM9e_FSa8SnMo6YSIq_hrnU4jfHinrK2W2o6_wlc3FnEeTaFxHBthCil74_SoBUNmtpyFjYikSDrE9va-Wh89q3eJLzFJjcmNh6ai7pkHcy_Y-JAUEPtRwGJz42qrvVTege8upF6YMhUfPD4TWHaNu2T1wR3gBDy_2zRjtpYMB6SyiSW-XmG8M6XJv4APo5zz98zUp2L-yRjCikab774dEG0vl3ROWLGDjM"/>
+</div>
+<div class="md:col-span-8 h-[400px] overflow-hidden rounded-sm">
+<img class="w-full h-full object-cover" data-alt="Final quality control check of premium skincare glass bottles on a sleek production line" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMvABDvr5IOZEbgDDbHDMq3_w68D_2C3kRlDZgc0Fx0_V4qWdx0NW256aj3fmIxFZqVBEX2XqyoayLMwNyULA1SCRRUTJy4Hy_CagwtY_4njbtmJnMvOAgiLMrmYfJ7y0gdscNnnsrPNRsRSR5ZKX0zgaH6tzUl-zywyOAx1kA5LAMp5gjLwmxNNc_kUBL5TzBi-bO4g6-rBTs6lyo00Q2ean2MBuNNNcFg6PyGF_3ttNoD0HBAUaH0BIWqGT8ocq4ZS9plcyxJM4"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Comunidad Gallery -->
+<section class="py-24 bg-surface px-6">
+<div class="max-w-7xl mx-auto text-center mb-16">
+<span class="font-brand text-secondary tracking-[0.3em] uppercase text-sm mb-4 block">La Comunidad</span>
+<h2 class="font-brand text-5xl text-on-surface uppercase">Hombres de Disciplina</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover hover:scale-105 transition duration-500" data-alt="User generated content: stylish man in neutral tones using facial oil in front of a minimalist bathroom mirror" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdZ9CrN_NYVIru5tlwZcyAfih6Re1hojwNCVRXeDRsXeXR0YpL6hC0bPfMk7G4FiYyiBuj7LpMkzgKO58d7xX_m2a5D889CrA_OOPtsSkiVJwA4I0PO251wsOQimj8la8ZPOzfCxKLewgPC9xQTzCcbTNE0juYahjkhfYyENFBSRFvKQffMj1n-f6oNbUpbfGVTKa5F-Uf4CWUdu--hWqMcf6zhDJq5heZg_9BvUjP-X1GiK5thYnN3wOkGccNUA75-tH3yusSzoA"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover hover:scale-105 transition duration-500" data-alt="User portrait of a man with clean healthy skin outdoors with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuA2tiVN_Dqb84GfTfRDiCu6pMkcO17K87IwOsvdGblXejJmL7FN6zP2PrvBw4HY9-A5qNtJ5Yc7u4k871T3gAr2kVqEq0-k59xYXbmVbDmmk-YfsyWjn1DPC0hx8oEW9-cccvPjbxJD-WCpcACyQtIgJlGge9BrYgZ8wqa_gRAuA5ZOI3Rbvp5QkvhB_s9YjkACtdcfegmfIkknsuXzeycD4xRVz2azUMFlX4lruWLH8g9-mZGg3LBeWQYTE8LcJOHSaER5ybaxE"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container hidden md:block">
+<img class="w-full h-full object-cover hover:scale-105 transition duration-500" data-alt="Young professional man working at a minimalist desk with a clean well-groomed appearance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVmAbZKD2z8O4IM9kLcXiku9AVnfZj4tQJYR8SQdUjOyekYzZda8EE0HKRZxsGL5e5AjvIBxM4unULfw7M8Bt3qRwR0lXldE5JQzCb55WWrRwlfal744OJk80g95wyTr_-WIXlqtKbzHmSy-y0n69gbcM4VJFZIJyUEEvLuTXBbq_0506H9tLO_AfzWOn5G067xoakE9eglZs6ScUGb8UQXppCTFKi0ZcC6o5CxHdzElc-8DJvA11C_y-7_2fGQYlJspI2-0qZB1w"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container hidden md:block">
+<img class="w-full h-full object-cover hover:scale-105 transition duration-500" data-alt="Man smiling confidently at a high-end cafe atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTIs0t-1Uf6qkW6JnUJ-z8G-n0N0CwExmBZggc601sJddLzYHLxQvT1hGPHlKuIOdLOghv5U6tDs37nr6EuvTKy4PL_cnAMr9Skis9-xk9yF-_FwO4c8G6iab6JA3J_uBrZgqq8Zs_t5QFpwhsDp2-w7n7uegdvjtiCfO9eoPXPR72x3qwTAvoTGQ5CdYIOnwWESRJ5A9EeRw7mSz-sEjBwg7xkLrgC76ppEl6F7UZn7D4UdVOQDStXf2A2iXchl19gERsfX3nj3g"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container hidden lg:block">
+<img class="w-full h-full object-cover hover:scale-105 transition duration-500" data-alt="Close up portrait of a man with textured background and editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwAtDNV7kXORXbOQBC4RLdtmTbNbITdI4S2YiUYmxTxGunfznX4tHt0rdxk3nmxs-bIR6j81CFtpPrwFqAlnbuFn6iePvAH7_wX2VpmyOrxX5kGwMrKZ1-A9T8gne-YprmjgIy0eewA_SyF_OuWJ8KMw7FscUws_OFytwAp0gOrru5xb1W2zJhvAjMf_lBQRv5oN7Zt_C-xosKFj57tn6xc2TQssvU_uz0GbvF9DnUf6SyHeXQTAOfw_a2sa6dF0AmHpAG5lHQkSQ"/>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 bg-primary text-on-primary text-center px-6 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary-container via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="font-brand text-5xl md:text-7xl mb-8 leading-tight tracking-tighter uppercase">ÚNETE A LA DISCIPLINA</h2>
+<p class="font-body text-lg text-primary-fixed opacity-90 mb-12 max-w-lg mx-auto leading-relaxed">
+                    Sé parte de la nueva era del cuidado masculino. No es vanidad, es arquitectura.
+                </p>
+<button class="bg-surface text-primary font-brand px-12 py-5 text-xl tracking-widest uppercase hover:bg-primary-fixed hover:scale-105 transition-all duration-300">
+                    SABER MÁS
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-8 py-12 bg-[#f6f3ec] dark:bg-stone-900 flex flex-col items-center text-center space-y-8">
+<div class="font-['Oswald'] text-xl tracking-tighter text-[#234b1d] dark:text-white mb-4 uppercase font-bold">DUNES</div>
+<nav class="flex flex-wrap justify-center gap-8">
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors" href="#">Políticas</a>
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors underline decoration-[#904c2d]" href="#">Blog</a>
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors" href="#">Instagram</a>
+<a class="font-['Inter'] text-sm tracking-normal leading-relaxed text-stone-600 dark:text-stone-400 hover:text-[#904c2d] transition-colors" href="#">TikTok</a>
+</nav>
+<p class="font-['Inter'] text-xs tracking-widest text-stone-500 dark:text-stone-500">© 2024 DUNES. HECHO EN COLOMBIA.</p>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 w-full z-50 rounded-t-3xl border-t border-stone-200/10 bg-[#fcf9f2] dark:bg-stone-950 shadow-[0_-8px_32px_rgba(0,0,0,0.04)] h-20 px-4 pb-safe flex justify-around items-center">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 ease-out duration-200 hover:text-[#234b1d]">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Inicio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 ease-out duration-200 hover:text-[#234b1d]">
+<span class="material-symbols-outlined" data-icon="rebase_edit">rebase_edit</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Producto</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#234b1d] dark:text-white bg-[#e5e2db] dark:bg-stone-800 rounded-xl px-3 py-1 ease-out duration-200">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Comunidad</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 ease-out duration-200 hover:text-[#234b1d]">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-medium mt-1">Blog</span>
+</div>
+</div>
+</body></html>
