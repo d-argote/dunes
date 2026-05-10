@@ -39,7 +39,9 @@ export async function POST(request: Request) {
     .eq("department", department)
     .single();
 
-  const shipping_cost = shippingRate?.rate ?? 0;
+  const rawShipping = shippingRate?.rate ?? 0;
+  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+  const shipping_cost = totalQuantity >= 4 ? 0 : rawShipping;
 
   // Calculate totals
   const subtotal = items.reduce(

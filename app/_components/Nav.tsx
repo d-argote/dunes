@@ -8,7 +8,7 @@ export default function Nav() {
       <div className="bg-primary text-on-primary text-center py-2 px-4 flex items-center justify-center gap-2">
         <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>local_shipping</span>
         <p className="font-body text-[11px] md:text-xs tracking-[0.15em] uppercase">
-          Envío <span className="font-bold">GRATIS</span> comprando 2 o más productos
+          Envío <span className="font-bold">GRATIS</span> comprando 4 o más productos
           <Link
             href="/tienda"
             className="ml-3 underline underline-offset-2 hover:no-underline transition-all hidden sm:inline"

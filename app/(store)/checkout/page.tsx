@@ -32,7 +32,9 @@ export default function CheckoutPage() {
     address: "",
   });
 
-  const total = cartSubtotal + (shippingCost ?? 0);
+  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+  const effectiveShipping = totalQuantity >= 4 ? 0 : (shippingCost ?? 0);
+  const total = cartSubtotal + effectiveShipping;
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -211,7 +213,13 @@ export default function CheckoutPage() {
             </div>
             <div className="flex justify-between">
               <span>Envío</span>
-              <span>{shippingCost !== null ? `$${shippingCost.toLocaleString("es-CO")}` : "—"}</span>
+              <span>
+                {totalQuantity >= 4
+                  ? <span className="text-primary font-bold">GRATIS</span>
+                  : shippingCost !== null
+                    ? `$${shippingCost.toLocaleString("es-CO")}`
+                    : "—"}
+              </span>
             </div>
           </div>
 
@@ -224,7 +232,7 @@ export default function CheckoutPage() {
 
           <button
             type="submit"
-            disabled={submitting || shippingCost === null || total === 0}
+            disabled={submitting || (shippingCost === null && totalQuantity < 4) || total === 0}
             className="bg-primary text-on-primary font-brand py-5 text-sm tracking-widest uppercase hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           >
             {submitting ? (
@@ -237,7 +245,7 @@ export default function CheckoutPage() {
             )}
           </button>
 
-          {shippingCost === null && (
+          {shippingCost === null && totalQuantity < 4 && (
             <p className="text-xs text-on-surface-variant text-center">
               Selecciona tu departamento para continuar
             </p>

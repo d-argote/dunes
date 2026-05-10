@@ -27,7 +27,12 @@ export default async function TiendaPage() {
     console.error("Error fetching products:", error.message);
   }
 
-  const items = (products ?? []) as Product[];
+  const ORDER = ["shampoo", "acondicionador"];
+  const items = ((products ?? []) as Product[]).sort((a, b) => {
+    const ai = ORDER.findIndex((k) => a.slug.includes(k));
+    const bi = ORDER.findIndex((k) => b.slug.includes(k));
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
 
   return (
     <main className="pt-24 pb-32 px-6 max-w-7xl mx-auto">
