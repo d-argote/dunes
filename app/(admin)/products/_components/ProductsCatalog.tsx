@@ -76,7 +76,7 @@ export default function ProductsCatalog({ products }: { products: Product[] }) {
         <div className="flex flex-col items-center justify-center py-32 gap-4 text-on-surface-variant">
           <span className="material-symbols-outlined text-6xl" style={{ fontVariationSettings: "'wght' 100" }}>inventory_2</span>
           <p className="font-headline text-xl font-bold uppercase">No hay productos aún</p>
-          <Link href="/admin/products/new" className="bg-primary text-on-primary px-8 py-4 font-brand text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-colors">
+          <Link href="/products/new" className="bg-primary text-on-primary px-8 py-4 font-brand text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-colors">
             AÑADIR PRIMER PRODUCTO
           </Link>
         </div>
@@ -90,7 +90,7 @@ export default function ProductsCatalog({ products }: { products: Product[] }) {
             return (
               <Link
                 key={product.id}
-                href={`/admin/products/${product.id}`}
+                href={`/products/${product.id}`}
                 className={`bg-surface-container-low relative group cursor-pointer ${status === "draft" ? "opacity-75 hover:opacity-100 transition-opacity" : ""}`}
               >
                 <div className="absolute top-4 left-4 z-10">
@@ -162,7 +162,7 @@ export default function ProductsCatalog({ products }: { products: Product[] }) {
                 <span className="font-headline font-bold text-primary">${product.price.toLocaleString("es-CO")}</span>
                 <span className={`font-body font-semibold ${status === "low" ? "text-error" : "text-on-surface"}`}>{product.stock} u.</span>
                 <StatusBadge status={status} />
-                <Link href={`/admin/products/${product.id}`} className="text-on-surface-variant hover:text-primary transition-colors flex justify-end">
+                <Link href={`/products/${product.id}`} className="text-on-surface-variant hover:text-primary transition-colors flex justify-end">
                   <span className="material-symbols-outlined">edit</span>
                 </Link>
               </div>

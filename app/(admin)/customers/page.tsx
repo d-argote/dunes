@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 
@@ -77,7 +77,7 @@ export default function CustomersPage() {
       {activeTab === "buyers" && (
         <section className="flex flex-col gap-8">
           <div className="flex justify-between items-center">
-            <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">COHORT — ALTO VALOR</h3>
+            <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">COHORT � ALTO VALOR</h3>
             <button className="bg-surface-container-highest text-on-surface-variant px-6 py-3 font-brand text-xs font-semibold uppercase tracking-widest hover:bg-surface-container-high transition-colors border border-outline-variant flex items-center gap-2">
               <span className="material-symbols-outlined text-base">file_download</span>
               EXPORTAR
@@ -113,7 +113,7 @@ export default function CustomersPage() {
           </div>
           {/* Segment donut placeholder */}
           <div className="bg-surface-container-low p-8">
-            <h4 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em] mb-6">SEGMENTACION — TOP 20%</h4>
+            <h4 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em] mb-6">SEGMENTACION � TOP 20%</h4>
             <div className="flex items-center gap-8">
               <div className="relative w-40 h-40 shrink-0">
                 <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">

@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: "Blog — Ciencia Capilar y Rutinas para Hombres",
   description:
     "Guías y artículos sobre la caída del cabello en hombres, ingredientes botánicos naturales y rutinas de cuidado capilar sin químicos. Basado en tricología moderna.",
-  alternates: { canonical: "https://www.dunesbotanical.com/blog" },
+  alternates: { canonical: "https://ditechdev.com/blog" },
   openGraph: {
     title: "Blog DUNES | Shampoo Natural, Caída del Cabello y Cuidado Masculino",
     description:
       "Aprende sobre shampoo natural sin químicos, romero para el crecimiento del cabello y rutinas capilares para hombres.",
-    url: "https://www.dunesbotanical.com/blog",
+    url: "https://ditechdev.com/blog",
     type: "website",
   },
 };

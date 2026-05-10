@@ -1,4 +1,4 @@
-﻿export default function SalesPage() {
+export default function SalesPage() {
   const channels = [
     { name: "Directo", pct: 75, amount: "$3.1M" },
     { name: "Retail", pct: 45, amount: "$1.9M" },
@@ -27,7 +27,7 @@
       <div className="flex justify-between items-center border-b border-outline-variant pb-8">
         <div>
           <h2 className="font-headline text-3xl font-bold text-on-surface uppercase tracking-tight">SALES ANALYTICS</h2>
-          <p className="font-brand text-sm font-semibold tracking-widest uppercase text-on-surface-variant mt-2">Q3 2026: JUL 01 — SEP 30</p>
+          <p className="font-brand text-sm font-semibold tracking-widest uppercase text-on-surface-variant mt-2">Q3 2026: JUL 01 � SEP 30</p>
         </div>
         <button className="bg-primary text-on-primary px-8 py-4 font-brand text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-colors flex items-center gap-2">
           <span className="material-symbols-outlined">file_download</span>

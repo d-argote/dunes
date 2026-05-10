@@ -5,12 +5,12 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 const navigation = [
-  { href: "/admin/dashboard", label: "DASHBOARD", icon: "dashboard" },
-  { href: "/admin/products", label: "PRODUCTOS", icon: "eco" },
-  { href: "/admin/customers", label: "COMUNIDAD", icon: "groups" },
+  { href: "/dashboard", label: "DASHBOARD", icon: "dashboard" },
+  { href: "/products", label: "PRODUCTOS", icon: "eco" },
+  { href: "/customers", label: "COMUNIDAD", icon: "groups" },
   { href: "/admin/blog", label: "CONTENIDO", icon: "edit_note" },
-  { href: "/admin/sales", label: "VENTAS", icon: "shopping_cart" },
-  { href: "/admin/social", label: "SOCIAL", icon: "campaign" },
+  { href: "/sales", label: "VENTAS", icon: "shopping_cart" },
+  { href: "/social", label: "SOCIAL", icon: "campaign" },
 ];
 
 function matchesPath(pathname: string, href: string) {
@@ -19,11 +19,11 @@ function matchesPath(pathname: string, href: string) {
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? "";
-  const isLogin = pathname === "/admin/login" || pathname === "/login";
+  const isLogin = pathname === "/login";
 
   function handleLogout() {
     fetch("/api/auth/logout", { method: "POST" }).finally(() => {
-      window.location.href = "/admin/login";
+      window.location.href = "/login";
     });
   }
 
@@ -72,7 +72,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         {/* CTA */}
         <div className="px-4 mt-auto mb-6 flex flex-col gap-3">
           <Link
-            href="/admin/products/new"
+            href="/products/new"
             className="w-full bg-primary text-on-primary font-brand text-sm font-semibold tracking-widest uppercase py-4 px-8 text-center hover:bg-primary-container transition-colors"
           >
             NUEVO PRODUCTO

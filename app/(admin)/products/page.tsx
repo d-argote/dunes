@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import ProductsCatalog from "./_components/ProductsCatalog";
 import type { Product } from "@/lib/types";
@@ -20,7 +20,7 @@ export default async function ProductsPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
         <div>
           <h2 className="font-headline text-3xl font-bold text-on-surface mb-8 uppercase tracking-tight">
-            PRODUCTOS — GESTIÓN DE CATÁLOGO
+            PRODUCTOS � GESTI�N DE CAT�LOGO
           </h2>
         </div>
         <div className="flex gap-4 self-stretch md:self-auto">
@@ -29,18 +29,18 @@ export default async function ProductsPage() {
             Filtros
           </button>
           <Link
-            href="/admin/products/new"
+            href="/products/new"
             className="bg-primary text-on-primary px-8 py-4 font-brand text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-colors flex items-center gap-2"
           >
             <span className="material-symbols-outlined">add</span>
-            AÑADIR PRODUCTO
+            A�ADIR PRODUCTO
           </Link>
         </div>
       </div>
 
       {error && (
         <div className="mb-8 px-4 py-3 border border-error/30 bg-error-container/20 font-body text-sm text-error">
-          Error al cargar productos. Verifica la conexión con Supabase.
+          Error al cargar productos. Verifica la conexi�n con Supabase.
         </div>
       )}
 

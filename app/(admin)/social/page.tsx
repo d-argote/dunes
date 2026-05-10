@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ const keywords = [
 
 const seoActions = [
   { priority: "Urgente", label: "Actualizar meta description de PDP principal", done: false },
-  { priority: "Urgente", label: "Optimizar imagenes — alt text faltante (12 img)", done: false },
+  { priority: "Urgente", label: "Optimizar imagenes � alt text faltante (12 img)", done: false },
   { priority: "Media", label: "Crear landing page: 'cosmetica natural colombia'", done: false },
   { priority: "Media", label: "Implementar schema markup Product + Review", done: true },
   { priority: "Baja", label: "Ampliar blog con keywords long-tail", done: false },
@@ -81,8 +81,8 @@ export default function SocialPage() {
           </div>
           <div className="bg-surface p-6 border-l-4 border-primary">
             <p className="font-body text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Video mas visto</p>
-            <p className="font-body text-base text-on-surface">"El ritual de 3 pasos que cambio mi piel — ingredientes amazonicos"</p>
-            <p className="font-body text-xs font-semibold text-primary mt-2">2.4M vistas • 18.2% engagement</p>
+            <p className="font-body text-base text-on-surface">"El ritual de 3 pasos que cambio mi piel � ingredientes amazonicos"</p>
+            <p className="font-body text-xs font-semibold text-primary mt-2">2.4M vistas � 18.2% engagement</p>
           </div>
         </div>
       </section>
@@ -90,7 +90,7 @@ export default function SocialPage() {
       {/* AI Semantic Comment Analysis */}
       <section className="bg-surface-container-low p-8 flex flex-col gap-8">
         <div className="flex justify-between items-center">
-          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">ANALISIS SEMANTICO DE COMENTARIOS — IA</h3>
+          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">ANALISIS SEMANTICO DE COMENTARIOS � IA</h3>
           <span className="flex items-center gap-2 font-brand text-xs font-semibold uppercase tracking-widest text-primary bg-primary-container/20 px-3 py-2">
             <span className="material-symbols-outlined text-sm animate-pulse">sensors</span> AI ACTIVE
           </span>
@@ -138,7 +138,7 @@ export default function SocialPage() {
               <span className="material-symbols-outlined text-primary text-xl">trending_up</span>
             </div>
             <p className="font-headline text-xl font-bold text-on-surface tracking-[-0.02em]">Video: Proceso de extraccion del cacao colombiano</p>
-            <p className="font-body text-base text-on-surface-variant">Estimated reach: 420K — 580K. Peak window: Lunes 7am / Viernes 6pm.</p>
+            <p className="font-body text-base text-on-surface-variant">Estimated reach: 420K � 580K. Peak window: Lunes 7am / Viernes 6pm.</p>
             <button className="bg-primary text-on-primary font-brand text-sm font-semibold uppercase tracking-widest px-6 py-3 hover:bg-primary-container transition-colors self-start">
               PLANIFICAR CONTENIDO
             </button>
@@ -148,7 +148,7 @@ export default function SocialPage() {
               <span className="bg-error-container text-on-error-container font-body text-xs font-bold px-3 py-1 uppercase border border-error">Atencion Requerida</span>
               <span className="material-symbols-outlined text-error text-xl">warning</span>
             </div>
-            <p className="font-headline text-xl font-bold text-on-surface tracking-[-0.02em]">Responder comentarios negativos precio — 48h window</p>
+            <p className="font-headline text-xl font-bold text-on-surface tracking-[-0.02em]">Responder comentarios negativos precio � 48h window</p>
             <p className="font-body text-base text-on-surface-variant">38 comentarios sin respuesta. Impacto potencial en sentiment score.</p>
             <button className="bg-error text-on-error font-brand text-sm font-semibold uppercase tracking-widest px-6 py-3 hover:bg-error-container transition-colors self-start">
               VER COMENTARIOS
@@ -160,7 +160,7 @@ export default function SocialPage() {
       {/* SEO */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-surface-container-low p-8 flex flex-col gap-6">
-          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">SEO — KEYWORD POSITIONS</h3>
+          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">SEO � KEYWORD POSITIONS</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>

@@ -71,7 +71,7 @@ export default function ProductEditorPage() {
     setLoading(true);
     try {
       const res = await fetch(`/api/products/${params.id}`);
-      if (!res.ok) { router.push("/admin/products"); return; }
+      if (!res.ok) { router.push("/products"); return; }
       const p = await res.json();
       // Normalize images array to always have 4 slots
       const rawImages: string[] = Array.isArray(p.images) ? p.images : [];
@@ -201,7 +201,7 @@ export default function ProductEditorPage() {
       const json = await res.json();
       if (!res.ok) { showToast(json.error ?? "Error al guardar.", false); return; }
       showToast(isNew ? "Producto creado." : "Cambios guardados.", true);
-      if (isNew) router.push(`/admin/products/${json.id}`);
+      if (isNew) router.push(`/products/${json.id}`);
     } finally {
       setSaving(false);
     }
@@ -213,7 +213,7 @@ export default function ProductEditorPage() {
     try {
       const res = await fetch(`/api/products/${params.id}`, { method: "DELETE" });
       if (!res.ok) { showToast("Error al eliminar.", false); return; }
-      router.push("/admin/products");
+      router.push("/products");
     } finally {
       setDeleting(false);
     }
@@ -483,7 +483,7 @@ export default function ProductEditorPage() {
                   <p className="font-body text-xs font-semibold uppercase text-on-surface-variant mb-4">Vista previa SERP</p>
                   <div className="flex flex-col gap-1">
                     <p className="font-body text-base text-[#1a0dab] truncate">{data.metaTitle || "Título del producto"}</p>
-                    <p className="font-body text-sm text-[#006621]">dunesbotanical.com/producto/{data.slug || "slug"}</p>
+                    <p className="font-body text-sm text-[#006621]">ditechdev.com/producto/{data.slug || "slug"}</p>
                     <p className="font-body text-sm text-[#545454] line-clamp-2">{data.metaDescription || "Descripción del producto..."}</p>
                   </div>
                 </div>
@@ -572,7 +572,7 @@ export default function ProductEditorPage() {
         <div className="flex items-center gap-4">
           <button
             type="button"
-            onClick={() => router.push("/admin/products")}
+            onClick={() => router.push("/products")}
             className="text-on-surface-variant font-brand text-sm font-semibold uppercase px-6 py-4 tracking-widest hover:text-primary transition-colors"
           >
             CANCELAR

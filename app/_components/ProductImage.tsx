@@ -25,6 +25,8 @@ export function ProductImage({ src, alt, className }: Props) {
       src={src}
       alt={alt}
       className={className}
+      loading="lazy"
+      decoding="async"
       onError={() => setBroken(true)}
     />
   );
