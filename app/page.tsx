@@ -153,7 +153,7 @@ const jsonLd = {
 export default async function HomePage() {
   const { data } = await supabaseAdmin
     .from("products")
-    .select("id, name, slug, description, price, stock, image_url")
+    .select("id, name, slug, description, price, stock, image_url, images, video_url")
     .order("name");
 
   const products: Product[] = data ?? [];

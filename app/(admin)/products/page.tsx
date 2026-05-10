@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function ProductsPage() {
   const { data, error } = await supabaseAdmin
     .from("products")
-    .select("id, name, slug, description, price, stock, image_url")
+    .select("id, name, slug, description, price, stock, image_url, images, video_url")
     .order("name");
 
   const products: Product[] = error ? [] : (data ?? []);
