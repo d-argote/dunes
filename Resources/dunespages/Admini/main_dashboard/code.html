@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DUNES - Main Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Oswald:wght@600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#733518",
+                      "surface-bright": "#f9faf3",
+                      "surface-container-high": "#e8e9e2",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#6e334b",
+                      "inverse-on-surface": "#f0f1ea",
+                      "surface-container-highest": "#e2e3dc",
+                      "background": "#f9faf3",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#904c2d",
+                      "on-primary-fixed-variant": "#285021",
+                      "surface-tint": "#3f6837",
+                      "inverse-surface": "#2f312c",
+                      "on-secondary-container": "#78391c",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c2c9bc",
+                      "inverse-primary": "#a4d397",
+                      "surface-dim": "#d9dbd4",
+                      "tertiary-fixed-dim": "#ffb0cc",
+                      "on-tertiary-fixed": "#390720",
+                      "on-primary-container": "#8dbb81",
+                      "on-secondary-fixed": "#360f00",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#42493f",
+                      "on-surface": "#1a1c18",
+                      "on-primary-fixed": "#002201",
+                      "on-background": "#1a1c18",
+                      "surface-variant": "#e2e3dc",
+                      "secondary-fixed": "#ffdbcd",
+                      "secondary-fixed-dim": "#ffb597",
+                      "primary": "#0b3408",
+                      "tertiary-container": "#692f47",
+                      "error": "#ba1a1a",
+                      "surface": "#f9faf3",
+                      "outline": "#72796e",
+                      "on-tertiary-container": "#e699b4",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f3f4ed",
+                      "primary-fixed": "#c0efb1",
+                      "primary-container": "#234b1d",
+                      "surface-container": "#edeee7",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#ffd9e4",
+                      "tertiary": "#4e1931",
+                      "primary-fixed-dim": "#a4d397",
+                      "secondary-container": "#fea680"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-margin-desktop": "64px",
+                      "base": "8px",
+                      "container-margin-mobile": "20px",
+                      "section-gap": "120px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Space Grotesk"],
+                      "display-lg": ["Oswald"],
+                      "headline-md": ["Space Grotesk"],
+                      "display-md": ["Oswald"],
+                      "label-md": ["Inter"],
+                      "label-lg": ["Oswald"],
+                      "headline-lg": ["Space Grotesk"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "display-md": ["48px", {"lineHeight": "1.1", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #f9faf3; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex">
+<!-- SideNavBar (drawer) -->
+<nav class="hidden md:flex flex-col h-full py-base bg-surface-container-low dark:bg-surface-dim border-r border-outline-variant dark:border-outline w-[240px] h-screen fixed left-0 top-0 z-50">
+<div class="px-4 mb-8 mt-4 flex flex-col items-center">
+<h1 class="font-display-md text-display-md tracking-tighter text-primary dark:text-inverse-primary">DUNES</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mt-2 tracking-widest">Admin Suite 2026</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 mt-4">
+<!-- Active Tab: DASHBOARD -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">DASHBOARD</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high dark:hover:bg-inverse-surface rounded-full scale-98" href="#">
+<span class="material-symbols-outlined">eco</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">PRODUCTOS</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high dark:hover:bg-inverse-surface rounded-full scale-98" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">COMUNIDAD</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high dark:hover:bg-inverse-surface rounded-full scale-98" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">CONTENIDO</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high dark:hover:bg-inverse-surface rounded-full scale-98" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">ORDENES</span>
+</a>
+</div>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase rounded-[2px] py-4 px-8 tracking-widest hover:bg-primary-container transition-colors">
+                NUEVO PRODUCTO
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[240px] flex flex-col min-h-screen">
+<!-- TopAppBar (medium) -->
+<header class="flex justify-between items-center px-gutter w-full z-40 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl h-16 sticky top-0 border-b border-transparent">
+<div class="flex items-center gap-4">
+<span class="font-label-lg text-label-lg text-on-surface-variant tracking-widest uppercase flex items-center gap-2">
+                    DUNES <span class="material-symbols-outlined text-[16px]">chevron_right</span> <span class="text-primary font-bold">INICIO</span>
+</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors rounded-full p-2 cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors rounded-full p-2 cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors rounded-full p-2 cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-gutter lg:p-container-margin-desktop flex-1 flex flex-col gap-12">
+<!-- KPI Cards Row -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Ventas -->
+<div class="bg-surface-container-low p-6 rounded-[2px]">
+<p class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant mb-2">VENTAS HOY</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">$2.847.000</p>
+<div class="mt-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-md text-label-md">+12.5% vs ayer</span>
+</div>
+</div>
+<!-- Pedidos -->
+<div class="bg-surface-container-low p-6 rounded-[2px]">
+<p class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant mb-2">PEDIDOS ACTIVOS</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">34</p>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+<span class="font-label-md text-label-md">8 en preparación</span>
+</div>
+</div>
+<!-- Conversion -->
+<div class="bg-surface-container-low p-6 rounded-[2px]">
+<p class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant mb-2">TASA CONVERSIÓN</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">3.8%</p>
+<div class="mt-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-md text-label-md">+0.4% vs mes anterior</span>
+</div>
+</div>
+<!-- Visitantes -->
+<div class="bg-surface-container-low p-6 rounded-[2px]">
+<p class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant mb-2">VISITANTES</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">1.247</p>
+<div class="mt-4 flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span class="font-label-md text-label-md">-2.1% vs ayer</span>
+</div>
+</div>
+</section>
+<!-- Chart Section -->
+<section class="bg-surface-container-low p-8 rounded-[2px] min-h-[400px] flex flex-col">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">VENTAS — ÚLTIMOS 30 DÍAS</h2>
+<button class="font-label-lg text-label-lg uppercase tracking-widest text-primary flex items-center gap-2 hover:underline">
+                        VER REPORTE DETALLADO <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Faux Chart Area (Using gradients for visual placeholder) -->
+<div class="flex-1 relative w-full border-b border-l border-outline-variant/30 flex items-end overflow-hidden pb-4 pl-4">
+<div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-primary/20 to-transparent"></div>
+<!-- Faux Line -->
+<svg class="absolute w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q10,70 20,80 T40,60 T60,70 T80,30 T100,40" fill="none" stroke="#0b3408" stroke-width="2"></path>
+</svg>
+<!-- Y Axis labels faux -->
+<div class="absolute left-[-40px] top-0 h-full flex flex-col justify-between font-label-md text-label-md text-on-surface-variant py-4">
+<span>$5M</span>
+<span>$2.5M</span>
+<span>$0</span>
+</div>
+</div>
+</section>
+<!-- Bottom Row: Table & List -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Table: ÚLTIMOS PEDIDOS (60%) -->
+<div class="lg:col-span-7 bg-surface-container-low p-8 rounded-[2px]">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">ÚLTIMOS PEDIDOS</h2>
+<span class="material-symbols-outlined text-on-surface-variant">more_horiz</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant/50">
+<th class="py-4 font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant">ORDEN</th>
+<th class="py-4 font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant">CLIENTE</th>
+<th class="py-4 font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant">PRODUCTO</th>
+<th class="py-4 font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant text-right">MONTO</th>
+<th class="py-4 font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant text-right">ESTADO</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="border-b border-outline-variant/20 hover:bg-surface transition-colors">
+<td class="py-4 font-label-md">#ORD-9082</td>
+<td class="py-4">Carlos M.</td>
+<td class="py-4">Extracto Cacao Puro</td>
+<td class="py-4 text-right">$125.000</td>
+<td class="py-4 text-right">
+<span class="inline-block px-3 py-1 bg-primary-container text-on-primary-container rounded-[2px] font-label-md uppercase">Completado</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-surface transition-colors">
+<td class="py-4 font-label-md">#ORD-9081</td>
+<td class="py-4">Ana R.</td>
+<td class="py-4">Bruma Amazónica</td>
+<td class="py-4 text-right">$89.500</td>
+<td class="py-4 text-right">
+<span class="inline-block px-3 py-1 bg-surface-variant text-on-surface-variant rounded-[2px] font-label-md uppercase">En Proceso</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-surface transition-colors">
+<td class="py-4 font-label-md">#ORD-9080</td>
+<td class="py-4">Felipe J.</td>
+<td class="py-4">Set Ritual Nocturno</td>
+<td class="py-4 text-right">$340.000</td>
+<td class="py-4 text-right">
+<span class="inline-block px-3 py-1 bg-surface-variant text-on-surface-variant rounded-[2px] font-label-md uppercase">En Proceso</span>
+</td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="py-4 font-label-md">#ORD-9079</td>
+<td class="py-4">Diana V.</td>
+<td class="py-4">Bálsamo Andino</td>
+<td class="py-4 text-right">$65.000</td>
+<td class="py-4 text-right">
+<span class="inline-block px-3 py-1 bg-error-container text-on-error-container rounded-[2px] font-label-md uppercase">Cancelado</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- List: TOP PRODUCTOS (40%) -->
+<div class="lg:col-span-5 bg-surface-container-low p-8 rounded-[2px]">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">TOP PRODUCTOS</h2>
+<span class="material-symbols-outlined text-on-surface-variant">trending_up</span>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Item 1 -->
+<div>
+<div class="flex justify-between font-body-md text-on-surface mb-2">
+<span>1. Extracto Cacao Puro</span>
+<span class="font-label-md font-bold text-primary">420 Und.</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Item 2 -->
+<div>
+<div class="flex justify-between font-body-md text-on-surface mb-2">
+<span>2. Bruma Amazónica</span>
+<span class="font-label-md font-bold text-primary">315 Und.</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full opacity-80" style="width: 65%;"></div>
+</div>
+</div>
+<!-- Item 3 -->
+<div>
+<div class="flex justify-between font-body-md text-on-surface mb-2">
+<span>3. Set Ritual Nocturno</span>
+<span class="font-label-md font-bold text-primary">190 Und.</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full opacity-60" style="width: 40%;"></div>
+</div>
+</div>
+<!-- Item 4 -->
+<div>
+<div class="flex justify-between font-body-md text-on-surface mb-2">
+<span>4. Bálsamo Andino</span>
+<span class="font-label-md font-bold text-primary">124 Und.</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full opacity-40" style="width: 25%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="sticky bottom-0 w-full border-t-2 border-primary bg-surface-container-high dark:bg-surface-container-highest flex justify-between items-center px-gutter py-4 z-30 mt-auto">
+<span class="font-display-lg text-label-lg tracking-widest uppercase text-on-surface-variant">
+                2026 DUNES BOTANICAL ARCHITECT
+            </span>
+<div class="flex gap-6 font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant">
+<a class="hover:text-primary transition-colors cursor-default" href="#">AUTO-SAVE: ACTIVE</a>
+<a class="hover:text-primary transition-colors cursor-default" href="#">EDITOR MODE</a>
+<a class="hover:text-primary transition-colors cursor-default" href="#">SYSTEM STATUS</a>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar (mobile only) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg border-t border-outline-variant shadow-sm flex justify-around items-center h-16 pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-primary font-bold active:bg-surface-container tap-highlight-transparent p-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md uppercase mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent p-2" href="#">
+<span class="material-symbols-outlined">spa</span>
+<span class="font-label-md text-label-md uppercase mt-1">Productos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent p-2" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-md text-label-md uppercase mt-1">Comunidad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent p-2" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="font-label-md text-label-md uppercase mt-1">Blog</span>
+</a>
+</nav>
+</body></html>

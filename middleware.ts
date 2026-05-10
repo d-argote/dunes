@@ -16,6 +16,7 @@ function internalAdminPath(pathname: string) {
   if (pathname === "/admin/sales") return "/sales";
   if (pathname === "/admin/social") return "/social";
   if (pathname === "/admin/customers") return "/customers";
+  if (pathname === "/admin/blog") return "/blog";
   return null;
 }
 
@@ -26,6 +27,7 @@ function publicAdminPath(pathname: string) {
   if (pathname === "/sales") return "/admin/sales";
   if (pathname === "/social") return "/admin/social";
   if (pathname === "/customers") return "/admin/customers";
+  if (pathname === "/blog") return "/admin/blog";
   return null;
 }
 
@@ -62,12 +64,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(withPathname(request, "/admin/login"));
   }
 
-  if (pathname === "/admin/blog") {
-    const url = withPathname(request, "/admin/dashboard");
-    url.searchParams.set("blocked", "blog-route-conflict");
-    return NextResponse.redirect(url);
-  }
-
   const destination = internalAdminPath(pathname);
   if (!destination) {
     return NextResponse.next();
@@ -85,5 +81,6 @@ export const config = {
     "/sales",
     "/social",
     "/customers",
+    "/blog",
   ],
 };

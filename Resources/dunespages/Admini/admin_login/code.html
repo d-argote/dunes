@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DUNES Admin Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Oswald:wght@600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#733518",
+                        "surface-bright": "#f9faf3",
+                        "surface-container-high": "#e8e9e2",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#6e334b",
+                        "inverse-on-surface": "#f0f1ea",
+                        "surface-container-highest": "#e2e3dc",
+                        "background": "#f9faf3",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#904c2d",
+                        "on-primary-fixed-variant": "#285021",
+                        "surface-tint": "#3f6837",
+                        "inverse-surface": "#2f312c",
+                        "on-secondary-container": "#78391c",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c2c9bc",
+                        "inverse-primary": "#a4d397",
+                        "surface-dim": "#d9dbd4",
+                        "tertiary-fixed-dim": "#ffb0cc",
+                        "on-tertiary-fixed": "#390720",
+                        "on-primary-container": "#8dbb81",
+                        "on-secondary-fixed": "#360f00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#42493f",
+                        "on-surface": "#1a1c18",
+                        "on-primary-fixed": "#002201",
+                        "on-background": "#1a1c18",
+                        "surface-variant": "#e2e3dc",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary-fixed-dim": "#ffb597",
+                        "primary": "#0b3408",
+                        "tertiary-container": "#692f47",
+                        "error": "#ba1a1a",
+                        "surface": "#f9faf3",
+                        "outline": "#72796e",
+                        "on-tertiary-container": "#e699b4",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f4ed",
+                        "primary-fixed": "#c0efb1",
+                        "primary-container": "#234b1d",
+                        "surface-container": "#edeee7",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffd9e4",
+                        "tertiary": "#4e1931",
+                        "primary-fixed-dim": "#a4d397",
+                        "secondary-container": "#fea680"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-margin-desktop": "64px",
+                        "base": "8px",
+                        "container-margin-mobile": "20px",
+                        "section-gap": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Oswald"],
+                        "headline-md": ["Space Grotesk"],
+                        "display-md": ["Oswald"],
+                        "label-md": ["Inter"],
+                        "label-lg": ["Oswald"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-md": ["48px", { "lineHeight": "1.1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center overflow-hidden antialiased">
+<div class="flex w-full h-screen">
+<!-- Left Section: Macro Photography -->
+<div class="hidden md:flex w-[60%] relative overflow-hidden bg-surface-container-highest flex-col items-center justify-center" data-alt="Macro photography of fresh rosemary sprigs and ginger root resting on a textured, dark marble surface. The scene features deep, moody shadows and sharp, focused lighting that highlights the organic textures of the botanicals against the brutalist stone. The overall aesthetic is raw, premium, and sophisticated, aligning with a dark organic brutalism theme." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmgvIknRO2wRP7Xh-KqFeCVub8EeCIXvuvBmQJETy-YHzEonx5_J0kigHZm2-bSlLiBob0rekgJu6Jfb4apDCkZTs41ubU63xn_hT8SvnqdNN6AQRkWqvsITkBKu353i1lSGUuyTCdx-f20iSONPJoLdFAONjiBTvSI3TeeMuldGMag5ZQ9nCGRsxLVCO_-J3wi5mUev2q3fq58-1w-JdqwMsOYVLf71PdFUk6s3-IIuzqQP5RIyH_rwVYPB2ZT0nZUF8W8wmOHw'); background-size: cover; background-position: center;">
+<!-- Dark Overlay -->
+<div class="absolute inset-0 bg-black/60 z-0"></div>
+<!-- Centered Content -->
+<div class="relative z-10 text-center flex flex-col items-center gap-4 px-12">
+<h1 class="font-display-lg text-[72px] text-white tracking-[0.1em] leading-none uppercase">DUNES</h1>
+<p class="font-headline-md text-[12px] text-white/60 tracking-widest uppercase">PANEL DE CONTROL — SISTEMA ADMINISTRATIVO 2026</p>
+</div>
+</div>
+<!-- Right Section: Login Panel -->
+<div class="w-full md:w-[40%] bg-surface flex flex-col justify-center px-8 md:px-16 lg:px-24 h-full z-10 shadow-[-16px_0_32px_rgba(28,28,24,0.05)]">
+<div class="w-full max-w-sm mx-auto flex flex-col gap-12">
+<!-- Header -->
+<div class="flex flex-col gap-4">
+<h2 class="font-display-md text-primary tracking-tighter uppercase text-[32px]">DUNES</h2>
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-secondary uppercase tracking-widest text-[10px]">ACCESO ADMINISTRATIVO</span>
+<h3 class="font-headline-lg text-on-surface">Bienvenido de vuelta.</h3>
+</div>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-8">
+<!-- Email Input -->
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b-2 border-outline-variant text-on-surface focus:ring-0 focus:border-primary px-0 py-2 font-body-md placeholder-transparent transition-colors" id="email" placeholder="Correo Electrónico" type="email"/>
+<label class="absolute left-0 -top-4 font-headline-md text-label-md text-on-surface-variant transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-label-md peer-focus:text-primary uppercase" for="email">Correo Electrónico</label>
+</div>
+<!-- Password Input -->
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b-2 border-outline-variant text-on-surface focus:ring-0 focus:border-primary px-0 py-2 font-body-md placeholder-transparent transition-colors" id="password" placeholder="Contraseña" type="password"/>
+<label class="absolute left-0 -top-4 font-headline-md text-label-md text-on-surface-variant transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-label-md peer-focus:text-primary uppercase" for="password">Contraseña</label>
+</div>
+<!-- Remember Me Toggle -->
+<div class="flex items-center justify-between mt-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+<span class="font-label-md text-on-surface-variant group-hover:text-on-surface transition-colors">Recordar dispositivo</span>
+</label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-lg tracking-[0.15em] uppercase py-4 px-8 rounded-[2px] hover:bg-primary-container transition-colors mt-4" type="submit">
+                        INICIAR SESIÓN
+                    </button>
+</form>
+<!-- Footer Links (Optional/Implicit in luxury design) -->
+<div class="text-center mt-8">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors border-b border-transparent hover:border-primary" href="#">¿Olvidaste tu contraseña?</a>
+</div>
+</div>
+</div>
+</div>
+</body></html>

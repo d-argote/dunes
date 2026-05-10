@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Social Media &amp; SEO Intelligence - DUNES</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Oswald:wght@600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#733518",
+                    "surface-bright": "#f9faf3",
+                    "surface-container-high": "#e8e9e2",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#6e334b",
+                    "inverse-on-surface": "#f0f1ea",
+                    "surface-container-highest": "#e2e3dc",
+                    "background": "#f9faf3",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#904c2d",
+                    "on-primary-fixed-variant": "#285021",
+                    "surface-tint": "#3f6837",
+                    "inverse-surface": "#2f312c",
+                    "on-secondary-container": "#78391c",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c2c9bc",
+                    "inverse-primary": "#a4d397",
+                    "surface-dim": "#d9dbd4",
+                    "tertiary-fixed-dim": "#ffb0cc",
+                    "on-tertiary-fixed": "#390720",
+                    "on-primary-container": "#8dbb81",
+                    "on-secondary-fixed": "#360f00",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#42493f",
+                    "on-surface": "#1a1c18",
+                    "on-primary-fixed": "#002201",
+                    "on-background": "#1a1c18",
+                    "surface-variant": "#e2e3dc",
+                    "secondary-fixed": "#ffdbcd",
+                    "secondary-fixed-dim": "#ffb597",
+                    "primary": "#0b3408",
+                    "tertiary-container": "#692f47",
+                    "error": "#ba1a1a",
+                    "surface": "#f9faf3",
+                    "outline": "#72796e",
+                    "on-tertiary-container": "#e699b4",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f3f4ed",
+                    "primary-fixed": "#c0efb1",
+                    "primary-container": "#234b1d",
+                    "surface-container": "#edeee7",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffd9e4",
+                    "tertiary": "#4e1931",
+                    "primary-fixed-dim": "#a4d397",
+                    "secondary-container": "#fea680"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "container-margin-desktop": "64px",
+                    "base": "8px",
+                    "container-margin-mobile": "20px",
+                    "section-gap": "120px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Space Grotesk"
+                    ],
+                    "display-lg": [
+                            "Oswald"
+                    ],
+                    "headline-md": [
+                            "Space Grotesk"
+                    ],
+                    "display-md": [
+                            "Oswald"
+                    ],
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "label-lg": [
+                            "Oswald"
+                    ],
+                    "headline-lg": [
+                            "Space Grotesk"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "display-lg": [
+                            "64px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "display-md": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "0.08em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-lg": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "letterSpacing": "0",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "letterSpacing": "0",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md">
+<!-- SideNavBar (Hidden on Mobile, Flex on Desktop) -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container-low hidden md:flex flex-col h-full py-base z-50">
+<div class="px-gutter mb-8 mt-4">
+<h1 class="font-display-md text-display-md tracking-tighter text-primary">DUNES</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-1">Admin Suite 2026</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">dashboard</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">DASHBOARD</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">eco</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">PRODUCTOS</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-weight: 300;">groups</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">COMUNIDAD</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">edit_note</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">CONTENIDO</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">shopping_cart</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">ORDENES</span>
+</a>
+</nav>
+<div class="px-4 mt-auto mb-4">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-widest py-3 px-8 rounded-DEFAULT hover:bg-primary-container transition-colors">NUEVO PRODUCTO</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<div class="md:ml-[240px] flex flex-col min-h-screen relative">
+<!-- TopAppBar -->
+<header class="h-16 w-full sticky top-0 bg-surface/80 backdrop-blur-xl flex justify-between items-center px-gutter z-40 max-w-full">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-primary hidden md:block">DUNES Admin</h2>
+<!-- Mobile Brand -->
+<h2 class="font-display-md text-headline-lg-mobile text-primary md:hidden">DUNES</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-surface-container-highest rounded-full px-4 py-2 w-64 border-none">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-weight: 300;">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface w-full p-0 placeholder:text-on-surface-variant/50" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 p-2 rounded-full transition-colors cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 p-2 rounded-full transition-colors cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">dark_mode</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 p-2 rounded-full transition-colors cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Canvas Content -->
+<main class="flex-1 px-container-margin-mobile md:px-container-margin-desktop py-12 pb-32 md:pb-12 max-w-[1440px] mx-auto w-full">
+<header class="mb-16">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">INTELLIGENCE</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Social Media &amp; SEO Mission Control. Organic Brutalism aesthetic applied to data visualization.</p>
+</header>
+<!-- Row 1: Social Connections & Metrics (Bento Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-section-gap">
+<!-- Instagram Card -->
+<div class="md:col-span-6 bg-surface-container-low p-6 rounded-DEFAULT flex flex-col justify-between min-h-[300px]">
+<div class="flex justify-between items-start mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-weight: 300;">photo_camera</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">@dunesbotanical</h3>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Instagram Connected</p>
+</div>
+</div>
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-3 py-1 rounded-sm uppercase tracking-wider">Active</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Followers</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">42.8K</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Engagement</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">4.2%</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Sentiment</p>
+<p class="font-headline-lg text-headline-lg text-secondary">88%</p>
+</div>
+</div>
+</div>
+<!-- TikTok Card -->
+<div class="md:col-span-6 bg-surface-container-low p-6 rounded-DEFAULT flex flex-col justify-between min-h-[300px]">
+<div class="flex justify-between items-start mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-weight: 300;">music_video</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">@dunes_architect</h3>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">TikTok Connected</p>
+</div>
+</div>
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-3 py-1 rounded-sm uppercase tracking-wider">Active</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Followers</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">112K</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Engagement</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">8.9%</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Sentiment</p>
+<p class="font-headline-lg text-headline-lg text-secondary">92%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Row 2: Sentiment & Content Opportunities -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-section-gap">
+<!-- Semantic Analysis Table -->
+<div class="md:col-span-8 bg-surface-container-low p-8 rounded-DEFAULT">
+<div class="flex justify-between items-end border-b border-outline-variant pb-4 mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase">ANÁLISIS DE COMENTARIOS — IA SEMÁNTICA</h3>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-weight: 300;">psychology</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">
+<th class="py-3 font-normal">Topic Extract</th>
+<th class="py-3 font-normal">Volume</th>
+<th class="py-3 font-normal">Sentiment Shift</th>
+<th class="py-3 font-normal text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-4">Sostenibilidad del empaque</td>
+<td class="py-4">Alto (45%)</td>
+<td class="py-4 text-primary">+12% Positivo</td>
+<td class="py-4 text-right">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-weight: 300;">arrow_forward</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-4">Textura del serum facial</td>
+<td class="py-4">Medio (28%)</td>
+<td class="py-4 text-secondary">-5% Neutral</td>
+<td class="py-4 text-right">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-weight: 300;">arrow_forward</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-4">Ingredientes amazónicos</td>
+<td class="py-4">Bajo (15%)</td>
+<td class="py-4 text-primary">+22% Positivo</td>
+<td class="py-4 text-right">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-weight: 300;">arrow_forward</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 flex flex-wrap gap-2">
+<span class="bg-outline-variant text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-sm uppercase tracking-wider">#EcoLuxury</span>
+<span class="bg-outline-variant text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-sm uppercase tracking-wider">#SkincareMen</span>
+<span class="bg-outline-variant text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-sm uppercase tracking-wider">#Botanical</span>
+<span class="bg-outline-variant text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-sm uppercase tracking-wider">#ColombiaBiodiversa</span>
+</div>
+</div>
+<!-- Content Opportunities -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase mb-2">OPORTUNIDADES DE CONTENIDO</h3>
+<div class="bg-surface border-l-4 border-primary p-6 rounded-r-DEFAULT shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-lg text-label-lg text-primary uppercase tracking-widest">Alta Probabilidad</span>
+<span class="material-symbols-outlined text-primary" style="font-weight: 300;">trending_up</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-4">Crear un Reel detallando el proceso de extracción ética en el Amazonas. Alto interés detectado en comentarios.</p>
+<button class="font-label-md text-label-md text-on-surface underline hover:text-primary uppercase tracking-wider transition-colors">Generar Brief</button>
+</div>
+<div class="bg-surface border-l-4 border-error p-6 rounded-r-DEFAULT shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-lg text-label-lg text-error uppercase tracking-widest">Atención Requerida</span>
+<span class="material-symbols-outlined text-error" style="font-weight: 300;">warning</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-4">Preguntas recurrentes sobre envíos internacionales sin respuesta clara en FAQs.</p>
+<button class="font-label-md text-label-md text-on-surface underline hover:text-error uppercase tracking-wider transition-colors">Actualizar Web</button>
+</div>
+</div>
+</section>
+<!-- Row 3: SEO Positioning -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
+<!-- SEO Keywords Table -->
+<div class="md:col-span-7 bg-surface-container-low p-8 rounded-DEFAULT">
+<div class="flex justify-between items-end border-b border-outline-variant pb-4 mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase">POSICIONAMIENTO — TOP KEYWORDS</h3>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-weight: 300;">query_stats</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest border-b border-outline-variant">
+<th class="py-3 font-normal">Keyword</th>
+<th class="py-3 font-normal">Posición</th>
+<th class="py-3 font-normal">Volumen</th>
+<th class="py-3 font-normal">Dificultad</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-4 font-semibold">Skincare botánico hombres</td>
+<td class="py-4 text-primary">#2 <span class="material-symbols-outlined text-[14px] align-middle" style="font-weight: 300;">arrow_upward</span></td>
+<td class="py-4">12.5K</td>
+<td class="py-4">Media</td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-high transition-colors">
+<td class="py-4 font-semibold">Serum antiedad natural</td>
+<td class="py-4 text-on-surface-variant">#5 <span class="material-symbols-outlined text-[14px] align-middle" style="font-weight: 300;">horizontal_rule</span></td>
+<td class="py-4">45K</td>
+<td class="py-4 text-secondary">Alta</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-4 font-semibold">Cosmética colombiana premium</td>
+<td class="py-4 text-primary">#1 <span class="material-symbols-outlined text-[14px] align-middle" style="font-weight: 300;">arrow_upward</span></td>
+<td class="py-4">8.2K</td>
+<td class="py-4">Baja</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- SEO Actions Checklist -->
+<div class="md:col-span-5 bg-surface-container-low p-8 rounded-DEFAULT">
+<div class="flex justify-between items-end border-b border-outline-variant pb-4 mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase">ACCIONES SEO SUGERIDAS</h3>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-weight: 300;">checklist</span>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-4 p-4 bg-surface hover:bg-surface-container-high transition-colors rounded-sm border-l-2 border-error">
+<input class="mt-1 border-outline text-primary focus:ring-primary rounded-sm bg-transparent cursor-pointer" type="checkbox"/>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-error-container text-on-error-container font-label-md text-label-md px-2 py-0.5 rounded-sm uppercase tracking-wider">Urgente</span>
+<p class="font-label-lg text-label-lg text-on-surface uppercase">Optimizar Meta Tags Blog</p>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">3 artículos recientes carecen de meta descripciones enfocadas en 'ingredientes naturales'.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 p-4 bg-surface hover:bg-surface-container-high transition-colors rounded-sm border-l-2 border-secondary">
+<input class="mt-1 border-outline text-primary focus:ring-primary rounded-sm bg-transparent cursor-pointer" type="checkbox"/>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-2 py-0.5 rounded-sm uppercase tracking-wider">Media</span>
+<p class="font-label-lg text-label-lg text-on-surface uppercase">Actualizar Alt Text Imágenes</p>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Nuevas fotos de producto subidas sin etiquetas alt descriptivas para accesibilidad y SEO.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 p-4 bg-surface hover:bg-surface-container-high transition-colors rounded-sm border-l-2 border-primary">
+<input class="mt-1 border-outline text-primary focus:ring-primary rounded-sm bg-transparent cursor-pointer" type="checkbox"/>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-2 py-0.5 rounded-sm uppercase tracking-wider">Baja</span>
+<p class="font-label-lg text-label-lg text-on-surface uppercase">Revisar Enlaces Rotos</p>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Ejecutar escaneo mensual de enlaces rotos en páginas de archivo.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="sticky bottom-0 w-full border-t-2 border-primary bg-surface-container-high flex justify-between items-center px-gutter py-4 z-30">
+<div>
+<span class="font-display-lg text-[24px] uppercase tracking-widest text-primary">2026 DUNES BOTANICAL ARCHITECT</span>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors cursor-default" href="#">AUTO-SAVE: ACTIVE</a>
+<a class="font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors cursor-default" href="#">EDITOR MODE</a>
+<a class="font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors cursor-default" href="#">SYSTEM STATUS</a>
+</div>
+</footer>
+</div>
+<!-- BottomNavBar (Hidden on Desktop, Fixed on Mobile) -->
+<nav class="fixed bottom-0 w-full md:hidden border-t border-outline-variant shadow-sm bg-surface/90 backdrop-blur-lg flex justify-around items-center h-16 pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">home</span>
+<span class="font-label-md text-label-md uppercase mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">spa</span>
+<span class="font-label-md text-label-md uppercase mt-1">Productos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-weight: 300;">forum</span>
+<span class="font-label-md text-label-md uppercase mt-1">Comunidad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">article</span>
+<span class="font-label-md text-label-md uppercase mt-1">Blog</span>
+</a>
+</nav>
+</body></html>

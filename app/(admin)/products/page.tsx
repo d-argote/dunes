@@ -1,150 +1,159 @@
-"use client";
+﻿"use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
-const products = [
-  { id: "shampoo-crecimiento-natural", name: "Shampoo Crecimiento Natural", sku: "DUN-SHN-500", stock: 124, price: "$89.000", status: "Activo", category: "Core", description: "Hero SKU para adquisición fría y bundles de entrada." },
-  { id: "tonico-renacer-capilar", name: "Tónico Renacer Capilar", sku: "DUN-TON-250", stock: 82, price: "$96.000", status: "Activo", category: "Upsell", description: "Sube AOV en flujo post-compra y recompra." },
-  { id: "kit-disciplina-90d", name: "Kit Disciplina 90D", sku: "DUN-KIT-90", stock: 39, price: "$248.000", status: "Bajo stock", category: "Bundle", description: "Bundle de margen alto para usuarios comprometidos." },
-  { id: "masajeador-capilar", name: "Masajeador Capilar", sku: "DUN-MAS-001", stock: 212, price: "$32.000", status: "Activo", category: "Accesorio", description: "Cross-sell de alta rotación y fácil ticket attach." },
+interface Product {
+  id: string;
+  name: string;
+  sku: string;
+  price: string;
+  stock: number;
+  status: "active" | "low" | "draft";
+  image: string;
+}
+
+const mockProducts: Product[] = [
+  { id: "1", name: "Serum Andino 01", sku: "SA-001", price: "$120", stock: 45, status: "active", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDLwGU37ud8FSjzjqmLKGcbM3-Nrc3hAi8XEYmSQMt30M6bU6N4elq82FZoqDc678q-mWaQifDVx-httIUnHgJm7pJ2gYuhUj1XwsaD4SJqwks4B1rSJpThoXmeqsaLQuQlgpIFRu8w7SEph5v49Fly3QyQY9ZhQxPaTh3s76Z2WtMnMs6_YZalz0VOKXTP8iu8ExXg4WwyNhhLEAv4e6b7HDapK605LrOQv0LcOdNrWQGk0IgkkH786dNHUOxqatQIoovLrN25aQ" },
+  { id: "2", name: "Arcilla Volcanica", sku: "AV-002", price: "$85", stock: 12, status: "active", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD8zI4-AV-FS_N--x5R1iXQ7Lcgu1Pu4nYbmw_DkxB9e2n3T0fcZbCBYcDJQLSQPcJPYh9KxwTknafW-7qwB4ytME-P4rDHSkIuv_uTspHnyybYg76Jpm4iwoDJtRoAwYb2VxH8IoVjNKjMeYFID9_WOrs82uQaSwa96kw-hwpIgBiFdusX3RLL-Shm5MucPtyWwUnFPPamVUHMyWg5M033-EIMlW_Xu8jwTWalUI2WHNT5BSUpO04zVRMoLYGXsJeNKcgX5wJb0g" },
+  { id: "3", name: "Elixir Nocturno", sku: "EN-003", price: "$150", stock: 3, status: "low", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBRHC3nE-DZ8OSHJjnFLleMXjCofgefSbMU1NVEI_1ecqljTJ_YlEocJ1LjIuP-KflMa-SGWT_PE6pQ74Q-fKAQ32__RCvITDGQ7mrX6p3u69NZDEWyk7d9Mh9ANbirfWMTHJki7U-6jHZXDOO8FLP9M2XXpC8AgtNjayKKqEtKNYlgAPlwys4JWvuIxppYaHFaBmZdpNIryfCTHN5GnL0sUDlQCTjmj1eDTZzXYAjkGYblRrWEtB0WwcZBIp1Hp7skmzxW1rCS7g" },
+  { id: "4", name: "Bruma Refrescante", sku: "--", price: "--", stock: 0, status: "draft", image: "" },
 ];
 
-export default function AdminProductsPage() {
-  const [view, setView] = useState<"grid" | "list">("grid");
-  const [query, setQuery] = useState("");
+function StatusBadge({ status }: { status: Product["status"] }) {
+  if (status === "active") return <span className="bg-primary text-on-primary font-body text-xs font-semibold px-3 py-1 uppercase">Activo</span>;
+  if (status === "low") return <span className="bg-error-container text-on-error-container font-body text-xs font-semibold px-3 py-1 uppercase border border-error">Bajo Stock</span>;
+  return <span className="bg-surface-variant text-on-surface-variant font-body text-xs font-semibold px-3 py-1 uppercase border border-outline">Borrador</span>;
+}
 
-  const visibleProducts = products.filter((product) => {
-    const value = query.toLowerCase();
-    return [product.name, product.sku, product.category].join(" ").toLowerCase().includes(value);
-  });
+export default function ProductsPage() {
+  const [view, setView] = useState<"grid" | "list">("grid");
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-[2.25rem] bg-surface-container-low px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)] sm:px-6">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
-          <div className="space-y-3">
-            <p className="font-brand text-[11px] tracking-[0.3em] uppercase text-secondary">Catálogo</p>
-            <h1 className="font-headline text-4xl font-semibold uppercase tracking-[-0.05em] text-primary">
-              Control de productos
-            </h1>
-            <p className="max-w-2xl text-sm leading-6 text-on-surface-variant">
-              Cambia entre vista editorial y tabla operativa para revisar precio, stock y foco comercial.
-            </p>
-          </div>
+    <div className="px-6 md:px-16 py-12 min-h-screen pb-32">
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <label className="flex items-center gap-3 rounded-full bg-surface px-4 py-3 text-sm text-on-surface-variant shadow-[0_14px_34px_rgba(28,28,24,0.04)]">
-              <span className="material-symbols-outlined text-[18px]">search</span>
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Buscar por nombre, SKU o categoría"
-                className="w-full bg-transparent outline-none placeholder:text-on-surface-variant sm:w-64"
-              />
-            </label>
-
-            <div className="flex rounded-full bg-surface p-1 shadow-[0_14px_34px_rgba(28,28,24,0.04)]">
-              <button
-                type="button"
-                onClick={() => setView("grid")}
-                className={`rounded-full px-4 py-2 text-sm font-medium ${view === "grid" ? "bg-primary text-white" : "text-on-surface"}`}
-              >
-                Grid
-              </button>
-              <button
-                type="button"
-                onClick={() => setView("list")}
-                className={`rounded-full px-4 py-2 text-sm font-medium ${view === "list" ? "bg-primary text-white" : "text-on-surface"}`}
-              >
-                Lista
-              </button>
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+        <div>
+          <h2 className="font-headline text-3xl font-bold text-on-surface mb-8 uppercase tracking-tight">
+            PRODUCTOS — GESTION DE CATALOGO
+          </h2>
+          <div className="flex gap-4 md:gap-12 flex-wrap">
+            <div>
+              <span className="font-body text-xs font-semibold text-on-surface-variant uppercase block mb-1">Total</span>
+              <span className="font-brand font-bold text-on-surface text-5xl">142</span>
+            </div>
+            <div>
+              <span className="font-body text-xs font-semibold text-on-surface-variant uppercase block mb-1">Stock Activo</span>
+              <span className="font-brand font-bold text-primary text-5xl">128</span>
+            </div>
+            <div>
+              <span className="font-body text-xs font-semibold text-on-surface-variant uppercase block mb-1">Sin Stock</span>
+              <span className="font-brand font-bold text-error text-5xl">4</span>
+            </div>
+            <div>
+              <span className="font-body text-xs font-semibold text-on-surface-variant uppercase block mb-1">Borradores</span>
+              <span className="font-brand font-bold text-outline text-5xl">10</span>
             </div>
           </div>
         </div>
-      </section>
+        <div className="flex gap-4 self-stretch md:self-auto">
+          <button className="bg-surface-container-highest text-on-surface-variant px-6 py-4 font-brand text-sm font-semibold uppercase tracking-widest hover:bg-surface-container-high transition-colors flex items-center gap-2 border border-outline-variant">
+            <span className="material-symbols-outlined">filter_list</span>
+            Filtros
+          </button>
+          <Link href="/admin/products/new" className="bg-primary text-on-primary px-8 py-4 font-brand text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-colors flex items-center gap-2">
+            <span className="material-symbols-outlined">add</span>
+            ANADIR PRODUCTO
+          </Link>
+        </div>
+      </div>
 
-      {view === "grid" ? (
-        <section className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
-          {visibleProducts.map((product) => (
-            <article
-              key={product.id}
-              className="rounded-[2rem] bg-surface px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)]"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="font-brand text-[11px] tracking-[0.28em] uppercase text-secondary">{product.category}</p>
-                  <h2 className="mt-3 font-headline text-2xl font-semibold uppercase tracking-[-0.04em] text-primary">
-                    {product.name}
-                  </h2>
-                </div>
-                <span className="rounded-full bg-surface-container-highest px-3 py-1 text-[11px] font-brand tracking-[0.18em] uppercase text-secondary">
-                  {product.status}
+      {/* View toggle */}
+      <div className="flex justify-end mb-8 border-b border-outline-variant pb-4">
+        <div className="flex gap-2">
+          <button
+            aria-label="Grid View"
+            onClick={() => setView("grid")}
+            className={`p-2 ${view === "grid" ? "text-primary border-b-2 border-primary bg-surface-container-low" : "text-on-surface-variant hover:bg-surface-container-low"} transition-colors`}
+          >
+            <span className="material-symbols-outlined">grid_view</span>
+          </button>
+          <button
+            aria-label="List View"
+            onClick={() => setView("list")}
+            className={`p-2 ${view === "list" ? "text-primary border-b-2 border-primary bg-surface-container-low" : "text-on-surface-variant hover:bg-surface-container-low"} transition-colors`}
+          >
+            <span className="material-symbols-outlined">view_list</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {mockProducts.map((product) => (
+          <Link
+            key={product.id}
+            href={`/admin/products/${product.id}`}
+            className={`bg-surface-container-low relative group cursor-pointer ${product.status === "draft" ? "opacity-75 hover:opacity-100 transition-opacity" : ""}`}
+          >
+            <div className="absolute top-4 left-4 z-10">
+              <StatusBadge status={product.status} />
+            </div>
+            <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button
+                type="button"
+                onClick={(e) => e.preventDefault()}
+                className="bg-surface/90 backdrop-blur text-on-surface p-2 rounded-full hover:bg-surface-container-highest"
+              >
+                <span className="material-symbols-outlined">more_vert</span>
+              </button>
+            </div>
+            <div className="aspect-[4/5] overflow-hidden bg-surface-container-highest flex items-center justify-center">
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={400}
+                  height={500}
+                  className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700"
+                />
+              ) : (
+                <span className="material-symbols-outlined text-outline text-6xl" style={{ fontVariationSettings: "'wght' 100" }}>image</span>
+              )}
+            </div>
+            <div className="p-4 border-t border-outline-variant">
+              <h3 className={`font-headline text-xl font-bold mb-2 uppercase tracking-[-0.02em] ${product.status === "draft" ? "text-on-surface-variant italic" : "text-on-surface"}`}>
+                {product.name}
+              </h3>
+              <div className="flex justify-between items-end">
+                <span className="font-body text-xs font-semibold text-on-surface-variant">{`SKU: ${product.sku}`}</span>
+                <span className={`font-headline text-2xl font-bold tracking-[-0.02em] ${product.status === "draft" ? "text-outline-variant" : "text-primary"}`}>{product.price}</span>
+              </div>
+              <div className="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+                <span className={`w-2 h-2 rounded-full ${product.status === "low" ? "bg-error" : product.status === "draft" ? "bg-outline-variant" : "bg-primary-container"}`} />
+                <span className={`font-body text-base ${product.status === "low" ? "text-error font-semibold" : "text-on-surface-variant"}`}>
+                  {product.status === "draft" ? "Stock: --" : `Stock: ${product.stock} u.`}
                 </span>
               </div>
+            </div>
+          </Link>
+        ))}
+      </div>
 
-              <p className="mt-4 text-sm leading-6 text-on-surface-variant">{product.description}</p>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 rounded-[1.75rem] bg-surface-container-low px-4 py-4">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Precio</p>
-                  <p className="mt-2 text-lg font-semibold text-on-surface">{product.price}</p>
-                </div>
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Stock</p>
-                  <p className="mt-2 text-lg font-semibold text-on-surface">{product.stock} uds.</p>
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center justify-between gap-4">
-                <p className="text-sm text-on-surface-variant">{product.sku}</p>
-                <Link
-                  href={`/admin/products/${product.id}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white transition-transform duration-200 hover:scale-[1.02]"
-                >
-                  <span className="material-symbols-outlined text-[18px]">edit</span>
-                  Editar
-                </Link>
-              </div>
-            </article>
-          ))}
-        </section>
-      ) : (
-        <section className="space-y-3">
-          {visibleProducts.map((product) => (
-            <article
-              key={product.id}
-              className="grid gap-4 rounded-[2rem] bg-surface px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)] xl:grid-cols-[1.1fr_0.8fr_0.6fr_0.6fr_0.45fr] xl:items-center"
-            >
-              <div>
-                <p className="font-headline text-2xl font-semibold uppercase tracking-[-0.04em] text-primary">{product.name}</p>
-                <p className="mt-2 text-sm text-on-surface-variant">{product.description}</p>
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">SKU</p>
-                <p className="mt-2 text-sm font-medium text-on-surface">{product.sku}</p>
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Precio</p>
-                <p className="mt-2 text-sm font-medium text-on-surface">{product.price}</p>
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Stock</p>
-                <p className="mt-2 text-sm font-medium text-on-surface">{product.stock} uds.</p>
-              </div>
-              <div className="flex xl:justify-end">
-                <Link
-                  href={`/admin/products/${product.id}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white transition-transform duration-200 hover:scale-[1.02]"
-                >
-                  <span className="material-symbols-outlined text-[18px]">open_in_new</span>
-                  Abrir
-                </Link>
-              </div>
-            </article>
-          ))}
-        </section>
-      )}
+      {/* Footer */}
+      <footer className="sticky bottom-0 w-full border-t-2 border-primary bg-surface-container-high flex justify-between items-center px-6 py-4 z-30 mt-16">
+        <div className="font-brand font-bold text-primary text-2xl">DUNES</div>
+        <div className="font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant">
+          2026 DUNES BOTANICAL ARCHITECT
+        </div>
+        <div className="flex gap-6 font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant cursor-default">
+          <span className="hover:text-primary transition-colors">AUTO-SAVE: ACTIVE</span>
+          <span className="hover:text-primary transition-colors">EDITOR MODE</span>
+          <span className="text-primary underline">SYSTEM STATUS</span>
+        </div>
+      </footer>
     </div>
   );
 }

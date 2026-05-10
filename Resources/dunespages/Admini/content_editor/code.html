@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DUNES Admin - Blog Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Oswald:wght@700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#733518",
+                      "surface-bright": "#f9faf3",
+                      "surface-container-high": "#e8e9e2",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#6e334b",
+                      "inverse-on-surface": "#f0f1ea",
+                      "surface-container-highest": "#e2e3dc",
+                      "background": "#f9faf3",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#904c2d",
+                      "on-primary-fixed-variant": "#285021",
+                      "surface-tint": "#3f6837",
+                      "inverse-surface": "#2f312c",
+                      "on-secondary-container": "#78391c",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c2c9bc",
+                      "inverse-primary": "#a4d397",
+                      "surface-dim": "#d9dbd4",
+                      "tertiary-fixed-dim": "#ffb0cc",
+                      "on-tertiary-fixed": "#390720",
+                      "on-primary-container": "#8dbb81",
+                      "on-secondary-fixed": "#360f00",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#42493f",
+                      "on-surface": "#1a1c18",
+                      "on-primary-fixed": "#002201",
+                      "on-background": "#1a1c18",
+                      "surface-variant": "#e2e3dc",
+                      "secondary-fixed": "#ffdbcd",
+                      "secondary-fixed-dim": "#ffb597",
+                      "primary": "#0b3408",
+                      "tertiary-container": "#692f47",
+                      "error": "#ba1a1a",
+                      "surface": "#f9faf3",
+                      "outline": "#72796e",
+                      "on-tertiary-container": "#e699b4",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f3f4ed",
+                      "primary-fixed": "#c0efb1",
+                      "primary-container": "#234b1d",
+                      "surface-container": "#edeee7",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#ffd9e4",
+                      "tertiary": "#4e1931",
+                      "primary-fixed-dim": "#a4d397",
+                      "secondary-container": "#fea680"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-margin-desktop": "64px",
+                      "base": "8px",
+                      "container-margin-mobile": "20px",
+                      "section-gap": "120px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Space Grotesk"
+                      ],
+                      "display-lg": [
+                              "Oswald"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "display-md": [
+                              "Oswald"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Oswald"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-md": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Hide scrollbar for a cleaner editorial look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-xl h-16 w-full sticky top-0 flex justify-between items-center px-gutter z-40 ml-[240px] max-w-[calc(100%-240px)] hidden md:flex">
+<div class="flex items-center">
+<span class="font-display-md text-display-md text-primary mr-4 tracking-tighter">DUNES Admin</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">search</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">dark_mode</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" style="font-weight: 300;">account_circle</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant flex flex-col py-base z-50 hidden md:flex">
+<div class="px-6 py-8 mb-4">
+<h1 class="font-display-md text-display-md tracking-tighter text-primary">DUNES</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-1">Admin Suite 2026</p>
+</div>
+<div class="flex-1 overflow-y-auto no-scrollbar">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">dashboard</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">DASHBOARD</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">eco</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">PRODUCTOS</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">groups</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">COMUNIDAD</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300; font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">CONTENIDO</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">shopping_cart</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">ORDENES</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase py-4 rounded-DEFAULT tracking-widest hover:bg-primary-container transition-colors">
+                    NUEVO PRODUCTO
+                </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex md:ml-[240px] h-[calc(100vh-64px)] overflow-hidden bg-surface-bright">
+<!-- Left Sidebar: Article List -->
+<aside class="w-80 bg-surface-container-lowest border-r border-outline-variant flex flex-col hidden lg:flex">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Borradores</h2>
+<button class="text-primary hover:bg-surface-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-2">
+<!-- Active Article Item -->
+<div class="bg-surface-container-low p-4 rounded-DEFAULT border-l-2 border-primary cursor-pointer">
+<p class="font-label-md text-label-md text-primary mb-1 uppercase tracking-widest">Botánica</p>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-2">TÍTULO DEL ARTÍCULO...</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 text-sm">Actualizado hace 2h</p>
+</div>
+<!-- Inactive Article Item -->
+<div class="p-4 rounded-DEFAULT hover:bg-surface-container-lowest border border-transparent hover:border-outline-variant cursor-pointer transition-colors">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 uppercase tracking-widest">Diseño</p>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold line-clamp-2">Principios de Arquitectura Orgánica</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 text-sm">Ayer</p>
+</div>
+<div class="p-4 rounded-DEFAULT hover:bg-surface-container-lowest border border-transparent hover:border-outline-variant cursor-pointer transition-colors">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 uppercase tracking-widest">Investigación</p>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold line-clamp-2">Especies Endémicas de los Andes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 text-sm">Hace 3 días</p>
+</div>
+</div>
+</aside>
+<!-- Center: Editor Area -->
+<div class="flex-1 overflow-y-auto no-scrollbar relative scroll-smooth">
+<!-- Cover Image Area -->
+<div class="relative w-full h-64 bg-surface-container-high group flex items-center justify-center">
+<img alt="Cover Placeholder" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A striking digital installation art piece featuring glowing, generative geometric shapes suspended in a vast, minimalist gallery space. The room is illuminated by high-key, soft white lighting that creates a bright, modern light-mode aesthetic. The artwork relies on a sophisticated palette of deep blacks and pristine whites, punctuated by intense accents of vibrant red. The mood is serene yet technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtsT1hqtZzknbZt6XyfdRogzmQIuUdk3dnq4mKeD4pZJ3gWuSaLlXHQiBdkWJ73CMliVnAARMu4RgwZa9teNESy8jZy-tRvMYbcw-QJBFPjv5HkJaQh-KAyF98tlqkCAr9QjMRg91U6jprjPtjjueeyvdxt43xFfUXGBSa1Nkd-lkOhr4UjHZV4OnrGwmDZM2fFy6f3BcP_xtvWgD92JHBut9LOw9S9qNHfQPDR7J6r9P59VpBRQR2LJksqAXKRDxT7-eUZXM4Hw"/>
+<button class="absolute bottom-6 right-6 bg-surface/90 backdrop-blur-md px-4 py-2 rounded-DEFAULT flex items-center gap-2 font-label-md text-label-md uppercase tracking-widest text-on-surface hover:bg-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">image</span>
+                        Cambiar Portada
+                    </button>
+</div>
+<!-- Editor Content -->
+<div class="max-w-3xl mx-auto px-8 py-12">
+<!-- Meta info & Categories -->
+<div class="flex items-center gap-3 mb-8">
+<span class="bg-outline-variant text-on-surface-variant px-3 py-1 rounded-DEFAULT font-label-md text-label-md uppercase tracking-widest flex items-center gap-1 cursor-pointer hover:bg-outline transition-colors">
+                            Botánica
+                            <span class="material-symbols-outlined" style="font-size: 14px;">close</span>
+</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-label-md text-label-md uppercase tracking-widest">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                            Categoría
+                        </button>
+</div>
+<!-- Title Input -->
+<input class="w-full bg-transparent border-none p-0 mb-8 font-display-md text-[40px] leading-tight text-on-surface placeholder-on-surface-variant/50 focus:ring-0 tracking-tighter" placeholder="TÍTULO DEL ARTÍCULO..." type="text" value="La Simetría Oculta en la Flora Colombiana"/>
+<!-- Toolbar (Sticky) -->
+<div class="sticky top-0 bg-surface-bright/90 backdrop-blur-md py-3 border-b border-surface-container-highest mb-8 flex gap-4 z-10">
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">format_bold</span></button>
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">format_italic</span></button>
+<div class="w-px h-6 bg-outline-variant my-auto"></div>
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">format_h1</span></button>
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">format_h2</span></button>
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">format_quote</span></button>
+<div class="w-px h-6 bg-outline-variant my-auto"></div>
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">link</span></button>
+<button class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">image</span></button>
+</div>
+<!-- Body Content Area -->
+<div class="prose prose-lg max-w-none text-on-surface font-body-lg text-body-lg leading-relaxed focus:outline-none" contenteditable="true">
+<p class="mb-6">La arquitectura brutalista, a menudo criticada por su fría imposición estructural, encuentra un inesperado paralelismo en el corazón de la selva colombiana. No en el concreto, sino en la rígida e implacable geometría de especies endémicas que han evolucionado para sobrevivir en condiciones extremas.</p>
+<p class="mb-6">Observar la estructura de una <i>Espeletia</i> (frailejón) en los páramos es ser testigo de un diseño funcional perfecto. Cada hoja carnosa, cubierta de pubescencia, está calculada para capturar la humedad y proteger el tallo central de la congelación nocturna.</p>
+<div class="my-10 p-6 bg-surface-container-low border-l-4 border-primary">
+<p class="font-headline-md text-headline-md italic text-on-surface-variant m-0">"La naturaleza no diseña por estética, diseña por pura y brutal supervivencia. La belleza es solo un subproducto de la eficiencia estructural."</p>
+</div>
+<p class="mb-6">En este artículo, exploraremos cómo podemos extraer lecciones de estas formaciones orgánicas para aplicarlas a sistemas de diseño modernos, donde la forma sigue verdaderamente a la función ecosistémica.</p>
+<p class="text-on-surface-variant/50 italic">Escribe aquí...</p>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: SEO & Widgets -->
+<aside class="w-80 bg-surface-container-low border-l border-outline-variant p-6 flex flex-col hidden xl:flex overflow-y-auto no-scrollbar">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-headline-md text-on-surface">Análisis SEO</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+<!-- SEO Score Gauge -->
+<div class="bg-surface-bright p-6 rounded-DEFAULT mb-6 flex flex-col items-center shadow-sm">
+<div class="relative w-32 h-32 flex items-center justify-center mb-4">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="82, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-md text-[32px] text-primary leading-none">82</span>
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Bueno</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-center text-on-surface-variant text-sm">El contenido está optimizado, pero requiere más enlaces internos.</p>
+</div>
+<!-- Keyword Density -->
+<div class="mb-8">
+<h4 class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface mb-4">Palabras Clave (Densidad)</h4>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span>arquitectura orgánica</span>
+<span>3.5%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[70%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span>flora colombiana</span>
+<span>2.1%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[45%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span>simetría</span>
+<span>1.2%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full w-[25%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Snippet Preview -->
+<div>
+<h4 class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface mb-4">Vista Previa (Google)</h4>
+<div class="bg-surface-bright p-4 rounded-DEFAULT border border-outline-variant/50">
+<p class="text-[14px] text-[#1a0dab] hover:underline cursor-pointer mb-1 truncate">La Simetría Oculta en la Flora Colombiana | DUNES</p>
+<p class="text-[12px] text-[#006621] mb-1 truncate">dunes.co › editorial › flora-simetria-oculta</p>
+<p class="text-[13px] text-[#545454] line-clamp-2 leading-snug">Descubre cómo la arquitectura brutalista encuentra un inesperado paralelismo en el corazón de la selva colombiana a través de sus especies endémicas y geometría...</p>
+</div>
+</div>
+<!-- Publish Action -->
+<div class="mt-auto pt-8">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase py-4 rounded-DEFAULT tracking-widest hover:bg-primary-container transition-colors shadow-[0_16px_32px_rgba(28,28,24,0.05)]">
+                        PUBLICAR AHORA
+                    </button>
+<button class="w-full mt-3 text-on-surface-variant font-label-md text-label-md uppercase py-2 tracking-widest hover:text-primary transition-colors">
+                        Guardar Borrador
+                    </button>
+</div>
+</aside>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 backdrop-blur-lg fixed bottom-0 w-full md:hidden border-t border-outline-variant shadow-sm flex justify-around items-center h-16 pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">home</span>
+<span class="font-label-md text-[10px] mt-1 uppercase">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">spa</span>
+<span class="font-label-md text-[10px] mt-1 uppercase">Productos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">forum</span>
+<span class="font-label-md text-[10px] mt-1 uppercase">Comunidad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold active:bg-surface-container tap-highlight-transparent w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300; font-variation-settings: 'FILL' 1;">article</span>
+<span class="font-label-md text-[10px] mt-1 uppercase">Blog</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-high sticky bottom-0 w-full border-t-2 border-primary flex justify-between items-center px-gutter py-4 ml-[240px] max-w-[calc(100%-240px)] z-30 hidden md:flex">
+<div class="font-display-lg text-display-lg text-primary text-sm">
+            2026 DUNES BOTANICAL ARCHITECT
+        </div>
+<div class="flex gap-6">
+<span class="font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors cursor-default">AUTO-SAVE: ACTIVE</span>
+<span class="font-label-lg text-label-lg tracking-widest uppercase text-primary underline hover:text-primary transition-colors cursor-default">EDITOR MODE</span>
+<span class="font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors cursor-default">SYSTEM STATUS</span>
+</div>
+</footer>
+</body></html>

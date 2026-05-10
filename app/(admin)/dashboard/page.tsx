@@ -1,176 +1,141 @@
-"use client";
-
-import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-
-const kpis = [
-  { label: "Revenue 30d", value: "$42.8M", delta: "+18.4%", icon: "payments" },
-  { label: "AOV", value: "$118K", delta: "+6.7%", icon: "point_of_sale" },
-  { label: "Conversión", value: "4.9%", delta: "+0.8 pp", icon: "conversion_path" },
-  { label: "Recompra", value: "27%", delta: "+4.1 pp", icon: "repeat" },
-];
-
-const revenueSeries = [
-  { day: "Lun", sales: 8.2, orders: 76 },
-  { day: "Mar", sales: 9.7, orders: 81 },
-  { day: "Mié", sales: 12.1, orders: 96 },
-  { day: "Jue", sales: 11.4, orders: 91 },
-  { day: "Vie", sales: 14.8, orders: 114 },
-  { day: "Sáb", sales: 16.9, orders: 128 },
-  { day: "Dom", sales: 13.2, orders: 104 },
-];
-
-const channelSeries = [
-  { channel: "Meta", roas: 5.4 },
-  { channel: "Google", roas: 4.1 },
-  { channel: "TikTok", roas: 3.6 },
-  { channel: "Email", roas: 7.2 },
-];
-
-const orderFeed = [
-  { id: "#D-1842", customer: "Daniel Pava", product: "Kit Shampoo + Tónico", total: "$182.000", status: "Pagado" },
-  { id: "#D-1841", customer: "Juan Méndez", product: "Shampoo 500 ml", total: "$89.000", status: "Empacando" },
-  { id: "#D-1838", customer: "Camilo Ríos", product: "Tónico Renacer", total: "$96.000", status: "En tránsito" },
-  { id: "#D-1836", customer: "Esteban Gil", product: "Rutina Trimestral", total: "$248.000", status: "Pagado" },
-];
-
-export default function AdminDashboardPage() {
+﻿export default function DashboardPage() {
   return (
-    <div className="space-y-6">
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {kpis.map((item) => (
-          <article
-            key={item.label}
-            className="rounded-[2rem] bg-surface-container-low px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)]"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-sm text-on-surface-variant">{item.label}</p>
-                <p className="mt-3 font-headline text-4xl font-semibold tracking-[-0.05em] text-primary">{item.value}</p>
-              </div>
-              <span className="material-symbols-outlined rounded-full bg-surface px-3 py-3 text-[24px] text-secondary">
-                {item.icon}
-              </span>
-            </div>
-            <p className="mt-5 inline-flex rounded-full bg-surface px-3 py-1 text-[11px] font-brand tracking-[0.22em] uppercase text-secondary">
-              {item.delta}
-            </p>
-          </article>
-        ))}
+    <div className="p-6 lg:p-16 flex flex-col gap-12 min-h-screen pb-32">
+
+      {/* KPI Cards */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-surface-container-low p-6 rounded-[2px]">
+          <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">VENTAS HOY</p>
+          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">$2.847.000</p>
+          <div className="mt-4 flex items-center gap-2 text-primary">
+            <span className="material-symbols-outlined text-base">trending_up</span>
+            <span className="font-body text-xs font-semibold">+12.5% vs ayer</span>
+          </div>
+        </div>
+        <div className="bg-surface-container-low p-6 rounded-[2px]">
+          <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">PEDIDOS ACTIVOS</p>
+          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">34</p>
+          <div className="mt-4 flex items-center gap-2 text-on-surface-variant">
+            <span className="material-symbols-outlined text-base">pending_actions</span>
+            <span className="font-body text-xs font-semibold">8 en preparacion</span>
+          </div>
+        </div>
+        <div className="bg-surface-container-low p-6 rounded-[2px]">
+          <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">TASA CONVERSION</p>
+          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">3.8%</p>
+          <div className="mt-4 flex items-center gap-2 text-primary">
+            <span className="material-symbols-outlined text-base">trending_up</span>
+            <span className="font-body text-xs font-semibold">+0.4% vs mes anterior</span>
+          </div>
+        </div>
+        <div className="bg-surface-container-low p-6 rounded-[2px]">
+          <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">VISITANTES</p>
+          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">1.247</p>
+          <div className="mt-4 flex items-center gap-2 text-error">
+            <span className="material-symbols-outlined text-base">trending_down</span>
+            <span className="font-body text-xs font-semibold">-2.1% vs ayer</span>
+          </div>
+        </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.4fr_0.95fr]">
-        <article className="rounded-[2.25rem] bg-surface-container-low px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)] sm:px-6">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="font-brand text-[11px] tracking-[0.3em] uppercase text-secondary">Volumen comercial</p>
-              <h3 className="mt-2 font-headline text-3xl font-semibold uppercase tracking-[-0.04em] text-primary">
-                Revenue y pedidos por día
-              </h3>
-            </div>
-            <div className="rounded-full bg-surface px-4 py-2 text-sm text-on-surface-variant">Últimos 7 días</div>
+      {/* Chart: Ventas 30 dias */}
+      <section className="bg-surface-container-low p-8 rounded-[2px] min-h-[400px] flex flex-col">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">VENTAS — ULTIMOS 30 DIAS</h2>
+          <button className="font-brand text-sm font-semibold uppercase tracking-widest text-primary flex items-center gap-2 hover:underline">
+            VER REPORTE DETALLADO <span className="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+        <div className="flex-1 relative w-full border-b border-l border-outline-variant/30 flex items-end overflow-hidden pb-4 pl-4">
+          <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-primary/20 to-transparent" />
+          <svg className="absolute w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <path d="M0,80 Q10,70 20,80 T40,60 T60,70 T80,30 T100,40" fill="none" stroke="#0b3408" strokeWidth="2" />
+          </svg>
+          <div className="absolute left-[-40px] top-0 h-full flex flex-col justify-between font-body text-xs text-on-surface-variant py-4">
+            <span>$5M</span>
+            <span>$2.5M</span>
+            <span>$0</span>
           </div>
-
-          <div className="mt-6 h-[320px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={revenueSeries}>
-                <defs>
-                  <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#234b1d" stopOpacity={0.34} />
-                    <stop offset="95%" stopColor="#234b1d" stopOpacity={0.04} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid vertical={false} stroke="#e5e2db" />
-                <XAxis dataKey="day" tickLine={false} axisLine={false} tick={{ fill: "#42493f", fontSize: 12 }} />
-                <YAxis tickLine={false} axisLine={false} tick={{ fill: "#42493f", fontSize: 12 }} />
-                <Tooltip
-                  contentStyle={{ borderRadius: 18, border: "none", background: "#fcf9f2", boxShadow: "0 18px 48px rgba(28,28,24,0.08)" }}
-                />
-                <Area type="monotone" dataKey="sales" stroke="#234b1d" strokeWidth={3} fill="url(#salesGradient)" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </article>
-
-        <article className="rounded-[2.25rem] bg-surface-container-highest px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)] sm:px-6">
-          <p className="font-brand text-[11px] tracking-[0.3em] uppercase text-secondary">ROAS por canal</p>
-          <h3 className="mt-2 font-headline text-3xl font-semibold uppercase tracking-[-0.04em] text-primary">
-            Mezcla pagada
-          </h3>
-          <div className="mt-6 h-[320px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={channelSeries} layout="vertical" margin={{ left: 10, right: 10 }}>
-                <CartesianGrid horizontal={false} stroke="#dcdad3" />
-                <XAxis type="number" tickLine={false} axisLine={false} tick={{ fill: "#42493f", fontSize: 12 }} />
-                <YAxis type="category" dataKey="channel" tickLine={false} axisLine={false} tick={{ fill: "#1c1c18", fontSize: 12 }} />
-                <Tooltip
-                  contentStyle={{ borderRadius: 18, border: "none", background: "#fcf9f2", boxShadow: "0 18px 48px rgba(28,28,24,0.08)" }}
-                />
-                <Bar dataKey="roas" fill="#904c2d" radius={[20, 20, 20, 20]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </article>
+        </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <article className="rounded-[2.25rem] bg-surface-container-low px-5 py-5 shadow-[0_20px_48px_rgba(28,28,24,0.05)] sm:px-6">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="font-brand text-[11px] tracking-[0.3em] uppercase text-secondary">Operación en vivo</p>
-              <h3 className="mt-2 font-headline text-3xl font-semibold uppercase tracking-[-0.04em] text-primary">
-                Últimos pedidos
-              </h3>
-            </div>
-            <div className="rounded-full bg-surface px-4 py-2 text-sm text-on-surface-variant">Tiempo real</div>
+      {/* Bottom: Table + Top Products */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Orders table */}
+        <div className="lg:col-span-7 bg-surface-container-low p-8 rounded-[2px]">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">ULTIMOS PEDIDOS</h2>
+            <span className="material-symbols-outlined text-on-surface-variant">more_horiz</span>
           </div>
-
-          <div className="mt-6 space-y-3">
-            {orderFeed.map((order) => (
-              <div key={order.id} className="grid gap-3 rounded-[1.75rem] bg-surface px-4 py-4 md:grid-cols-[0.8fr_1fr_0.8fr_0.6fr] md:items-center">
-                <div>
-                  <p className="font-headline text-lg font-semibold text-primary">{order.id}</p>
-                  <p className="text-sm text-on-surface-variant">{order.customer}</p>
-                </div>
-                <p className="text-sm leading-6 text-on-surface">{order.product}</p>
-                <p className="font-medium text-on-surface">{order.total}</p>
-                <span className="inline-flex w-fit rounded-full bg-surface-container-highest px-3 py-1 text-[11px] font-brand tracking-[0.2em] uppercase text-secondary">
-                  {order.status}
-                </span>
-              </div>
-            ))}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-outline-variant/50">
+                  {["ORDEN","CLIENTE","PRODUCTO","MONTO","ESTADO"].map((h) => (
+                    <th key={h} className="py-4 font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="font-body text-base text-on-surface">
+                {[
+                  { id:"#ORD-9082", cliente:"Carlos M.", producto:"Extracto Cacao Puro", monto:"$125.000", estado:"Completado", estadoClass:"bg-primary-container text-on-primary-container" },
+                  { id:"#ORD-9081", cliente:"Ana R.", producto:"Bruma Amazonica", monto:"$89.500", estado:"En Proceso", estadoClass:"bg-surface-variant text-on-surface-variant" },
+                  { id:"#ORD-9080", cliente:"Felipe J.", producto:"Set Ritual Nocturno", monto:"$340.000", estado:"En Proceso", estadoClass:"bg-surface-variant text-on-surface-variant" },
+                  { id:"#ORD-9079", cliente:"Diana V.", producto:"Balsamo Andino", monto:"$65.000", estado:"Cancelado", estadoClass:"bg-error-container text-on-error-container" },
+                ].map((row) => (
+                  <tr key={row.id} className="border-b border-outline-variant/20 hover:bg-surface transition-colors">
+                    <td className="py-4 font-body text-xs font-semibold">{row.id}</td>
+                    <td className="py-4">{row.cliente}</td>
+                    <td className="py-4">{row.producto}</td>
+                    <td className="py-4 text-right">{row.monto}</td>
+                    <td className="py-4 text-right">
+                      <span className={`inline-block px-3 py-1 rounded-[2px] font-body text-xs font-semibold uppercase ${row.estadoClass}`}>{row.estado}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </article>
+        </div>
 
-        <article className="rounded-[2.25rem] bg-primary px-5 py-5 text-white shadow-[0_24px_56px_rgba(35,75,29,0.18)] sm:px-6">
-          <p className="font-brand text-[11px] tracking-[0.3em] uppercase text-white/70">Acciones críticas</p>
-          <h3 className="mt-2 font-headline text-3xl font-semibold uppercase tracking-[-0.04em] text-white">
-            Prioridades del turno
-          </h3>
-
-          <div className="mt-6 space-y-4">
+        {/* Top products */}
+        <div className="lg:col-span-5 bg-surface-container-low p-8 rounded-[2px]">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">TOP PRODUCTOS</h2>
+            <span className="material-symbols-outlined text-on-surface-variant">trending_up</span>
+          </div>
+          <div className="flex flex-col gap-6">
             {[
-              "Reabastecer kit trimestral antes de las 3 PM.",
-              "Subir nuevo creativo UGC con claim de disciplina diaria.",
-              "Ajustar bundle post-compra para elevar recompra en 7 días.",
-            ].map((task, index) => (
-              <div key={task} className="rounded-[1.6rem] bg-white/10 px-4 py-4 backdrop-blur-md">
-                <p className="font-brand text-[11px] tracking-[0.22em] uppercase text-white/72">Task 0{index + 1}</p>
-                <p className="mt-2 text-sm leading-6 text-white/90">{task}</p>
+              { name:"1. Extracto Cacao Puro", units:"420 Und.", pct:"85%" },
+              { name:"2. Bruma Amazonica", units:"315 Und.", pct:"65%" },
+              { name:"3. Set Ritual Nocturno", units:"190 Und.", pct:"40%" },
+              { name:"4. Balsamo Andino", units:"124 Und.", pct:"25%" },
+            ].map((item, i) => (
+              <div key={item.name}>
+                <div className="flex justify-between font-body text-base text-on-surface mb-2">
+                  <span>{item.name}</span>
+                  <span className="font-body text-xs font-bold text-primary">{item.units}</span>
+                </div>
+                <div className="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+                  <div className="bg-primary h-full rounded-full" style={{ width: item.pct, opacity: 1 - i * 0.15 }} />
+                </div>
               </div>
             ))}
           </div>
-        </article>
+        </div>
       </section>
+
+      {/* Footer bar */}
+      <footer className="sticky bottom-0 w-full border-t-2 border-primary bg-surface-container-high flex justify-between items-center px-6 py-4 z-30 mt-auto">
+        <span className="font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant">
+          2026 DUNES BOTANICAL ARCHITECT
+        </span>
+        <div className="flex gap-6 font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant">
+          <span className="hover:text-primary transition-colors cursor-default">AUTO-SAVE: ACTIVE</span>
+          <span className="hover:text-primary transition-colors cursor-default">EDITOR MODE</span>
+          <span className="hover:text-primary transition-colors cursor-default">SYSTEM STATUS</span>
+        </div>
+      </footer>
     </div>
   );
 }
