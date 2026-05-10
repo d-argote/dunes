@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import type { FormEvent } from "react";
@@ -27,11 +27,11 @@ export default function AdminLoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error ?? "Error al iniciar sesión.");
+        setError(data.error ?? "Error al iniciar sesi�n.");
         return;
       }
 
-      router.push("/admin/dashboard");
+      router.push("/dashboard");
     } catch {
       setError("Error de red. Intenta de nuevo.");
     } finally {
@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
         <div className="relative z-10 text-center flex flex-col items-center gap-4 px-12">
           <h1 className="font-brand font-bold text-white tracking-[0.1em] leading-none uppercase text-[72px]">DUNES</h1>
           <p className="font-headline text-[12px] text-white/60 tracking-widest uppercase">
-            PANEL DE CONTROL — SISTEMA ADMINISTRATIVO 2026
+            PANEL DE CONTROL � SISTEMA ADMINISTRATIVO 2026
           </p>
         </div>
       </div>

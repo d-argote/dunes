@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: "Shampoo Natural para Hombres | Detiene la Caída y Activa el Crecimiento",
   description:
     "DUNES: shampoo 100% natural con romero, jengibre y extractos botánicos colombianos. Ideal para hombres que buscan detener la caída del cabello y estimular el crecimiento sin químicos.",
-  alternates: { canonical: "https://www.dunesbotanical.com" },
+  alternates: { canonical: "https://ditechdev.com" },
   openGraph: {
     title: "Shampoo Natural para Hombres | DUNES — Hecho en Colombia",
     description:
       "Shampoo orgánico y tónico capilar con ingredientes botánicos 100% naturales. Sin sulfatos agresivos. Hecho en Colombia para hombres de disciplina.",
-    url: "https://www.dunesbotanical.com",
+    url: "https://ditechdev.com",
     type: "website",
   },
 };
@@ -106,10 +106,10 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://www.dunesbotanical.com/#organization",
+      "@id": "https://ditechdev.com/#organization",
       name: "DUNES Botanical Lab",
-      url: "https://www.dunesbotanical.com",
-      logo: "https://www.dunesbotanical.com/logo.png",
+      url: "https://ditechdev.com",
+      logo: "https://ditechdev.com/logo.png",
       sameAs: ["https://instagram.com/dunesbotanical", "https://tiktok.com/@dunesbotanical"],
       address: { "@type": "PostalAddress", addressCountry: "CO" },
     },
@@ -120,8 +120,8 @@ const jsonLd = {
         "Shampoo 100% natural con romero, jengibre, canela y cebolla. Detiene la caída del cabello y estimula el crecimiento en hombres. Sin sulfatos agresivos ni parabenos.",
       brand: { "@type": "Brand", name: "DUNES" },
       category: "Shampoo natural para hombres",
-      url: "https://www.dunesbotanical.com/tienda",
-      image: "https://www.dunesbotanical.com/og-image.jpg",
+      url: "https://ditechdev.com/tienda",
+      image: "https://ditechdev.com/og-image.jpg",
       offers: {
         "@type": "Offer",
         priceCurrency: "COP",
@@ -137,13 +137,13 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.dunesbotanical.com/#website",
-      url: "https://www.dunesbotanical.com",
+      "@id": "https://ditechdev.com/#website",
+      url: "https://ditechdev.com",
       name: "DUNES",
-      publisher: { "@id": "https://www.dunesbotanical.com/#organization" },
+      publisher: { "@id": "https://ditechdev.com/#organization" },
       potentialAction: {
         "@type": "SearchAction",
-        target: "https://www.dunesbotanical.com/tienda?q={search_term_string}",
+        target: "https://ditechdev.com/tienda?q={search_term_string}",
         "query-input": "required name=search_term_string",
       },
     },
@@ -153,7 +153,7 @@ const jsonLd = {
 export default async function HomePage() {
   const { data } = await supabaseAdmin
     .from("products")
-    .select("id, name, slug, description, price, stock, image_url")
+    .select("id, name, slug, description, price, stock, image_url, images, video_url")
     .order("name");
 
   const products: Product[] = data ?? [];
@@ -171,6 +171,9 @@ export default async function HomePage() {
             alt="DUNES Logo"
             className="w-64 md:w-80 lg:w-96 mb-10 md:mb-14 object-contain"
             src="/logo.png"
+            // @ts-expect-error fetchpriority is valid HTML but not yet typed in React
+            fetchpriority="high"
+            decoding="async"
           />
           <h1 className="font-brand font-bold tracking-tighter mb-6 md:mb-8">
             <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-[88px] text-primary leading-[1.05] mb-1 md:mb-2">
@@ -281,6 +284,8 @@ export default async function HomePage() {
                     alt="Cabello antes de DUNES"
                     className="w-full h-full object-cover"
                     src="/cabello/before.png"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <h3 className="font-brand text-xl text-primary uppercase mb-2">
@@ -298,6 +303,8 @@ export default async function HomePage() {
                     alt="Cabello después de DUNES"
                     className="w-full h-full object-cover"
                     src="/cabello/after.png"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <h3 className="font-brand text-xl uppercase mb-2">
@@ -338,16 +345,18 @@ export default async function HomePage() {
                       alt={ing.name}
                       className="w-full h-full object-cover"
                       src={ing.img}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <h4 className="font-brand text-xs md:text-sm text-primary tracking-widest">{ing.name}</h4>
-                  <p className="text-xs text-on-surface-variant leading-relaxed hidden sm:block">{ing.desc}</p>
+                  <p className="text-xs text-on-surface-variant leading-relaxed">{ing.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Tónico */}
+          {/* Tónico */}}
           <div className="border-t border-primary/10 pt-10 md:pt-14">
             <p className="font-headline text-xs uppercase tracking-[0.25em] text-secondary font-bold mb-6 md:mb-8 text-center">
               Tónico Capilar
@@ -361,10 +370,12 @@ export default async function HomePage() {
                       alt={ing.name}
                       className="w-full h-full object-cover"
                       src={ing.img}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <h4 className="font-brand text-xs md:text-sm text-primary tracking-widest">{ing.name}</h4>
-                  <p className="text-xs text-on-surface-variant leading-relaxed hidden sm:block">{ing.desc}</p>
+                  <p className="text-xs text-on-surface-variant leading-relaxed">{ing.desc}</p>
                 </div>
               ))}
             </div>
@@ -417,6 +428,8 @@ export default async function HomePage() {
                       alt={t.author}
                       className="w-full h-full object-cover"
                       src={t.img}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div>

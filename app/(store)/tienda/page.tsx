@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   title: "Tienda — Shampoo y Tónico Capilar Natural para Hombres",
   description:
     "Compra el shampoo natural y el tónico capilar orgánico de DUNES. Formulados con extractos botánicos colombianos para detener la caída del cabello y activar su crecimiento.",
-  alternates: { canonical: "https://www.dunesbotanical.com/tienda" },
+  alternates: { canonical: "https://ditechdev.com/tienda" },
   openGraph: {
     title: "Tienda DUNES | Shampoo Natural Orgánico para Hombres en Colombia",
     description:
       "Shampoo 100% natural sin químicos agresivos y tónico capilar botánico. Envíos a todo Colombia.",
-    url: "https://www.dunesbotanical.com/tienda",
+    url: "https://ditechdev.com/tienda",
     type: "website",
   },
 };

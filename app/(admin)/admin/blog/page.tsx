@@ -256,7 +256,7 @@ export default function BlogPage() {
               onChange={(e) => setMetaTitle(e.target.value)}
               className="font-body text-sm text-[#1a0dab] w-full bg-transparent border-0 focus:ring-0 outline-none hover:underline cursor-text"
             />
-            <p className="font-body text-xs text-[#006621]">dunesbotanical.com/blog/flora-colombiana</p>
+            <p className="font-body text-xs text-[#006621]">ditechdev.com/blog/flora-colombiana</p>
             <textarea
               value={metaDesc}
               onChange={(e) => setMetaDesc(e.target.value)}

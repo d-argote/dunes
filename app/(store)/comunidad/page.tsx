@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: "Comunidad — Hombres que Cuidan su Cabello con Disciplina",
   description:
     "Conoce la comunidad DUNES: hombres que apostaron por el shampoo natural orgánico colombiano y transformaron su cabello con ciencia botánica y disciplina.",
-  alternates: { canonical: "https://www.dunesbotanical.com/comunidad" },
+  alternates: { canonical: "https://ditechdev.com/comunidad" },
   openGraph: {
     title: "Comunidad DUNES | Shampoo Natural para Hombres en Colombia",
     description:
       "Hombres de disciplina que eligieron el cuidado capilar natural. Shampoo orgánico colombiano sin químicos agresivos.",
-    url: "https://www.dunesbotanical.com/comunidad",
+    url: "https://ditechdev.com/comunidad",
     type: "website",
   },
 };

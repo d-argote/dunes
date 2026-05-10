@@ -1,4 +1,4 @@
-﻿export default function DashboardPage() {
+export default function DashboardPage() {
   return (
     <div className="p-6 lg:p-16 flex flex-col gap-12 min-h-screen pb-32">
 
@@ -41,7 +41,7 @@
       {/* Chart: Ventas 30 dias */}
       <section className="bg-surface-container-low p-8 rounded-[2px] min-h-[400px] flex flex-col">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">VENTAS — ULTIMOS 30 DIAS</h2>
+          <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">VENTAS � ULTIMOS 30 DIAS</h2>
           <button className="font-brand text-sm font-semibold uppercase tracking-widest text-primary flex items-center gap-2 hover:underline">
             VER REPORTE DETALLADO <span className="material-symbols-outlined">arrow_forward</span>
           </button>
