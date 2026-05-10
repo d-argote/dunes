@@ -11,7 +11,7 @@ export async function GET(_req: Request, { params }: Params) {
 
   const { data, error } = await supabaseAdmin
     .from("products")
-    .select("*")
+    .select("id, name, slug, description, price, stock, image_url, images, video_url")
     .eq("id", id)
     .single();
 
@@ -31,7 +31,7 @@ export async function PUT(request: Request, { params }: Params) {
 
   try {
     const body = await request.json();
-    const { name, slug, description, price, stock, image_url } = body;
+    const { name, slug, description, price, stock, image_url, images, video_url } = body;
 
     // Build update object with only provided fields
     const updates: Record<string, unknown> = {};
@@ -41,6 +41,8 @@ export async function PUT(request: Request, { params }: Params) {
     if (price !== undefined) updates.price = Number(price);
     if (stock !== undefined) updates.stock = Number(stock);
     if (image_url !== undefined) updates.image_url = image_url ?? null;
+    if (images !== undefined) updates.images = Array.isArray(images) ? images : [];
+    if (video_url !== undefined) updates.video_url = video_url ?? null;
 
     if (Object.keys(updates).length === 0) {
       return NextResponse.json({ error: "No hay campos para actualizar." }, { status: 400 });

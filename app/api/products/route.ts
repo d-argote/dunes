@@ -11,7 +11,7 @@ export async function GET(request: Request) {
 
   let query = supabaseAdmin
     .from("products")
-    .select("id, name, price, stock, image_url, slug, description")
+    .select("id, name, price, stock, image_url, images, video_url, slug, description")
     .order("name");
 
   if (!showAll) {
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, slug, description, price, stock, image_url } = body;
+    const { name, slug, description, price, stock, image_url, images, video_url } = body;
 
     if (!name || !slug || price === undefined) {
       return NextResponse.json({ error: "name, slug y price son requeridos." }, { status: 400 });
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await supabaseAdmin
       .from("products")
-      .insert({ name, slug, description: description ?? null, price: Number(price), stock: Number(stock ?? 0), image_url: image_url ?? null })
+      .insert({ name, slug, description: description ?? null, price: Number(price), stock: Number(stock ?? 0), image_url: image_url ?? null, images: images ?? [], video_url: video_url ?? null })
       .select()
       .single();
 

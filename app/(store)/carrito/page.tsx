@@ -79,7 +79,8 @@ export default function CarritoPage() {
                         onClick={() =>
                           updateQuantity(item.product_id, item.purchase_type, item.quantity + 1)
                         }
-                        className="w-8 h-8 flex items-center justify-center bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors text-lg font-bold"
+                        disabled={item.quantity >= item.stock}
+                        className="w-8 h-8 flex items-center justify-center bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors text-lg font-bold disabled:opacity-40 disabled:cursor-not-allowed"
                         aria-label="Aumentar cantidad"
                       >
                         +

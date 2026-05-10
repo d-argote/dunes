@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 
 interface ProductForm {
@@ -10,6 +10,8 @@ interface ProductForm {
   price: string;
   stock: number;
   image_url: string;
+  images: string[];       // up to 4 gallery images
+  video_url: string;      // optional product video
   metaTitle: string;
   metaDescription: string;
 }
@@ -21,6 +23,8 @@ const empty: ProductForm = {
   price: "",
   stock: 0,
   image_url: "",
+  images: ["", "", "", ""],
+  video_url: "",
   metaTitle: "",
   metaDescription: "",
 };
@@ -43,19 +47,21 @@ export default function ProductEditorPage() {
   const [loading, setLoading] = useState(!isNew);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  // null = not uploading, number = image slot index (0-3), "video" = video slot
+  const [uploadingSlot, setUploadingSlot] = useState<number | "video" | null>(null);
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
+  const imageInputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null]);
+  const videoInputRef = useRef<HTMLInputElement | null>(null);
 
   function showToast(msg: string, ok: boolean) {
     setToast({ msg, ok });
-    setTimeout(() => setToast(null), 3000);
+    setTimeout(() => setToast(null), 3500);
   }
 
   function set<K extends keyof ProductForm>(field: K, value: ProductForm[K]) {
     setData((prev) => ({ ...prev, [field]: value }));
   }
 
-  // Auto-generate slug from name (only for new products)
   function handleNameChange(value: string) {
     set("name", value);
     if (isNew) set("slug", toSlug(value));
@@ -67,6 +73,14 @@ export default function ProductEditorPage() {
       const res = await fetch(`/api/products/${params.id}`);
       if (!res.ok) { router.push("/admin/products"); return; }
       const p = await res.json();
+      // Normalize images array to always have 4 slots
+      const rawImages: string[] = Array.isArray(p.images) ? p.images : [];
+      const images: string[] = [
+        rawImages[0] ?? p.image_url ?? "",
+        rawImages[1] ?? "",
+        rawImages[2] ?? "",
+        rawImages[3] ?? "",
+      ];
       setData({
         name: p.name ?? "",
         slug: p.slug ?? "",
@@ -74,6 +88,8 @@ export default function ProductEditorPage() {
         price: String(p.price ?? ""),
         stock: p.stock ?? 0,
         image_url: p.image_url ?? "",
+        images,
+        video_url: p.video_url ?? "",
         metaTitle: p.name ? `${p.name} | DUNES Botanical` : "",
         metaDescription: p.description ?? "",
       });
@@ -86,6 +102,80 @@ export default function ProductEditorPage() {
     if (!isNew) fetchProduct();
   }, [isNew, fetchProduct]);
 
+  /** Upload a file (image or video) and return its public URL */
+  async function uploadFile(file: File): Promise<string | null> {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch("/api/upload", { method: "POST", body: form });
+    const json = await res.json();
+    if (!res.ok) { showToast(json.error ?? "Error al subir archivo.", false); return null; }
+    return json.url as string;
+  }
+
+  /** Persist images + video_url immediately if editing an existing product */
+  async function persistMedia(images: string[], video_url: string) {
+    if (isNew) return;
+    const cleanImages = images.filter(Boolean);
+    await fetch(`/api/products/${params.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        images: cleanImages,
+        image_url: cleanImages[0] ?? null,
+        video_url: video_url || null,
+      }),
+    });
+  }
+
+  async function handleImageUpload(slotIndex: number, e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingSlot(slotIndex);
+    try {
+      const url = await uploadFile(file);
+      if (!url) return;
+      const newImages = [...data.images];
+      newImages[slotIndex] = url;
+      // Slot 0 also sets image_url (main image)
+      const newImageUrl = newImages[0] || data.image_url;
+      setData((prev) => ({ ...prev, images: newImages, image_url: newImageUrl }));
+      await persistMedia(newImages, data.video_url);
+      showToast(`Imagen ${slotIndex + 1} subida.`, true);
+    } finally {
+      setUploadingSlot(null);
+      e.target.value = "";
+    }
+  }
+
+  async function handleVideoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingSlot("video");
+    try {
+      const url = await uploadFile(file);
+      if (!url) return;
+      setData((prev) => ({ ...prev, video_url: url }));
+      await persistMedia(data.images, url);
+      showToast("Video subido.", true);
+    } finally {
+      setUploadingSlot(null);
+      e.target.value = "";
+    }
+  }
+
+  function removeImage(slotIndex: number) {
+    const newImages = [...data.images];
+    newImages[slotIndex] = "";
+    const newImageUrl = newImages[0] || data.image_url;
+    setData((prev) => ({ ...prev, images: newImages, image_url: newImageUrl }));
+    persistMedia(newImages, data.video_url);
+  }
+
+  function removeVideo() {
+    setData((prev) => ({ ...prev, video_url: "" }));
+    persistMedia(data.images, "");
+  }
+
   async function handleSave() {
     if (!data.name || !data.slug || !data.price) {
       showToast("Nombre, slug y precio son requeridos.", false);
@@ -93,13 +183,16 @@ export default function ProductEditorPage() {
     }
     setSaving(true);
     try {
+      const cleanImages = data.images.filter(Boolean);
       const body = {
         name: data.name,
         slug: data.slug,
         description: data.description || null,
         price: parseFloat(data.price),
         stock: data.stock,
-        image_url: data.image_url || null,
+        image_url: (cleanImages[0] ?? data.image_url) || null,
+        images: cleanImages,
+        video_url: data.video_url || null,
       };
       const res = await fetch(
         isNew ? "/api/products" : `/api/products/${params.id}`,
@@ -111,40 +204,6 @@ export default function ProductEditorPage() {
       if (isNew) router.push(`/admin/products/${json.id}`);
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      const form = new FormData();
-      form.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: form });
-      const json = await res.json();
-      if (!res.ok) { showToast(json.error ?? "Error al subir imagen.", false); return; }
-
-      const newUrl: string = json.url;
-      set("image_url", newUrl);
-
-      // Persist immediately to DB if editing an existing product
-      if (!isNew) {
-        const saveRes = await fetch(`/api/products/${params.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ image_url: newUrl }),
-        });
-        if (!saveRes.ok) {
-          showToast("Imagen subida pero no guardada en BD. Haz clic en Guardar.", false);
-          return;
-        }
-      }
-
-      showToast("Imagen subida y guardada.", true);
-    } finally {
-      setUploading(false);
-      e.target.value = "";
     }
   }
 
@@ -168,6 +227,8 @@ export default function ProductEditorPage() {
       </div>
     );
   }
+
+  const previewImageUrl = data.images[0] || data.image_url;
 
   return (
     <div className="flex flex-col h-full">
@@ -243,51 +304,6 @@ export default function ProductEditorPage() {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <label className="font-headline text-xl font-bold uppercase text-on-surface tracking-[-0.02em]">Imagen del Producto</label>
-                  {/* Preview */}
-                  <div className="relative w-full aspect-square bg-surface-container-low overflow-hidden flex items-center justify-center">
-                    {data.image_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={data.image_url}
-                        alt="Preview"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span className="material-symbols-outlined text-6xl text-on-surface-variant opacity-20">image</span>
-                    )}
-                    {uploading && (
-                      <div className="absolute inset-0 bg-surface/80 flex flex-col items-center justify-center gap-3">
-                        <span className="material-symbols-outlined text-primary text-4xl animate-spin">progress_activity</span>
-                        <span className="font-body text-sm text-on-surface">Subiendo imagen...</span>
-                      </div>
-                    )}
-                  </div>
-                  {/* Upload button */}
-                  <label className="cursor-pointer flex items-center justify-center gap-2 bg-primary text-on-primary font-brand text-xs font-semibold uppercase tracking-widest py-3 hover:bg-primary/90 transition-colors">
-                    <span className="material-symbols-outlined text-base">upload</span>
-                    {data.image_url ? "CAMBIAR IMAGEN" : "SUBIR IMAGEN"}
-                    <input
-                      type="file"
-                      accept="image/jpeg,image/jpg,image/png,image/webp"
-                      className="hidden"
-                      disabled={uploading}
-                      onChange={handleImageUpload}
-                    />
-                  </label>
-                  <p className="font-body text-xs text-on-surface-variant text-center">JPG, PNG o WebP · máx. 5 MB</p>
-                  {/* Manual URL fallback */}
-                  {data.image_url && (
-                    <input
-                      type="url"
-                      className="w-full bg-surface-container-highest border-0 p-3 font-body text-xs text-on-surface-variant focus:ring-2 focus:ring-primary outline-none"
-                      placeholder="O pega una URL..."
-                      value={data.image_url}
-                      onChange={(e) => set("image_url", e.target.value)}
-                    />
-                  )}
-                </div>
                 <div className="flex flex-col gap-2 md:col-span-2">
                   <label className="font-headline text-xl font-bold uppercase text-on-surface tracking-[-0.02em]">Stock Disponible</label>
                   <div className="flex items-center gap-0 w-max border-2 border-surface-container-highest bg-surface-container-highest">
@@ -305,6 +321,140 @@ export default function ProductEditorPage() {
                       <span className="material-symbols-outlined">add</span>
                     </button>
                   </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Media Gallery */}
+            <section className="flex flex-col gap-8">
+              <div className="border-l-4 border-secondary pl-4">
+                <h2 className="font-headline text-xl font-bold uppercase text-on-surface tracking-[-0.02em]">Galería de Medios</h2>
+                <p className="font-body text-sm text-on-surface-variant mt-1">Hasta 4 imágenes + 1 video. La primera imagen es la principal.</p>
+              </div>
+
+              {/* 4 Image Slots */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[0, 1, 2, 3].map((slotIndex) => {
+                  const url = data.images[slotIndex] ?? "";
+                  const isUploading = uploadingSlot === slotIndex;
+                  return (
+                    <div key={slotIndex} className="flex flex-col gap-2">
+                      <div className="relative aspect-square bg-surface-container-low overflow-hidden group">
+                        {url ? (
+                          <>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={url} alt={`Imagen ${slotIndex + 1}`} className="w-full h-full object-cover" />
+                            {/* Overlay with remove button */}
+                            <div className="absolute inset-0 bg-surface/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => imageInputRefs.current[slotIndex]?.click()}
+                                className="p-2 bg-primary text-on-primary hover:bg-primary/80 transition-colors"
+                                title="Cambiar imagen"
+                              >
+                                <span className="material-symbols-outlined text-xl">edit</span>
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => removeImage(slotIndex)}
+                                className="p-2 bg-error text-on-error hover:bg-error/80 transition-colors"
+                                title="Eliminar imagen"
+                              >
+                                <span className="material-symbols-outlined text-xl">delete</span>
+                              </button>
+                            </div>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => imageInputRefs.current[slotIndex]?.click()}
+                            disabled={isUploading}
+                            className="w-full h-full flex flex-col items-center justify-center gap-2 hover:bg-surface-container-high transition-colors disabled:cursor-wait"
+                          >
+                            <span className="material-symbols-outlined text-4xl text-outline">add_photo_alternate</span>
+                            <span className="font-body text-xs text-on-surface-variant uppercase tracking-widest">Foto {slotIndex + 1}{slotIndex === 0 ? " (principal)" : ""}</span>
+                          </button>
+                        )}
+                        {isUploading && (
+                          <div className="absolute inset-0 bg-surface/80 flex flex-col items-center justify-center gap-2">
+                            <span className="material-symbols-outlined text-primary text-3xl animate-spin">progress_activity</span>
+                            <span className="font-body text-xs text-on-surface">Subiendo...</span>
+                          </div>
+                        )}
+                        {/* Badge principal */}
+                        {slotIndex === 0 && url && (
+                          <span className="absolute top-2 left-2 bg-primary text-on-primary font-body text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5">Principal</span>
+                        )}
+                        <input
+                          ref={(el) => { imageInputRefs.current[slotIndex] = el; }}
+                          type="file"
+                          accept="image/jpeg,image/jpg,image/png,image/webp"
+                          className="hidden"
+                          disabled={isUploading}
+                          onChange={(e) => handleImageUpload(slotIndex, e)}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Video Slot */}
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-xs font-semibold uppercase text-on-surface-variant tracking-widest">Video del producto (MP4 / WebM · máx. 100 MB)</label>
+                <div className="relative w-full bg-surface-container-low overflow-hidden">
+                  {data.video_url ? (
+                    <div className="relative group">
+                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                      <video
+                        src={data.video_url}
+                        controls
+                        className="w-full max-h-64 object-contain bg-black"
+                      />
+                      <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                          type="button"
+                          onClick={() => videoInputRef.current?.click()}
+                          className="p-2 bg-primary text-on-primary hover:bg-primary/80 transition-colors"
+                          title="Cambiar video"
+                        >
+                          <span className="material-symbols-outlined text-xl">edit</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={removeVideo}
+                          className="p-2 bg-error text-on-error hover:bg-error/80 transition-colors"
+                          title="Eliminar video"
+                        >
+                          <span className="material-symbols-outlined text-xl">delete</span>
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => videoInputRef.current?.click()}
+                      disabled={uploadingSlot === "video"}
+                      className="w-full h-40 flex flex-col items-center justify-center gap-3 hover:bg-surface-container-high transition-colors disabled:cursor-wait"
+                    >
+                      <span className="material-symbols-outlined text-5xl text-outline">video_call</span>
+                      <span className="font-body text-sm text-on-surface-variant uppercase tracking-widest">Subir Video</span>
+                    </button>
+                  )}
+                  {uploadingSlot === "video" && (
+                    <div className="absolute inset-0 bg-surface/80 flex flex-col items-center justify-center gap-3">
+                      <span className="material-symbols-outlined text-primary text-4xl animate-spin">progress_activity</span>
+                      <span className="font-body text-sm text-on-surface">Subiendo video...</span>
+                    </div>
+                  )}
+                  <input
+                    ref={videoInputRef}
+                    type="file"
+                    accept="video/mp4,video/webm,video/quicktime"
+                    className="hidden"
+                    disabled={uploadingSlot === "video"}
+                    onChange={handleVideoUpload}
+                  />
                 </div>
               </div>
             </section>
@@ -371,15 +521,29 @@ export default function ProductEditorPage() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-surface-container-highest rounded-b-xl z-20" />
                 <div className="flex-1 overflow-y-auto bg-surface relative">
                   <div className="h-[300px] w-full bg-surface-container-low relative overflow-hidden">
-                    {data.image_url ? (
+                    {previewImageUrl ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={data.image_url} alt={data.name} className="w-full h-full object-cover" />
+                      <img src={previewImageUrl} alt={data.name} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <span className="material-symbols-outlined text-6xl text-outline" style={{ fontVariationSettings: "'wght' 100" }}>image</span>
                       </div>
                     )}
                   </div>
+                  {/* Thumbnail strip in preview */}
+                  {data.images.some(Boolean) && (
+                    <div className="flex gap-1 px-2 py-2 bg-surface-container-low">
+                      {data.images.filter(Boolean).map((url, i) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={i} src={url} alt="" className={`w-12 h-12 object-cover cursor-pointer ${i === 0 ? "ring-2 ring-primary" : "opacity-60"}`} />
+                      ))}
+                      {data.video_url && (
+                        <div className="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+                          <span className="material-symbols-outlined text-primary text-xl">play_circle</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className="p-6 flex flex-col gap-4">
                     <div>
                       <p className="font-body text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-1">DUNES Botanical</p>
@@ -426,4 +590,3 @@ export default function ProductEditorPage() {
     </div>
   );
 }
-
