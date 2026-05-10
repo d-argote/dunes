@@ -30,16 +30,22 @@ export const useCartStore = create<CartStore>()(
               i.purchase_type === incoming.purchase_type
           );
           if (existing) {
+            const newQty = Math.min(existing.quantity + quantity, incoming.stock);
             return {
               items: state.items.map((i) =>
                 i.product_id === incoming.product_id &&
                 i.purchase_type === incoming.purchase_type
-                  ? { ...i, quantity: i.quantity + quantity }
+                  ? { ...i, quantity: newQty }
                   : i
               ),
             };
           }
-          return { items: [...state.items, { ...incoming, quantity }] };
+          return {
+            items: [
+              ...state.items,
+              { ...incoming, quantity: Math.min(quantity, incoming.stock) },
+            ],
+          };
         });
       },
 
@@ -59,7 +65,7 @@ export const useCartStore = create<CartStore>()(
         set((state) => ({
           items: state.items.map((i) =>
             i.product_id === productId && i.purchase_type === purchaseType
-              ? { ...i, quantity }
+              ? { ...i, quantity: Math.min(quantity, i.stock) }
               : i
           ),
         }));

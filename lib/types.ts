@@ -9,6 +9,8 @@ export interface Product {
   price: number;
   stock: number;
   image_url: string | null;
+  images: string[];
+  video_url: string | null;
   slug: string;
   description: string | null;
 }
@@ -51,4 +53,5 @@ export interface CartItem {
   image_url: string | null;
   purchase_type: "once";
   quantity: number;
+  stock: number;
 }

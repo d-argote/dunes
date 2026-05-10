@@ -4,6 +4,7 @@ import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import type { Product } from "@/lib/types";
 import ProductInteractive from "./_components/ProductInteractive";
+import ProductGallery from "./_components/ProductGallery";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -116,63 +117,24 @@ export default async function ProductoPage({ params }: Props) {
   const product = data as Product;
   const relatedProducts = (related ?? []) as Product[];
 
+  // Normalize gallery: use `images[]` if populated, fall back to image_url
+  const galleryImages: string[] = Array.isArray(product.images) && product.images.some(Boolean)
+    ? product.images.filter(Boolean)
+    : product.image_url
+    ? [product.image_url]
+    : [];
+
   return (
     <main className="pt-24 pb-32 px-4 md:px-12 lg:px-24 max-w-7xl mx-auto">
       {/* ── Product grid ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
-        {/* Gallery */}
-        <div className="lg:col-span-7 flex flex-col gap-6">
-          <div className="relative overflow-hidden group">
-            {product.image_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                alt={product.name}
-                className="w-full aspect-[4/5] object-cover rounded-xl shadow-sm group-hover:scale-105 transition-transform duration-700"
-                src={product.image_url}
-              />
-            ) : (
-              <div className="w-full aspect-[4/5] bg-surface-container-low rounded-xl flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary text-8xl opacity-20">
-                  spa
-                </span>
-              </div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none rounded-xl" />
-          </div>
-
-          {/* Thumbnails — placeholder para futuras fotos del producto */}
-          <div className="grid grid-cols-4 gap-4">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className={`aspect-square rounded-lg overflow-hidden bg-surface-container-high cursor-pointer ${
-                  i === 0 ? "border-b-2 border-primary" : "hover:opacity-80 transition-opacity"
-                }`}
-              >
-                {product.image_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={product.image_url}
-                    alt={`${product.name} — vista ${i + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary opacity-30">
-                      spa
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-            <div className="aspect-square rounded-lg bg-surface-container-high flex items-center justify-center cursor-pointer hover:bg-surface-container-highest transition-colors">
-              <span className="material-symbols-outlined text-primary text-3xl">
-                play_circle
-              </span>
-            </div>
-          </div>
-        </div>
+        {/* Gallery — interactive client component */}
+        <ProductGallery
+          name={product.name}
+          images={galleryImages}
+          videoUrl={product.video_url ?? null}
+        />
 
         {/* Content */}
         <div className="lg:col-span-5 space-y-8">

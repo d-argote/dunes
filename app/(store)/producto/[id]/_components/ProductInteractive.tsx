@@ -20,6 +20,7 @@ export default function ProductInteractive({
   stock,
 }: Props) {
   const [added, setAdded] = useState(false);
+  const [qty, setQty] = useState(1);
   const addItem = useCartStore((s) => s.addItem);
 
   function handleAddToCart() {
@@ -29,7 +30,8 @@ export default function ProductInteractive({
       price,
       image_url: productImageUrl,
       purchase_type: "once",
-      quantity: 1,
+      quantity: qty,
+      stock,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
@@ -37,7 +39,7 @@ export default function ProductInteractive({
 
   return (
     <div className="space-y-4">
-      {/* ── Precio ── */}
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Precio Ã¢â€â‚¬Ã¢â€â‚¬ */}
       <div className="flex items-center justify-between p-5 bg-surface-container-low">
         <span className="font-headline font-medium text-primary uppercase tracking-widest text-sm">
           Precio
@@ -47,7 +49,37 @@ export default function ProductInteractive({
         </span>
       </div>
 
-      {/* ── Botón añadir al carrito ── */}
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Selector de cantidad Ã¢â€â‚¬Ã¢â€â‚¬ */}
+      {stock > 0 && (
+        <div className="flex items-center gap-0">
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.max(1, q - 1))}
+            disabled={qty <= 1}
+            className="w-10 h-10 flex items-center justify-center bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors text-lg font-bold disabled:opacity-40"
+            aria-label="Reducir cantidad"
+          >
+            −
+          </button>
+          <span className="w-12 text-center font-headline font-bold text-primary text-sm">
+            {qty}
+          </span>
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.min(stock, q + 1))}
+            disabled={qty >= stock}
+            className="w-10 h-10 flex items-center justify-center bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors text-lg font-bold disabled:opacity-40"
+            aria-label="Aumentar cantidad"
+          >
+            +
+          </button>
+          <span className="ml-3 font-body text-xs text-on-surface-variant uppercase tracking-widest">
+            {stock === 1 ? "Último disponible" : `${stock} disponibles`}
+          </span>
+        </div>
+      )}
+
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ BotÃƒÂ³n aÃƒÂ±adir al carrito Ã¢â€â‚¬Ã¢â€â‚¬ */}
       {stock > 0 ? (
         <button
           onClick={handleAddToCart}
@@ -75,7 +107,7 @@ export default function ProductInteractive({
         </button>
       )}
 
-      {/* ── Link al checkout directo ── */}
+      {/* Ã¢â€â‚¬Ã¢â€â‚¬ Link al checkout directo Ã¢â€â‚¬Ã¢â€â‚¬ */}
       {stock > 0 && (
         <Link
           href="/checkout"
@@ -87,3 +119,4 @@ export default function ProductInteractive({
     </div>
   );
 }
+

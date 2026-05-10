@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { supabaseAdmin } from "@/lib/supabase/server";
+import type { Product } from "@/lib/types";
+import { ProductImage } from "@/app/_components/ProductImage";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Shampoo Natural para Hombres | Detiene la Caída y Activa el Crecimiento",
@@ -96,23 +101,6 @@ const TESTIMONIALS = [
   },
 ];
 
-const PRODUCTS = [
-  {
-    name: "Shampoo Crecimiento Natural",
-    tag: "500 ml · Hecho en Colombia",
-    desc: "Romero, jengibre, canela y cebolla. Detiene la caída y estimula el crecimiento desde el primer lavado.",
-    img: "/shampoo.jpg",
-    href: "/tienda",
-  },
-  {
-    name: "Tónico Renacer Capilar",
-    tag: "250 ml · Hecho en Colombia",
-    desc: "Cerrena, ortiga, quina y hojas de guayaba. Fortalece el cuero cabelludo y aporta vitalidad. Úsalo a diario.",
-    img: "/tonico.jpg",
-    href: "/tienda",
-  },
-];
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -162,7 +150,13 @@ const jsonLd = {
   ],
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { data } = await supabaseAdmin
+    .from("products")
+    .select("id, name, slug, description, price, stock, image_url")
+    .order("name");
+
+  const products: Product[] = data ?? [];
   return (
     <main>
       <script
@@ -227,28 +221,33 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
-            {PRODUCTS.map((p) => (
+            {products.map((p) => (
               <Link
-                key={p.name}
-                href={p.href}
-                className="group bg-surface overflow-hidden block"
+                key={p.id}
+                href={`/producto/${p.id}`}
+                className="group bg-surface overflow-hidden block flex flex-col"
               >
                 <div className="aspect-[3/4] overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={p.img}
+                  <ProductImage
+                    src={p.image_url || `/${p.slug}.jpg`}
                     alt={p.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-6 md:p-8 space-y-3">
-                  <p className="font-body text-xs text-secondary tracking-[0.2em] uppercase">{p.tag}</p>
-                  <h3 className="font-brand text-2xl md:text-3xl text-primary leading-[1.1] uppercase">{p.name}</h3>
-                  <p className="font-body text-sm text-on-surface-variant leading-relaxed">{p.desc}</p>
-                  <span className="inline-flex items-center gap-1 font-brand text-xs tracking-[0.2em] uppercase text-primary group-hover:text-secondary transition-colors pt-1">
-                    Ver producto
-                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
+                <div className="p-6 md:p-8 flex flex-col flex-1">
+                  <h3 className="font-brand text-2xl md:text-3xl text-primary leading-[1.1] uppercase mb-3">{p.name}</h3>
+                  <p className="font-body text-sm text-on-surface-variant leading-relaxed flex-1 mb-4 min-h-[2.5rem]">
+                    {p.description ?? ""}
+                  </p>
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/20">
+                    <span className="font-headline font-bold text-lg text-tertiary">
+                      ${p.price.toLocaleString("es-CO")}
+                    </span>
+                    <span className="inline-flex items-center gap-1 font-brand text-xs tracking-[0.2em] uppercase text-primary group-hover:text-secondary transition-colors">
+                      Ver producto
+                      <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
