@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
+import { verifySession, COOKIE_NAME } from "@/lib/auth";
+import { cookies } from "next/headers";
 
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 const ALLOWED_VIDEO_TYPES = ["video/mp4", "video/webm", "video/quicktime"];
@@ -7,6 +9,10 @@ const MAX_IMAGE_SIZE = 15 * 1024 * 1024; // 15 MB
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100 MB
 
 export async function POST(request: NextRequest) {
+  const cookieStore = await cookies();
+  if (!verifySession(cookieStore.get(COOKIE_NAME)?.value ?? "")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   let formData: FormData;
   try {
     formData = await request.formData();

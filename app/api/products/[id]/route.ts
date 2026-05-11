@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
+import { verifySession, COOKIE_NAME } from "@/lib/auth";
+import { cookies } from "next/headers";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -27,6 +29,10 @@ export async function GET(_req: Request, { params }: Params) {
  * Actualiza un producto. Acepta actualización parcial (solo los campos enviados).
  */
 export async function PUT(request: Request, { params }: Params) {
+  const cookieStore = await cookies();
+  if (!verifySession(cookieStore.get(COOKIE_NAME)?.value ?? "")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { id } = await params;
 
   try {
@@ -75,6 +81,10 @@ export async function PUT(request: Request, { params }: Params) {
  * DELETE /api/products/[id]
  */
 export async function DELETE(_req: Request, { params }: Params) {
+  const cookieStore = await cookies();
+  if (!verifySession(cookieStore.get(COOKIE_NAME)?.value ?? "")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { id } = await params;
 
   const { error } = await supabaseAdmin

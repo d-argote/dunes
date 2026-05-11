@@ -42,6 +42,7 @@ export default function BlogEditor({ articles }: Props) {
   const [metaDesc, setMetaDesc] = useState(
     articles[0]?.meta_description ?? ""
   );
+  const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
   const active = articles.find((a) => a.id === activeId) ?? articles[0];
 
@@ -55,32 +56,50 @@ export default function BlogEditor({ articles }: Props) {
 
   async function handleSaveDraft() {
     if (!active) return;
-    await fetch(`/api/admin/blog/${active.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: titleValue,
-        content: contentValue,
-        meta_title: metaTitle,
-        meta_description: metaDesc,
-        status: "draft",
-      }),
-    });
+    setSaveState("saving");
+    try {
+      const res = await fetch(`/api/admin/blog/${active.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: titleValue,
+          content: contentValue,
+          meta_title: metaTitle,
+          meta_description: metaDesc,
+          status: "draft",
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setSaveState("saved");
+    } catch {
+      setSaveState("error");
+    } finally {
+      setTimeout(() => setSaveState("idle"), 3000);
+    }
   }
 
   async function handlePublish() {
     if (!active) return;
-    await fetch(`/api/admin/blog/${active.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: titleValue,
-        content: contentValue,
-        meta_title: metaTitle,
-        meta_description: metaDesc,
-        status: "published",
-      }),
-    });
+    setSaveState("saving");
+    try {
+      const res = await fetch(`/api/admin/blog/${active.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: titleValue,
+          content: contentValue,
+          meta_title: metaTitle,
+          meta_description: metaDesc,
+          status: "published",
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setSaveState("saved");
+    } catch {
+      setSaveState("error");
+    } finally {
+      setTimeout(() => setSaveState("idle"), 3000);
+    }
   }
 
   const circumference = 2 * Math.PI * 40;
@@ -226,19 +245,36 @@ export default function BlogEditor({ articles }: Props) {
 
         {/* Footer actions */}
         <div className="sticky bottom-0 border-t-2 border-primary bg-surface-container-high flex justify-between items-center px-8 py-4 z-30">
-          <div className="font-brand font-bold text-primary text-2xl">
-            DUNES
+          <div className="flex items-center gap-3">
+            <div className="font-brand font-bold text-primary text-2xl">DUNES</div>
+            {saveState === "saving" && (
+              <span className="font-body text-xs text-on-surface-variant uppercase tracking-widest animate-pulse">Guardando...</span>
+            )}
+            {saveState === "saved" && (
+              <span className="flex items-center gap-1 font-body text-xs text-primary uppercase tracking-widest">
+                <span className="material-symbols-outlined text-base">check_circle</span>
+                Guardado
+              </span>
+            )}
+            {saveState === "error" && (
+              <span className="flex items-center gap-1 font-body text-xs text-error uppercase tracking-widest">
+                <span className="material-symbols-outlined text-base">error</span>
+                Error al guardar
+              </span>
+            )}
           </div>
           <div className="flex gap-4">
             <button
               onClick={handleSaveDraft}
-              className="bg-surface-container-highest text-on-surface border border-outline-variant font-brand text-sm font-semibold uppercase tracking-widest px-6 py-3 hover:bg-surface-container-high transition-colors"
+              disabled={saveState === "saving"}
+              className="bg-surface-container-highest text-on-surface border border-outline-variant font-brand text-sm font-semibold uppercase tracking-widest px-6 py-3 hover:bg-surface-container-high transition-colors disabled:opacity-50"
             >
               GUARDAR BORRADOR
             </button>
             <button
               onClick={handlePublish}
-              className="bg-primary text-on-primary font-brand text-sm font-semibold uppercase tracking-widest px-8 py-3 hover:bg-primary-container transition-colors"
+              disabled={saveState === "saving"}
+              className="bg-primary text-on-primary font-brand text-sm font-semibold uppercase tracking-widest px-8 py-3 hover:bg-primary-container transition-colors disabled:opacity-50"
             >
               PUBLICAR AHORA
             </button>
