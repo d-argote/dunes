@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sales &amp; Analytics - DUNES Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Oswald:wght@400;600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#733518",
+                        "surface-bright": "#f9faf3",
+                        "surface-container-high": "#e8e9e2",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#6e334b",
+                        "inverse-on-surface": "#f0f1ea",
+                        "surface-container-highest": "#e2e3dc",
+                        "background": "#f9faf3",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#904c2d",
+                        "on-primary-fixed-variant": "#285021",
+                        "surface-tint": "#3f6837",
+                        "inverse-surface": "#2f312c",
+                        "on-secondary-container": "#78391c",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c2c9bc",
+                        "inverse-primary": "#a4d397",
+                        "surface-dim": "#d9dbd4",
+                        "tertiary-fixed-dim": "#ffb0cc",
+                        "on-tertiary-fixed": "#390720",
+                        "on-primary-container": "#8dbb81",
+                        "on-secondary-fixed": "#360f00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#42493f",
+                        "on-surface": "#1a1c18",
+                        "on-primary-fixed": "#002201",
+                        "on-background": "#1a1c18",
+                        "surface-variant": "#e2e3dc",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary-fixed-dim": "#ffb597",
+                        "primary": "#0b3408",
+                        "tertiary-container": "#692f47",
+                        "error": "#ba1a1a",
+                        "surface": "#f9faf3",
+                        "outline": "#72796e",
+                        "on-tertiary-container": "#e699b4",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f4ed",
+                        "primary-fixed": "#c0efb1",
+                        "primary-container": "#234b1d",
+                        "surface-container": "#edeee7",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffd9e4",
+                        "tertiary": "#4e1931",
+                        "primary-fixed-dim": "#a4d397",
+                        "secondary-container": "#fea680"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-margin-desktop": "64px",
+                        "base": "8px",
+                        "container-margin-mobile": "20px",
+                        "section-gap": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Oswald"],
+                        "headline-md": ["Space Grotesk"],
+                        "display-md": ["Oswald"],
+                        "label-md": ["Inter"],
+                        "label-lg": ["Oswald"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-md": ["48px", { "lineHeight": "1.1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Shared Component) -->
+<nav class="w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container-low flex flex-col h-full py-base z-50">
+<div class="px-6 py-8 mb-8">
+<h1 class="font-display-md text-display-md tracking-tighter text-primary">DUNES</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-2">Admin Suite 2026</p>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">DASHBOARD</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">eco</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">PRODUCTOS</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">COMUNIDAD</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">CONTENIDO</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-lg text-label-lg tracking-[0.15em] uppercase">ORDENES</span>
+</a>
+</div>
+<div class="mt-auto px-4 pb-8">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase py-4 rounded-[2px] hover:bg-primary-container hover:text-on-primary-container transition-colors tracking-widest">
+                NUEVO PRODUCTO
+            </button>
+</div>
+</nav>
+<!-- Main Wrapper -->
+<div class="flex-1 flex flex-col ml-[240px] max-w-[calc(100%-240px)] min-h-screen">
+<!-- TopAppBar (Shared Component) -->
+<header class="h-16 w-full sticky top-0 bg-surface/80 backdrop-blur-xl flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">DUNES Admin</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors cursor-pointer active:opacity-70 p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors cursor-pointer active:opacity-70 p-2 rounded-full">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors cursor-pointer active:opacity-70 p-2 rounded-full">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 px-container-margin-desktop py-12 flex flex-col gap-section-gap">
+<!-- Controls Header -->
+<section class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-outline-variant pb-8">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary uppercase tracking-tighter mb-4">Sales &amp; Analytics</h2>
+<div class="flex items-center gap-4 bg-surface-container-low px-4 py-3 w-fit">
+<span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+<span class="font-label-lg text-label-lg text-on-surface uppercase tracking-widest">Q3 2026: JUL 01 — SEP 30</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer ml-4">expand_more</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg uppercase px-8 py-4 rounded-[2px] tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    EXPORT REPORT
+                </button>
+</section>
+<!-- Row 1: Advanced KPI Cards -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-8 flex flex-col justify-between min-h-[200px]">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant uppercase">Ingresos</h3>
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<div>
+<p class="font-display-md text-display-md text-on-surface mt-4">$4.2M</p>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2 tracking-widest">+12.4% VS LAST QUARTER</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-8 flex flex-col justify-between min-h-[200px]">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant uppercase">Ticket Promedio</h3>
+<span class="material-symbols-outlined text-outline">horizontal_rule</span>
+</div>
+<div>
+<p class="font-display-md text-display-md text-on-surface mt-4">$285</p>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2 tracking-widest">-1.2% VS LAST QUARTER</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-8 flex flex-col justify-between min-h-[200px]">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant uppercase">New vs Recurrent</h3>
+<span class="material-symbols-outlined text-secondary">pie_chart</span>
+</div>
+<div>
+<div class="flex items-end gap-2 mt-4">
+<p class="font-display-md text-display-md text-on-surface">32<span class="text-headline-lg font-headline-lg">%</span></p>
+<p class="font-display-md text-display-md text-outline">/ 68<span class="text-headline-lg font-headline-lg">%</span></p>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2 tracking-widest">STRONG RETENTION TREND</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low p-8 flex flex-col justify-between min-h-[200px]">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant uppercase">Churn Rate</h3>
+<span class="material-symbols-outlined text-error">trending_down</span>
+</div>
+<div>
+<p class="font-display-md text-display-md text-on-surface mt-4">2.4%</p>
+<p class="font-label-md text-label-md text-error mt-2 tracking-widest">NEEDS ATTENTION IN Q4</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-low p-8 flex flex-col justify-between min-h-[200px]">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant uppercase">LTV (Life Time Val)</h3>
+<span class="material-symbols-outlined text-primary">diamond</span>
+</div>
+<div>
+<p class="font-display-md text-display-md text-on-surface mt-4">$1,840</p>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2 tracking-widest">PROJECTED 24 MONTHS</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-low p-8 flex flex-col justify-between min-h-[200px]">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant uppercase">Marketing ROI</h3>
+<span class="material-symbols-outlined text-secondary">bar_chart</span>
+</div>
+<div>
+<p class="font-display-md text-display-md text-on-surface mt-4">4.8x</p>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2 tracking-widest">BASED ON $850K SPEND</p>
+</div>
+</div>
+</section>
+<!-- Row 2: Charts -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Ventas por Canal -->
+<div class="bg-surface-container-low p-8">
+<h3 class="font-headline-lg text-headline-lg text-primary uppercase mb-8">Ventas por Canal</h3>
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-4">
+<span class="font-label-lg text-label-lg uppercase w-24 text-on-surface">Directo</span>
+<div class="flex-1 bg-surface-container-highest h-8 relative">
+<div class="absolute left-0 top-0 bottom-0 bg-primary w-[75%]"></div>
+</div>
+<span class="font-label-lg text-label-lg w-16 text-right">75%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-lg text-label-lg uppercase w-24 text-on-surface">Retail</span>
+<div class="flex-1 bg-surface-container-highest h-8 relative">
+<div class="absolute left-0 top-0 bottom-0 bg-primary-container w-[45%]"></div>
+</div>
+<span class="font-label-lg text-label-lg w-16 text-right">45%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-lg text-label-lg uppercase w-24 text-on-surface">Pop-up</span>
+<div class="flex-1 bg-surface-container-highest h-8 relative">
+<div class="absolute left-0 top-0 bottom-0 bg-secondary w-[20%]"></div>
+</div>
+<span class="font-label-lg text-label-lg w-16 text-right">20%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-lg text-label-lg uppercase w-24 text-on-surface">B2B</span>
+<div class="flex-1 bg-surface-container-highest h-8 relative">
+<div class="absolute left-0 top-0 bottom-0 bg-outline w-[15%]"></div>
+</div>
+<span class="font-label-lg text-label-lg w-16 text-right">15%</span>
+</div>
+</div>
+</div>
+<!-- Conversion Funnel -->
+<div class="bg-surface-container-low p-8 flex flex-col items-center">
+<h3 class="font-headline-lg text-headline-lg text-primary uppercase mb-8 self-start w-full">Conversion Funnel</h3>
+<div class="w-full max-w-md flex flex-col items-center gap-2">
+<div class="w-full bg-surface-container-highest py-4 text-center border-b-[4px] border-surface">
+<span class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant">Visits (100k)</span>
+</div>
+<div class="w-[80%] bg-primary-container py-4 text-center border-b-[4px] border-surface text-on-primary-container">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">Added to Cart (80k)</span>
+</div>
+<div class="w-[60%] bg-primary py-4 text-center border-b-[4px] border-surface text-on-primary">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">Checkout (60k)</span>
+</div>
+<div class="w-[30%] bg-secondary py-4 text-center text-on-secondary">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">Purchased (30k)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Row 3: Data Table -->
+<section class="bg-surface-container-low p-8">
+<h3 class="font-headline-lg text-headline-lg text-primary uppercase mb-8 border-b border-outline-variant pb-4">Comportamiento — Usuarios que no compraron</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-outline-variant">
+<th class="py-4 px-4 font-label-lg text-label-lg uppercase text-on-surface-variant tracking-widest">Segmento</th>
+<th class="py-4 px-4 font-label-lg text-label-lg uppercase text-on-surface-variant tracking-widest">Volumen</th>
+<th class="py-4 px-4 font-label-lg text-label-lg uppercase text-on-surface-variant tracking-widest">Tiempo en sitio</th>
+<th class="py-4 px-4 font-label-lg text-label-lg uppercase text-on-surface-variant tracking-widest">Bounce Rate</th>
+<th class="py-4 px-4 font-label-lg text-label-lg uppercase text-on-surface-variant tracking-widest text-right">Acción Sugerida</th>
+</tr>
+</thead>
+<tbody class="font-body-lg">
+<tr class="border-b border-surface-container-high hover:bg-surface-container transition-colors">
+<td class="py-4 px-4 font-headline-md">Nuevos Visitantes Mobile</td>
+<td class="py-4 px-4 text-on-surface-variant">45,200</td>
+<td class="py-4 px-4 text-on-surface-variant">00:45</td>
+<td class="py-4 px-4"><span class="bg-error-container text-on-error-container px-3 py-1 rounded-[2px] font-label-md uppercase">82% (Alto)</span></td>
+<td class="py-4 px-4 text-right"><button class="text-primary hover:underline font-label-lg uppercase tracking-widest">Optimizar LP</button></td>
+</tr>
+<tr class="border-b border-surface-container-high hover:bg-surface-container transition-colors">
+<td class="py-4 px-4 font-headline-md">Recurrentes sin cuenta</td>
+<td class="py-4 px-4 text-on-surface-variant">12,800</td>
+<td class="py-4 px-4 text-on-surface-variant">03:20</td>
+<td class="py-4 px-4"><span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-[2px] font-label-md uppercase">45% (Medio)</span></td>
+<td class="py-4 px-4 text-right"><button class="text-primary hover:underline font-label-lg uppercase tracking-widest">Pop-up 10%</button></td>
+</tr>
+<tr class="border-b border-surface-container-high hover:bg-surface-container transition-colors">
+<td class="py-4 px-4 font-headline-md">Abandono en Checkout</td>
+<td class="py-4 px-4 text-on-surface-variant">8,400</td>
+<td class="py-4 px-4 text-on-surface-variant">05:12</td>
+<td class="py-4 px-4"><span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-[2px] font-label-md uppercase">12% (Bajo)</span></td>
+<td class="py-4 px-4 text-right"><button class="text-primary hover:underline font-label-lg uppercase tracking-widest">Email Retarget</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Row 4: Heatmap & Targets -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-outline-variant pt-12">
+<div class="lg:col-span-8 bg-surface-container-lowest p-2 border border-surface-container-high">
+<img alt="Heatmap showing user interaction on the botanical architect website" class="w-full h-[500px] object-cover grayscale-[30%]" data-alt="A highly detailed data visualization heatmap overlaying a minimalist, brutalist e-commerce website interface. The aesthetic is organic brutalism in light mode, featuring stark white and pale olive surfaces contrasted by deep forest green typography. The heatmap itself uses a sophisticated gradient from cool translucent gray to intense, glowing amber and rust red to indicate high interaction areas around product photography and typography-heavy technical specifications. The mood is analytical yet beautifully designed, resembling a page from a modern architectural analytics report." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoVfcRDjDuH1QOj80ZX-Awvokx1_5FVmEhDAqHkOqenALoyFsCLgP6VUpEqrcevdQ0UtoeQ3WnjJrM0_mchL8RPrDqmgB_-vOBpS63iCKzW7WcB68lI4QA4S4nleSAuRD27QW2mHSQH6khhiG6ktvzaqIzwABFb7JztYJ6F5dqCbAaTU-QiQ1OCqKeagd9UHWVawzkBnvLJUxwXzJpdNxlThwbDMdmIjhAoANY69SXcx23nTQzmipGzUQys_iMTrc4tCXBfY9mcg"/>
+</div>
+<div class="lg:col-span-4 bg-surface-container-low p-8 h-full">
+<h3 class="font-headline-lg text-headline-lg text-primary uppercase mb-8">Top 5 Click Targets</h3>
+<ul class="flex flex-col gap-6">
+<li>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">1. Main Nav: Colecciones</span>
+<span class="font-label-md text-on-surface-variant">24%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2"><div class="bg-primary h-full w-[24%]"></div></div>
+</li>
+<li>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">2. Hero Image CTA</span>
+<span class="font-label-md text-on-surface-variant">18%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2"><div class="bg-primary-container h-full w-[18%]"></div></div>
+</li>
+<li>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">3. Product Spec Toggle</span>
+<span class="font-label-md text-on-surface-variant">15%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2"><div class="bg-secondary h-full w-[15%]"></div></div>
+</li>
+<li>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">4. Footer: Material Guide</span>
+<span class="font-label-md text-on-surface-variant">9%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2"><div class="bg-outline h-full w-[9%]"></div></div>
+</li>
+<li>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg uppercase tracking-widest">5. Search Icon</span>
+<span class="font-label-md text-on-surface-variant">6%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2"><div class="bg-outline-variant h-full w-[6%]"></div></div>
+</li>
+</ul>
+</div>
+</section>
+</main>
+</div>
+</body></html>

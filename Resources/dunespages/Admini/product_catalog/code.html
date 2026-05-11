@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DUNES - Gestión de Catálogo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&amp;family=Space+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#733518",
+                        "surface-bright": "#f9faf3",
+                        "surface-container-high": "#e8e9e2",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#6e334b",
+                        "inverse-on-surface": "#f0f1ea",
+                        "surface-container-highest": "#e2e3dc",
+                        "background": "#f9faf3",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#904c2d",
+                        "on-primary-fixed-variant": "#285021",
+                        "surface-tint": "#3f6837",
+                        "inverse-surface": "#2f312c",
+                        "on-secondary-container": "#78391c",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c2c9bc",
+                        "inverse-primary": "#a4d397",
+                        "surface-dim": "#d9dbd4",
+                        "tertiary-fixed-dim": "#ffb0cc",
+                        "on-tertiary-fixed": "#390720",
+                        "on-primary-container": "#8dbb81",
+                        "on-secondary-fixed": "#360f00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#42493f",
+                        "on-surface": "#1a1c18",
+                        "on-primary-fixed": "#002201",
+                        "on-background": "#1a1c18",
+                        "surface-variant": "#e2e3dc",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary-fixed-dim": "#ffb597",
+                        "primary": "#0b3408",
+                        "tertiary-container": "#692f47",
+                        "error": "#ba1a1a",
+                        "surface": "#f9faf3",
+                        "outline": "#72796e",
+                        "on-tertiary-container": "#e699b4",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f4ed",
+                        "primary-fixed": "#c0efb1",
+                        "primary-container": "#234b1d",
+                        "surface-container": "#edeee7",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffd9e4",
+                        "tertiary": "#4e1931",
+                        "primary-fixed-dim": "#a4d397",
+                        "secondary-container": "#fea680"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        gutter: "24px",
+                        "container-margin-desktop": "64px",
+                        base: "8px",
+                        "container-margin-mobile": "20px",
+                        "section-gap": "120px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Oswald"],
+                        "headline-md": ["Space Grotesk"],
+                        "display-md": ["Oswald"],
+                        "label-md": ["Inter"],
+                        "label-lg": ["Oswald"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "0.1em", fontWeight: "700" }],
+                        "headline-md": ["20px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "display-md": ["48px", { lineHeight: "1.1", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }],
+                        "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", letterSpacing: "0", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "1.5", letterSpacing: "0", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container-low flex-col py-base z-50">
+<div class="px-gutter mb-12 mt-6">
+<h1 class="font-display-md text-display-md tracking-tighter text-primary">DUNES</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mt-2">Admin Suite 2026</p>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high rounded-full font-label-lg text-label-lg tracking-[0.15em] uppercase" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">dashboard</span>
+                        DASHBOARD
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 transition-transform duration-200 hover:bg-surface-container-high font-label-lg text-label-lg tracking-[0.15em] uppercase" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">eco</span>
+                        PRODUCTOS
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high rounded-full font-label-lg text-label-lg tracking-[0.15em] uppercase" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">groups</span>
+                        COMUNIDAD
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high rounded-full font-label-lg text-label-lg tracking-[0.15em] uppercase" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">edit_note</span>
+                        CONTENIDO
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 transition-colors hover:bg-surface-container-high rounded-full font-label-lg text-label-lg tracking-[0.15em] uppercase" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">shopping_cart</span>
+                        ORDENES
+                    </a>
+</li>
+</ul>
+</div>
+<div class="px-4 mt-auto mb-6">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase rounded-none py-4 px-8 tracking-widest hover:bg-primary-container transition-colors">
+                NUEVO PRODUCTO
+            </button>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center px-gutter w-full z-40 ml-[240px] max-w-[calc(100%-240px)] h-16 sticky top-0 bg-surface/80 backdrop-blur-xl">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" style="font-variation-settings: 'wght' 300;">search</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">DUNES Admin</span>
+</div>
+<div class="flex items-center gap-6 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full" style="font-variation-settings: 'wght' 300;">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full" style="font-variation-settings: 'wght' 300;">dark_mode</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-highest/20 transition-colors p-2 rounded-full" style="font-variation-settings: 'wght' 300;">account_circle</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="md:ml-[240px] min-h-screen pb-32">
+<div class="px-container-margin-mobile md:px-container-margin-desktop py-12">
+<!-- Header & Stats Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-8 uppercase tracking-tight">PRODUCTOS — GESTIÓN DE CATÁLOGO</h2>
+<div class="flex gap-4 md:gap-12 flex-wrap">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase block mb-1">Total</span>
+<span class="font-display-md text-display-md text-on-surface">142</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase block mb-1">Stock Activo</span>
+<span class="font-display-md text-display-md text-primary">128</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase block mb-1">Sin Stock</span>
+<span class="font-display-md text-display-md text-error">4</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase block mb-1">Borradores</span>
+<span class="font-display-md text-display-md text-outline">10</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 self-stretch md:self-auto">
+<button class="bg-surface-container-highest text-on-surface-variant px-6 py-4 rounded-none font-label-lg text-label-lg uppercase tracking-widest hover:bg-surface-container-high transition-colors flex items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">filter_list</span>
+                        Filtros
+                    </button>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-none font-label-lg text-label-lg uppercase tracking-widest hover:bg-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">add</span>
+                        AÑADIR PRODUCTO
+                    </button>
+</div>
+</div>
+<!-- View Toggle -->
+<div class="flex justify-end mb-8 border-b border-outline-variant pb-4">
+<div class="flex gap-2">
+<button aria-label="Grid View" class="p-2 text-primary border-b-2 border-primary bg-surface-container-low">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">grid_view</span>
+</button>
+<button aria-label="List View" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">view_list</span>
+</button>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-low relative group cursor-pointer">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-primary text-on-primary font-label-md text-label-md px-3 py-1 rounded-none uppercase">Activo</span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface/90 backdrop-blur text-on-surface p-2 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">more_vert</span>
+</button>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container-highest">
+<img alt="Botanical product" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="A sleek, minimalist glass bottle of botanical serum resting on a rough concrete slab. The lighting is harsh and architectural, casting sharp shadows that contrast with the organic green tones of the liquid. The aesthetic is premium, raw, and aligned with organic brutalism, featuring a predominantly muted palette with a strong, dark green focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLwGU37ud8FSjzjqmLKGcbM3-Nrc3hAi8XEYmSQMt30M6bU6N4elq82FZoqDc678q-mWaQifDVx-httIUnHgJm7pJ2gYuhUj1XwsaD4SJqwks4B1rSJpThoXmeqsaLQuQlgpIFRu8w7SEph5v49Fly3QyQY9ZhQxPaTh3s76Z2WtMnMs6_YZalz0VOKXTP8iu8ExXg4WwyNhhLEAv4e6b7HDapK605LrOQv0LcOdNrWQGk0IgkkH786dNHUOxqatQIoovLrN25aQ"/>
+</div>
+<div class="p-4 border-t border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 uppercase">Serum Andino 01</h3>
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">SKU: SA-001</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$120</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-body-md text-body-md text-on-surface-variant">Stock: 45 u.</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-low relative group cursor-pointer">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-primary text-on-primary font-label-md text-label-md px-3 py-1 rounded-none uppercase">Activo</span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface/90 backdrop-blur text-on-surface p-2 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">more_vert</span>
+</button>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container-highest">
+<img alt="Botanical product" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="A heavy, dark glass jar of botanical face cream positioned against a textured, brutalist stone wall. Soft, diffused natural light highlights the thick consistency of the cream peeking from under the lid. The mood is grounded luxury, utilizing a color palette of deep browns, slate greys, and muted whites, emphasizing structural integrity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8zI4-AV-FS_N--x5R1iXQ7Lcgu1Pu4nYbmw_DkxB9e2n3T0fcZbCBYcDJQLSQPcJPYh9KxwTknafW-7qwB4ytME-P4rDHSkIuv_uTspHnyybYg76Jpm4iwoDJtRoAwYb2VxH8IoVjNKjMeYFID9_WOrs82uQaSwa96kw-hwpIgBiFdusX3RLL-Shm5MucPtyWwUnFPPamVUHMyWg5M033-EIMlW_Xu8jwTWalUI2WHNT5BSUpO04zVRMoLYGXsJeNKcgX5wJb0g"/>
+</div>
+<div class="p-4 border-t border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 uppercase">Arcilla Volcánica</h3>
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">SKU: AV-002</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$85</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-body-md text-body-md text-on-surface-variant">Stock: 12 u.</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 (Low Stock) -->
+<div class="bg-surface-container-low relative group cursor-pointer">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-error-container text-on-error-container font-label-md text-label-md px-3 py-1 rounded-none uppercase border border-error">Bajo Stock</span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface/90 backdrop-blur text-on-surface p-2 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">more_vert</span>
+</button>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container-highest">
+<img alt="Botanical product" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="An amber glass tincture dropper bottle standing isolated on a stark white pedestal. The lighting is clinical and bright, creating a high-key architectural aesthetic. Minimalist shadows anchor the bottle, highlighting its premium, raw materials. The overall visual style is sparse and disciplined, fitting an organic brutalist theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRHC3nE-DZ8OSHJjnFLleMXjCofgefSbMU1NVEI_1ecqljTJ_YlEocJ1LjIuP-KflMa-SGWT_PE6pQ74Q-fKAQ32__RCvITDGQ7mrX6p3u69NZDEWyk7d9Mh9ANbirfWMTHJki7U-6jHZXDOO8FLP9M2XXpC8AgtNjayKKqEtKNYlgAPlwys4JWvuIxppYaHFaBmZdpNIryfCTHN5GnL0sUDlQCTjmj1eDTZzXYAjkGYblRrWEtB0WwcZBIp1Hp7skmzxW1rCS7g"/>
+</div>
+<div class="p-4 border-t border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 uppercase">Elixir Nocturno</h3>
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">SKU: EN-003</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$150</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-md text-body-md text-error font-semibold">Stock: 3 u.</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 (Draft) -->
+<div class="bg-surface-container-low relative group cursor-pointer opacity-75 hover:opacity-100 transition-opacity">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-variant text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-none uppercase border border-outline">Borrador</span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface/90 backdrop-blur text-on-surface p-2 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">more_vert</span>
+</button>
+</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-6xl" style="font-variation-settings: 'wght' 100;">image</span>
+</div>
+<div class="p-4 border-t border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant mb-2 uppercase italic">Bruma Refrescante</h3>
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">SKU: --</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-outline-variant">--</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="font-body-md text-body-md text-on-surface-variant">Stock: --</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full flex justify-around items-center h-16 pb-safe bg-surface/90 backdrop-blur-lg border-t border-outline-variant shadow-sm z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'wght' 300;">home</span>
+            Inicio
+        </a>
+<a class="flex flex-col items-center justify-center text-primary font-bold active:bg-surface-container tap-highlight-transparent font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'wght' 400, 'FILL' 1;">spa</span>
+            Productos
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'wght' 300;">forum</span>
+            Comunidad
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container tap-highlight-transparent font-label-md text-label-md uppercase" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'wght' 300;">article</span>
+            Blog
+        </a>
+</nav>
+<!-- Footer -->
+<footer class="hidden md:flex sticky bottom-0 w-full justify-between items-center px-gutter py-4 ml-[240px] max-w-[calc(100%-240px)] z-30 bg-surface-container-high border-t-2 border-primary">
+<div class="font-display-lg text-display-lg text-primary text-[24px]">DUNES</div>
+<div class="font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant">
+            2026 DUNES BOTANICAL ARCHITECT
+        </div>
+<div class="flex gap-6 font-label-lg text-label-lg tracking-widest uppercase text-on-surface-variant cursor-default">
+<span class="hover:text-primary transition-colors">AUTO-SAVE: ACTIVE</span>
+<span class="hover:text-primary transition-colors">EDITOR MODE</span>
+<span class="text-primary underline">SYSTEM STATUS</span>
+</div>
+</footer>
+</body></html>
