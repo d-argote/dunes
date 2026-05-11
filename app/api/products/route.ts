@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
+import { verifySession, COOKIE_NAME } from "@/lib/auth";
+import { cookies } from "next/headers";
 
 /**
  * GET /api/products
@@ -33,6 +35,10 @@ export async function GET(request: Request) {
  * Crea un nuevo producto.
  */
 export async function POST(request: Request) {
+  const cookieStore = await cookies();
+  if (!verifySession(cookieStore.get(COOKIE_NAME)?.value ?? "")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
     const body = await request.json();
     const { name, slug, description, price, stock, image_url, images, video_url } = body;

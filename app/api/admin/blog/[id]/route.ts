@@ -11,7 +11,7 @@ export async function PATCH(
 
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("dunes-admin-session");
-  if (!sessionCookie || !(await verifySession(sessionCookie.value))) {
+  if (!sessionCookie || !verifySession(sessionCookie.value)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
