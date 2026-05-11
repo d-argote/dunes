@@ -33,6 +33,15 @@ function publicAdminPath(pathname: string) {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Seed endpoint: return 404 in production regardless of auth
+  if (pathname === "/api/auth/seed") {
+    if (process.env.NODE_ENV === "production") {
+      return NextResponse.json({ error: "Not found." }, { status: 404 });
+    }
+    return NextResponse.next();
+  }
+
   const session = request.cookies.get("dunes-admin-session")?.value;
 
   const canonicalAdminPath = publicAdminPath(pathname);
@@ -82,5 +91,6 @@ export const config = {
     "/social",
     "/customers",
     "/blog",
+    "/api/auth/seed",
   ],
 };

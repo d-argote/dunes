@@ -1,16 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useCartStore } from "@/lib/cart-store";
 
 export default function CartBadge() {
   const totalItems = useCartStore((s) => s.totalItems());
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // useSyncExternalStore returns false on the server and true on the client,
+  // giving us a reliable hydration guard without useState+useEffect.
+  // The empty subscribe function is intentional: this value never changes
+  // after mount, so no re-subscription is needed.
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   return (
     <Link

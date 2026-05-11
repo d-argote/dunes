@@ -100,6 +100,11 @@ export default function ProductEditorPage() {
   }, [params.id, router]);
 
   useEffect(() => {
+    // fetchProduct is async: setState calls (setLoading, setData) execute after
+    // the network response resolves, not synchronously inside this effect body.
+    // The linter cannot distinguish sync from async setState, so we disable the
+    // rule for this line only.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!isNew) fetchProduct();
   }, [isNew, fetchProduct]);
 
