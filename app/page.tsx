@@ -109,7 +109,7 @@ const jsonLd = {
       "@id": "https://ditechdev.com/#organization",
       name: "DUNES Botanical Lab",
       url: "https://ditechdev.com",
-      logo: "https://ditechdev.com/logo.png",
+      logo: "https://ditechdev.com/DunesOK.png",
       sameAs: ["https://instagram.com/dunesbotanical", "https://tiktok.com/@dunesbotanical"],
       address: { "@type": "PostalAddress", addressCountry: "CO" },
     },
@@ -170,9 +170,8 @@ export default async function HomePage() {
           <img
             alt="DUNES Logo"
             className="w-64 md:w-80 lg:w-96 mb-10 md:mb-14 object-contain"
-            src="/logo.png"
-            // @ts-expect-error fetchpriority is valid HTML but not yet typed in React
-            fetchpriority="high"
+            src="/DunesOK.png"
+            fetchPriority="high"
             decoding="async"
           />
           <h1 className="font-brand font-bold tracking-tighter mb-6 md:mb-8">
