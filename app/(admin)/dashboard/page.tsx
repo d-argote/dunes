@@ -1,4 +1,73 @@
-export default function DashboardPage() {
+import { supabaseAdmin } from "@/lib/supabase/server";
+import type { OrderItem, OrderStatus } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
+
+const STATUS_MAP: Record<OrderStatus, { label: string; class: string }> = {
+  pending: { label: "Pendiente", class: "bg-surface-variant text-on-surface-variant" },
+  paid: { label: "Pagado", class: "bg-secondary-container text-on-surface" },
+  shipped: { label: "Enviado", class: "bg-primary-container text-on-primary-container" },
+  delivered: { label: "Completado", class: "bg-primary-container text-on-primary-container" },
+  cancelled: { label: "Cancelado", class: "bg-error-container text-on-error-container" },
+};
+
+function formatCOP(amount: number) {
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+export default async function DashboardPage() {
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  const [todayRes, activeRes, recentRes, allItemsRes] = await Promise.all([
+    supabaseAdmin
+      .from("orders")
+      .select("total")
+      .gte("created_at", todayStart.toISOString())
+      .neq("status", "cancelled"),
+    supabaseAdmin
+      .from("orders")
+      .select("id", { count: "exact", head: true })
+      .in("status", ["pending", "paid"]),
+    supabaseAdmin
+      .from("orders")
+      .select("id, customer_name, items, total, status")
+      .order("created_at", { ascending: false })
+      .limit(5),
+    supabaseAdmin
+      .from("orders")
+      .select("items")
+      .neq("status", "cancelled"),
+  ]);
+
+  const todayRevenue = (todayRes.data ?? []).reduce(
+    (s, o) => s + (o.total ?? 0),
+    0
+  );
+  const activeCount = activeRes.count ?? 0;
+  const recentOrders = recentRes.data ?? [];
+
+  // Aggregate top products from JSONB items arrays
+  const productTotals = new Map<string, { name: string; qty: number }>();
+  for (const order of allItemsRes.data ?? []) {
+    for (const item of (order.items ?? []) as OrderItem[]) {
+      const existing = productTotals.get(item.product_id) ?? {
+        name: item.product_name,
+        qty: 0,
+      };
+      existing.qty += item.quantity;
+      productTotals.set(item.product_id, existing);
+    }
+  }
+  const topProducts = Array.from(productTotals.values())
+    .sort((a, b) => b.qty - a.qty)
+    .slice(0, 4);
+  const maxQty = topProducts[0]?.qty ?? 1;
+
   return (
     <div className="p-6 lg:p-16 flex flex-col gap-12 min-h-screen pb-32">
 
@@ -6,56 +75,47 @@ export default function DashboardPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-surface-container-low p-6 rounded-[2px]">
           <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">VENTAS HOY</p>
-          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">$2.847.000</p>
+          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">{formatCOP(todayRevenue)}</p>
           <div className="mt-4 flex items-center gap-2 text-primary">
-            <span className="material-symbols-outlined text-base">trending_up</span>
-            <span className="font-body text-xs font-semibold">+12.5% vs ayer</span>
+            <span className="material-symbols-outlined text-base">payments</span>
+            <span className="font-body text-xs font-semibold">Actualizado en tiempo real</span>
           </div>
         </div>
         <div className="bg-surface-container-low p-6 rounded-[2px]">
           <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">PEDIDOS ACTIVOS</p>
-          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">34</p>
+          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">{activeCount}</p>
           <div className="mt-4 flex items-center gap-2 text-on-surface-variant">
             <span className="material-symbols-outlined text-base">pending_actions</span>
-            <span className="font-body text-xs font-semibold">8 en preparacion</span>
+            <span className="font-body text-xs font-semibold">Pendientes + Pagados</span>
           </div>
         </div>
         <div className="bg-surface-container-low p-6 rounded-[2px]">
           <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">TASA CONVERSION</p>
-          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">3.8%</p>
-          <div className="mt-4 flex items-center gap-2 text-primary">
-            <span className="material-symbols-outlined text-base">trending_up</span>
-            <span className="font-body text-xs font-semibold">+0.4% vs mes anterior</span>
+          <p className="font-headline text-3xl font-bold text-on-surface-variant tracking-[-0.02em]">—</p>
+          <div className="mt-4 flex items-center gap-2 text-on-surface-variant">
+            <span className="material-symbols-outlined text-base">analytics</span>
+            <span className="font-body text-xs font-semibold">Requiere Google Analytics</span>
           </div>
         </div>
         <div className="bg-surface-container-low p-6 rounded-[2px]">
           <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">VISITANTES</p>
-          <p className="font-headline text-3xl font-bold text-on-surface tracking-[-0.02em]">1.247</p>
-          <div className="mt-4 flex items-center gap-2 text-error">
-            <span className="material-symbols-outlined text-base">trending_down</span>
-            <span className="font-body text-xs font-semibold">-2.1% vs ayer</span>
+          <p className="font-headline text-3xl font-bold text-on-surface-variant tracking-[-0.02em]">—</p>
+          <div className="mt-4 flex items-center gap-2 text-on-surface-variant">
+            <span className="material-symbols-outlined text-base">people</span>
+            <span className="font-body text-xs font-semibold">Requiere Google Analytics</span>
           </div>
         </div>
       </section>
 
       {/* Chart: Ventas 30 dias */}
-      <section className="bg-surface-container-low p-8 rounded-[2px] min-h-[400px] flex flex-col">
+      <section className="bg-surface-container-low p-8 rounded-[2px] min-h-[220px] flex flex-col">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">VENTAS � ULTIMOS 30 DIAS</h2>
-          <button className="font-brand text-sm font-semibold uppercase tracking-widest text-primary flex items-center gap-2 hover:underline">
-            VER REPORTE DETALLADO <span className="material-symbols-outlined">arrow_forward</span>
-          </button>
+          <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">VENTAS — ULTIMOS 30 DIAS</h2>
         </div>
-        <div className="flex-1 relative w-full border-b border-l border-outline-variant/30 flex items-end overflow-hidden pb-4 pl-4">
-          <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-primary/20 to-transparent" />
-          <svg className="absolute w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-            <path d="M0,80 Q10,70 20,80 T40,60 T60,70 T80,30 T100,40" fill="none" stroke="#0b3408" strokeWidth="2" />
-          </svg>
-          <div className="absolute left-[-40px] top-0 h-full flex flex-col justify-between font-body text-xs text-on-surface-variant py-4">
-            <span>$5M</span>
-            <span>$2.5M</span>
-            <span>$0</span>
-          </div>
+        <div className="flex-1 flex items-center justify-center">
+          <p className="font-body text-sm text-on-surface-variant text-center">
+            Conecta Google Analytics o una vista de Supabase para mostrar el gráfico histórico.
+          </p>
         </div>
       </section>
 
@@ -67,35 +127,38 @@ export default function DashboardPage() {
             <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">ULTIMOS PEDIDOS</h2>
             <span className="material-symbols-outlined text-on-surface-variant">more_horiz</span>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-outline-variant/50">
-                  {["ORDEN","CLIENTE","PRODUCTO","MONTO","ESTADO"].map((h) => (
-                    <th key={h} className="py-4 font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="font-body text-base text-on-surface">
-                {[
-                  { id:"#ORD-9082", cliente:"Carlos M.", producto:"Extracto Cacao Puro", monto:"$125.000", estado:"Completado", estadoClass:"bg-primary-container text-on-primary-container" },
-                  { id:"#ORD-9081", cliente:"Ana R.", producto:"Bruma Amazonica", monto:"$89.500", estado:"En Proceso", estadoClass:"bg-surface-variant text-on-surface-variant" },
-                  { id:"#ORD-9080", cliente:"Felipe J.", producto:"Set Ritual Nocturno", monto:"$340.000", estado:"En Proceso", estadoClass:"bg-surface-variant text-on-surface-variant" },
-                  { id:"#ORD-9079", cliente:"Diana V.", producto:"Balsamo Andino", monto:"$65.000", estado:"Cancelado", estadoClass:"bg-error-container text-on-error-container" },
-                ].map((row) => (
-                  <tr key={row.id} className="border-b border-outline-variant/20 hover:bg-surface transition-colors">
-                    <td className="py-4 font-body text-xs font-semibold">{row.id}</td>
-                    <td className="py-4">{row.cliente}</td>
-                    <td className="py-4">{row.producto}</td>
-                    <td className="py-4 text-right">{row.monto}</td>
-                    <td className="py-4 text-right">
-                      <span className={`inline-block px-3 py-1 rounded-[2px] font-body text-xs font-semibold uppercase ${row.estadoClass}`}>{row.estado}</span>
-                    </td>
+          {recentOrders.length === 0 ? (
+            <p className="font-body text-sm text-on-surface-variant">No hay pedidos todavía.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-outline-variant/50">
+                    {["ORDEN", "CLIENTE", "PRODUCTO", "MONTO", "ESTADO"].map((h) => (
+                      <th key={h} className="py-4 font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant">{h}</th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="font-body text-base text-on-surface">
+                  {recentOrders.map((order) => {
+                    const s = STATUS_MAP[order.status as OrderStatus] ?? STATUS_MAP.pending;
+                    const firstItem = (order.items as OrderItem[])?.[0];
+                    return (
+                      <tr key={order.id} className="border-b border-outline-variant/20 hover:bg-surface transition-colors">
+                        <td className="py-4 font-body text-xs font-semibold">#{order.id.slice(0, 8).toUpperCase()}</td>
+                        <td className="py-4">{order.customer_name}</td>
+                        <td className="py-4 text-on-surface-variant">{firstItem?.product_name ?? "—"}</td>
+                        <td className="py-4 text-right font-semibold">{formatCOP(order.total)}</td>
+                        <td className="py-4 text-right">
+                          <span className={`inline-block px-3 py-1 rounded-[2px] font-body text-xs font-semibold uppercase ${s.class}`}>{s.label}</span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
 
         {/* Top products */}
@@ -104,24 +167,26 @@ export default function DashboardPage() {
             <h2 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">TOP PRODUCTOS</h2>
             <span className="material-symbols-outlined text-on-surface-variant">trending_up</span>
           </div>
-          <div className="flex flex-col gap-6">
-            {[
-              { name:"1. Extracto Cacao Puro", units:"420 Und.", pct:"85%" },
-              { name:"2. Bruma Amazonica", units:"315 Und.", pct:"65%" },
-              { name:"3. Set Ritual Nocturno", units:"190 Und.", pct:"40%" },
-              { name:"4. Balsamo Andino", units:"124 Und.", pct:"25%" },
-            ].map((item, i) => (
-              <div key={item.name}>
-                <div className="flex justify-between font-body text-base text-on-surface mb-2">
-                  <span>{item.name}</span>
-                  <span className="font-body text-xs font-bold text-primary">{item.units}</span>
+          {topProducts.length === 0 ? (
+            <p className="font-body text-sm text-on-surface-variant">Sin ventas registradas todavía.</p>
+          ) : (
+            <div className="flex flex-col gap-6">
+              {topProducts.map((item, i) => (
+                <div key={item.name}>
+                  <div className="flex justify-between font-body text-base text-on-surface mb-2">
+                    <span>{i + 1}. {item.name}</span>
+                    <span className="font-body text-xs font-bold text-primary">{item.qty} Und.</span>
+                  </div>
+                  <div className="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-primary h-full rounded-full"
+                      style={{ width: `${Math.round((item.qty / maxQty) * 100)}%`, opacity: 1 - i * 0.15 }}
+                    />
+                  </div>
                 </div>
-                <div className="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
-                  <div className="bg-primary h-full rounded-full" style={{ width: item.pct, opacity: 1 - i * 0.15 }} />
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -131,7 +196,6 @@ export default function DashboardPage() {
           2026 DUNES BOTANICAL ARCHITECT
         </span>
         <div className="flex gap-6 font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant">
-          <span className="hover:text-primary transition-colors cursor-default">AUTO-SAVE: ACTIVE</span>
           <span className="hover:text-primary transition-colors cursor-default">EDITOR MODE</span>
           <span className="hover:text-primary transition-colors cursor-default">SYSTEM STATUS</span>
         </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -11,13 +11,11 @@ const keywords = [
 
 const seoActions = [
   { priority: "Urgente", label: "Actualizar meta description de PDP principal", done: false },
-  { priority: "Urgente", label: "Optimizar imagenes � alt text faltante (12 img)", done: false },
+  { priority: "Urgente", label: "Optimizar imagenes - alt text faltante (12 img)", done: false },
   { priority: "Media", label: "Crear landing page: 'cosmetica natural colombia'", done: false },
   { priority: "Media", label: "Implementar schema markup Product + Review", done: true },
   { priority: "Baja", label: "Ampliar blog con keywords long-tail", done: false },
 ];
-
-const hashtags = ["#cosmeticanatural", "#botanicalbeauty", "#colombianaturaleza", "#skincarerutin", "#dunesbotanical", "#amazonicskin"];
 
 export default function SocialPage() {
   const [checks, setChecks] = useState<boolean[]>(seoActions.map((a) => a.done));
@@ -31,136 +29,62 @@ export default function SocialPage() {
         <h2 className="font-headline text-3xl font-bold text-on-surface uppercase tracking-tight">INTELLIGENCE</h2>
       </div>
 
-      {/* Social cards */}
+      {/* Social integration placeholders */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        {/* Instagram */}
-        <div className="bg-surface-container-low p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">Instagram</p>
-              <p className="font-body text-base font-semibold text-on-surface">@dunesbotanical</p>
+        {[
+          { platform: "Instagram", handle: "@dunesbotanical", icon: "photo_camera" },
+          { platform: "TikTok", handle: "@dunes_architect", icon: "play_circle" },
+        ].map(({ platform, handle, icon }) => (
+          <div key={platform} className="bg-surface-container-low p-8 flex flex-col gap-6">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">{platform}</p>
+                <p className="font-body text-base font-semibold text-on-surface">{handle}</p>
+              </div>
+              <span className="material-symbols-outlined text-3xl text-primary">{icon}</span>
             </div>
-            <span className="material-symbols-outlined text-3xl text-primary">photo_camera</span>
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            {[{ label: "Seguidores", value: "42.8K" }, { label: "Engagement", value: "4.2%" }, { label: "Sentimiento", value: "88% +" }].map((m) => (
-              <div key={m.label} className="bg-surface p-4 text-center">
-                <p className="font-headline text-2xl font-bold text-primary tracking-[-0.02em]">{m.value}</p>
-                <p className="font-body text-xs text-on-surface-variant font-semibold mt-1 uppercase">{m.label}</p>
+            <div className="flex items-center gap-4 py-6 border border-dashed border-outline-variant">
+              <span className="material-symbols-outlined text-3xl text-on-surface-variant ml-4">link_off</span>
+              <div>
+                <p className="font-body text-sm font-semibold text-on-surface">Integracion requerida</p>
+                <p className="font-body text-xs text-on-surface-variant mt-1">
+                  Conecta la API de {platform} para ver metricas reales en tiempo real.
+                </p>
               </div>
-            ))}
-          </div>
-          <div className="grid grid-cols-4 gap-2">
-            {[45, 62, 38, 71].map((h, i) => (
-              <div key={i} className="relative h-24 bg-surface-container-highest overflow-hidden flex items-end">
-                <div className="absolute inset-0 bg-primary/10" />
-                <div className="w-full bg-primary" style={{ height: `${h}%` }} />
-              </div>
-            ))}
-          </div>
-          <p className="font-body text-xs font-semibold text-on-surface-variant text-center uppercase tracking-wider">Rendimiento ultimas 4 semanas</p>
-        </div>
-
-        {/* TikTok */}
-        <div className="bg-surface-container-low p-8 flex flex-col gap-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">TikTok</p>
-              <p className="font-body text-base font-semibold text-on-surface">@dunes_architect</p>
             </div>
-            <span className="material-symbols-outlined text-3xl text-on-surface">play_circle</span>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            {[{ label: "Seguidores", value: "112K" }, { label: "Engagement", value: "8.9%" }, { label: "Alcance", value: "2.4M" }].map((m) => (
-              <div key={m.label} className="bg-surface p-4 text-center">
-                <p className="font-headline text-2xl font-bold text-on-surface tracking-[-0.02em]">{m.value}</p>
-                <p className="font-body text-xs text-on-surface-variant font-semibold mt-1 uppercase">{m.label}</p>
-              </div>
-            ))}
-          </div>
-          <div className="bg-surface p-6 border-l-4 border-primary">
-            <p className="font-body text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Video mas visto</p>
-            <p className="font-body text-base text-on-surface">"El ritual de 3 pasos que cambio mi piel � ingredientes amazonicos"</p>
-            <p className="font-body text-xs font-semibold text-primary mt-2">2.4M vistas � 18.2% engagement</p>
+        ))}
+      </section>
+
+      {/* AI Comment Analysis placeholder */}
+      <section className="bg-surface-container-low p-8 flex flex-col gap-6">
+        <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">ANALISIS SEMANTICO DE COMENTARIOS - IA</h3>
+        <div className="flex items-center gap-4 py-6 border border-dashed border-outline-variant">
+          <span className="material-symbols-outlined text-3xl text-on-surface-variant ml-4">psychology</span>
+          <div>
+            <p className="font-body text-sm font-semibold text-on-surface">Requiere integracion con APIs sociales</p>
+            <p className="font-body text-xs text-on-surface-variant mt-1">
+              Conecta las APIs de Instagram y TikTok para activar el analisis semantico de comentarios con IA.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* AI Semantic Comment Analysis */}
-      <section className="bg-surface-container-low p-8 flex flex-col gap-8">
-        <div className="flex justify-between items-center">
-          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">ANALISIS SEMANTICO DE COMENTARIOS � IA</h3>
-          <span className="flex items-center gap-2 font-brand text-xs font-semibold uppercase tracking-widest text-primary bg-primary-container/20 px-3 py-2">
-            <span className="material-symbols-outlined text-sm animate-pulse">sensors</span> AI ACTIVE
-          </span>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b border-outline-variant/50">
-                {["TOPICO","MENCIONES","SENTIMIENTO","INSIGHT"].map((h) => (
-                  <th key={h} className="py-4 font-brand text-xs font-semibold uppercase tracking-widest text-on-surface-variant pr-8">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { topic: "Sostenibilidad empaque", mentions: "1,240", sentiment: "92% +", sentiment_c: "text-primary", insight: "Packaging refill program demand high" },
-                { topic: "Textura serum", mentions: "864", sentiment: "78% +", sentiment_c: "text-primary", insight: "Lightweight formula praised" },
-                { topic: "Ingredientes amazonicos", mentions: "620", sentiment: "96% +", sentiment_c: "text-primary", insight: "Origin story resonates strongly" },
-                { topic: "Precio punto", mentions: "380", sentiment: "44% -", sentiment_c: "text-error", insight: "Starter kit bundle recommended" },
-              ].map((row) => (
-                <tr key={row.topic} className="border-b border-outline-variant/20 hover:bg-surface transition-colors">
-                  <td className="py-4 font-body text-base text-on-surface font-semibold pr-8">{row.topic}</td>
-                  <td className="py-4 font-body text-base text-on-surface pr-8">{row.mentions}</td>
-                  <td className={`py-4 font-body text-base font-bold pr-8 ${row.sentiment_c}`}>{row.sentiment}</td>
-                  <td className="py-4 font-body text-sm text-on-surface-variant italic">{row.insight}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          {hashtags.map((tag) => (
-            <span key={tag} className="bg-surface border border-outline-variant font-body text-sm font-semibold text-on-surface px-4 py-2 hover:bg-primary hover:text-on-primary transition-colors cursor-pointer">{tag}</span>
-          ))}
-        </div>
-      </section>
-
-      {/* Content Opportunities */}
+      {/* Content Opportunities placeholder */}
       <section className="flex flex-col gap-6">
         <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">CONTENT OPPORTUNITIES</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-surface-container-low p-8 border-l-4 border-primary flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <span className="bg-primary text-on-primary font-body text-xs font-bold px-3 py-1 uppercase">Alta Probabilidad</span>
-              <span className="material-symbols-outlined text-primary text-xl">trending_up</span>
-            </div>
-            <p className="font-headline text-xl font-bold text-on-surface tracking-[-0.02em]">Video: Proceso de extraccion del cacao colombiano</p>
-            <p className="font-body text-base text-on-surface-variant">Estimated reach: 420K � 580K. Peak window: Lunes 7am / Viernes 6pm.</p>
-            <button className="bg-primary text-on-primary font-brand text-sm font-semibold uppercase tracking-widest px-6 py-3 hover:bg-primary-container transition-colors self-start">
-              PLANIFICAR CONTENIDO
-            </button>
-          </div>
-          <div className="bg-surface-container-low p-8 border-l-4 border-error flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <span className="bg-error-container text-on-error-container font-body text-xs font-bold px-3 py-1 uppercase border border-error">Atencion Requerida</span>
-              <span className="material-symbols-outlined text-error text-xl">warning</span>
-            </div>
-            <p className="font-headline text-xl font-bold text-on-surface tracking-[-0.02em]">Responder comentarios negativos precio � 48h window</p>
-            <p className="font-body text-base text-on-surface-variant">38 comentarios sin respuesta. Impacto potencial en sentiment score.</p>
-            <button className="bg-error text-on-error font-brand text-sm font-semibold uppercase tracking-widest px-6 py-3 hover:bg-error-container transition-colors self-start">
-              VER COMENTARIOS
-            </button>
-          </div>
+        <div className="flex items-center gap-4 py-8 border border-dashed border-outline-variant">
+          <span className="material-symbols-outlined text-3xl text-on-surface-variant ml-6">trending_up</span>
+          <p className="font-body text-sm text-on-surface-variant">
+            Las oportunidades de contenido se generan automaticamente cuando se conecten las APIs sociales.
+          </p>
         </div>
       </section>
 
       {/* SEO */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-surface-container-low p-8 flex flex-col gap-6">
-          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">SEO � KEYWORD POSITIONS</h3>
+          <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">SEO - KEYWORD POSITIONS</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
@@ -182,6 +106,7 @@ export default function SocialPage() {
               </tbody>
             </table>
           </div>
+          <p className="font-body text-xs text-on-surface-variant">Datos de ejemplo - conecta Google Search Console para datos reales.</p>
         </div>
         <div className="bg-surface-container-low p-8 flex flex-col gap-6">
           <h3 className="font-headline text-xl font-bold text-on-surface uppercase tracking-[-0.02em]">SEO ACTIONS</h3>
@@ -203,16 +128,6 @@ export default function SocialPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="sticky bottom-0 w-full border-t-2 border-primary bg-surface-container-high flex justify-between items-center px-6 py-4 z-30 mt-auto">
-        <div className="font-brand font-bold text-primary text-2xl">DUNES</div>
-        <span className="font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant">2026 DUNES BOTANICAL ARCHITECT</span>
-        <div className="flex gap-6 font-brand text-xs font-semibold tracking-widest uppercase text-on-surface-variant cursor-default">
-          <span className="hover:text-primary">AUTO-SAVE: ACTIVE</span>
-          <span className="text-primary underline">INTELLIGENCE MODE</span>
-        </div>
-      </footer>
     </div>
   );
 }
