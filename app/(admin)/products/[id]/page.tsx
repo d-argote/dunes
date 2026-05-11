@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
 
@@ -68,45 +68,54 @@ export default function ProductEditorPage() {
     if (isNew) set("slug", toSlug(value));
   }
 
-  const fetchProduct = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/products/${params.id}`);
-      if (!res.ok) { router.push("/products"); return; }
-      const p = await res.json();
-      // Normalize images array to always have 4 slots
-      const rawImages: string[] = Array.isArray(p.images) ? p.images : [];
-      const images: string[] = [
-        rawImages[0] ?? p.image_url ?? "",
-        rawImages[1] ?? "",
-        rawImages[2] ?? "",
-        rawImages[3] ?? "",
-      ];
-      setData({
-        name: p.name ?? "",
-        slug: p.slug ?? "",
-        description: p.description ?? "",
-        price: String(p.price ?? ""),
-        stock: p.stock ?? 0,
-        image_url: p.image_url ?? "",
-        images,
-        video_url: p.video_url ?? "",
-        metaTitle: p.name ? `${p.name} | DUNES Botanical` : "",
-        metaDescription: p.description ?? "",
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, [params.id, router]);
-
   useEffect(() => {
-    // fetchProduct is async: setState calls (setLoading, setData) execute after
-    // the network response resolves, not synchronously inside this effect body.
-    // The linter cannot distinguish sync from async setState, so we disable the
-    // rule for this line only.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (!isNew) fetchProduct();
-  }, [isNew, fetchProduct]);
+    if (isNew) return;
+
+    let cancelled = false;
+
+    const load = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/products/${params.id}`);
+        if (!res.ok || cancelled) {
+          if (!cancelled) router.push("/products");
+          return;
+        }
+
+        const p = await res.json();
+        if (cancelled) return;
+
+        // Normalize images array to always have 4 slots
+        const rawImages: string[] = Array.isArray(p.images) ? p.images : [];
+        const images: string[] = [
+          rawImages[0] ?? p.image_url ?? "",
+          rawImages[1] ?? "",
+          rawImages[2] ?? "",
+          rawImages[3] ?? "",
+        ];
+        setData({
+          name: p.name ?? "",
+          slug: p.slug ?? "",
+          description: p.description ?? "",
+          price: String(p.price ?? ""),
+          stock: p.stock ?? 0,
+          image_url: p.image_url ?? "",
+          images,
+          video_url: p.video_url ?? "",
+          metaTitle: p.name ? `${p.name} | DUNES Botanical` : "",
+          metaDescription: p.description ?? "",
+        });
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    void load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isNew, params.id, router]);
 
   /** Upload a file (image or video) and return its public URL */
   async function uploadFile(file: File): Promise<string | null> {
