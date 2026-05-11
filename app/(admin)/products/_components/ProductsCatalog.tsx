@@ -23,6 +23,11 @@ function StatusBadge({ status }: { status: ProductStatus }) {
 
 export default function ProductsCatalog({ products }: { products: Product[] }) {
   const [view, setView] = useState<"grid" | "list">("grid");
+  const [page, setPage] = useState(1);
+
+  const PAGE_SIZE = 20;
+  const totalPages = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
+  const paginated = products.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const total = products.length;
   const active = products.filter((p) => p.stock > 5).length;
@@ -85,7 +90,7 @@ export default function ProductsCatalog({ products }: { products: Product[] }) {
       {/* Grid */}
       {view === "grid" && products.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product) => {
+          {paginated.map((product) => {
             const status = deriveStatus(product.stock);
             return (
               <Link
@@ -142,7 +147,7 @@ export default function ProductsCatalog({ products }: { products: Product[] }) {
             <span>Estado</span>
             <span />
           </div>
-          {products.map((product) => {
+          {paginated.map((product) => {
             const status = deriveStatus(product.stock);
             return (
               <div key={product.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_80px] gap-4 px-4 py-4 items-center hover:bg-surface-container-low transition-colors">
@@ -168,6 +173,55 @@ export default function ProductsCatalog({ products }: { products: Product[] }) {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-8 pt-6 border-t border-outline-variant">
+          <p className="font-body text-sm text-on-surface-variant">
+            Mostrando {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, products.length)} de {products.length} productos
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="p-2 text-on-surface-variant hover:text-primary disabled:opacity-30 transition-colors"
+            >
+              <span className="material-symbols-outlined">chevron_left</span>
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((p) => p === 1 || p === totalPages || Math.abs(p - page) <= 1)
+              .reduce<(number | "...")[]>((acc, p, i, arr) => {
+                if (i > 0 && p - (arr[i - 1] as number) > 1) acc.push("...");
+                acc.push(p);
+                return acc;
+              }, [])
+              .map((p, i) =>
+                p === "..." ? (
+                  <span key={`ellipsis-${i}`} className="px-2 text-on-surface-variant font-body text-sm">…</span>
+                ) : (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p as number)}
+                    className={`w-9 h-9 font-brand text-sm font-semibold transition-colors ${
+                      page === p
+                        ? "bg-primary text-on-primary"
+                        : "text-on-surface-variant hover:bg-surface-container-low"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                )
+              )}
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className="p-2 text-on-surface-variant hover:text-primary disabled:opacity-30 transition-colors"
+            >
+              <span className="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
         </div>
       )}
     </>

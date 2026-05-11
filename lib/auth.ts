@@ -3,7 +3,14 @@ import { promisify } from "util";
 
 const scryptAsync = promisify(scrypt);
 
-const SESSION_SECRET = process.env.ADMIN_SESSION_SECRET!;
+const SESSION_SECRET = process.env.ADMIN_SESSION_SECRET;
+if (!SESSION_SECRET) {
+  throw new Error(
+    "La variable de entorno ADMIN_SESSION_SECRET no está definida. " +
+      "Configúrala antes de iniciar el servidor."
+  );
+}
+const VERIFIED_SECRET: string = SESSION_SECRET;
 const COOKIE_NAME = "dunes-admin-session";
 const SESSION_MAX_AGE = 8 * 60 * 60; // 8 horas (segundos)
 const SESSION_REMEMBER_AGE = 7 * 24 * 60 * 60; // 7 días
@@ -46,7 +53,7 @@ export function signSession(userId: string, remember = false): string {
   const maxAge = remember ? SESSION_REMEMBER_AGE : SESSION_MAX_AGE;
   const expiry = Math.floor(Date.now() / 1000) + maxAge;
   const payload = Buffer.from(`${userId}:${expiry}`).toString("base64url");
-  const hmac = createHmac("sha256", SESSION_SECRET)
+  const hmac = createHmac("sha256", VERIFIED_SECRET)
     .update(payload)
     .digest("base64url");
   return `${payload}.${hmac}`;
@@ -56,11 +63,11 @@ export function signSession(userId: string, remember = false): string {
  * Verifica un token de sesión. Retorna el userId si es válido, null si no.
  */
 export function verifySession(token: string): string | null {
-  if (!token || !SESSION_SECRET) return null;
+  if (!token || !VERIFIED_SECRET) return null;
   const [payload, hmac] = token.split(".");
   if (!payload || !hmac) return null;
 
-  const expectedHmac = createHmac("sha256", SESSION_SECRET)
+  const expectedHmac = createHmac("sha256", VERIFIED_SECRET)
     .update(payload)
     .digest("base64url");
 

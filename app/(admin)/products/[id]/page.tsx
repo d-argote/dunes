@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
+import Image from "next/image";
 
 interface ProductForm {
   name: string;
@@ -342,8 +343,7 @@ export default function ProductEditorPage() {
                       <div className="relative aspect-square bg-surface-container-low overflow-hidden group">
                         {url ? (
                           <>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={url} alt={`Imagen ${slotIndex + 1}`} className="w-full h-full object-cover" />
+                              <Image src={url} alt={`Imagen ${slotIndex + 1}`} fill className="object-cover" />
                             {/* Overlay with remove button */}
                             <div className="absolute inset-0 bg-surface/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                               <button
@@ -522,8 +522,7 @@ export default function ProductEditorPage() {
                 <div className="flex-1 overflow-y-auto bg-surface relative">
                   <div className="h-[300px] w-full bg-surface-container-low relative overflow-hidden">
                     {previewImageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={previewImageUrl} alt={data.name} className="w-full h-full object-cover" />
+                      <Image src={previewImageUrl} alt={data.name} fill className="object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <span className="material-symbols-outlined text-6xl text-outline" style={{ fontVariationSettings: "'wght' 100" }}>image</span>
@@ -534,8 +533,9 @@ export default function ProductEditorPage() {
                   {data.images.some(Boolean) && (
                     <div className="flex gap-1 px-2 py-2 bg-surface-container-low">
                       {data.images.filter(Boolean).map((url, i) => (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img key={i} src={url} alt="" className={`w-12 h-12 object-cover cursor-pointer ${i === 0 ? "ring-2 ring-primary" : "opacity-60"}`} />
+                        <div key={i} className={`relative w-12 h-12 cursor-pointer ${i === 0 ? "ring-2 ring-primary" : "opacity-60"}`}>
+                          <Image src={url} alt="" fill className="object-cover" />
+                        </div>
                       ))}
                       {data.video_url && (
                         <div className="w-12 h-12 bg-surface-container-highest flex items-center justify-center">

@@ -5,14 +5,30 @@ import { hashPassword } from "@/lib/auth";
 /**
  * Ruta de utilidad SOLO para desarrollo.
  * Crea el primer usuario administrador.
- * Desactívala o elimínala antes de ir a producción.
+ * Requiere el header X-Seed-Token con el valor de ADMIN_SEED_SECRET.
+ * En producción esta ruta devuelve 404 (bloqueada también en middleware).
  *
  * Uso: POST /api/auth/seed
+ * Headers: X-Seed-Token: <ADMIN_SEED_SECRET>
  * Body: { "email": "admin@dunes.co", "password": "MiClave123!", "name": "Admin" }
  */
 export async function POST(request: Request) {
+  // Double-guard: middleware blocks in production, but we check again here.
   if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "No disponible en producción." }, { status: 403 });
+    return NextResponse.json({ error: "Not found." }, { status: 404 });
+  }
+
+  const seedSecret = process.env.ADMIN_SEED_SECRET;
+  if (!seedSecret) {
+    return NextResponse.json(
+      { error: "ADMIN_SEED_SECRET no configurado." },
+      { status: 503 }
+    );
+  }
+
+  const providedToken = request.headers.get("x-seed-token") ?? "";
+  if (providedToken !== seedSecret) {
+    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
   }
 
   try {

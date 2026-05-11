@@ -45,6 +45,20 @@ export interface ShippingRate {
   rate: number;
 }
 
+export interface BlogArticle {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string | null;
+  category: string | null;
+  status: "published" | "draft" | "design" | "research";
+  meta_title: string | null;
+  meta_description: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 /* Cart (client-side only, no DB) */
 export interface CartItem {
   product_id: string;

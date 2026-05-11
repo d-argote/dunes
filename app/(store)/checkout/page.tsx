@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCartStore } from "@/lib/cart-store";
 import type { OrderItem } from "@/lib/types";
 
@@ -395,8 +396,7 @@ export default function CheckoutPage() {
               <li key={`${item.product_id}-${item.purchase_type}`} className="flex items-center gap-4">
                 <div className="relative w-16 h-16 flex-shrink-0 bg-surface overflow-hidden">
                   {item.image_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+                    <Image src={item.image_url} alt={item.name} fill className="object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
                       <span className="material-symbols-outlined text-outline text-2xl">spa</span>
